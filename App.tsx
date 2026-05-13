@@ -1,0 +1,1426 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Globe, 
+  Menu, 
+  X, 
+  Calendar, 
+  MapPin, 
+  Users, 
+  Target, 
+  ChevronRight,
+  ChevronLeft,
+  Download, 
+  ArrowRight,
+  TrendingUp,
+  Building2,
+  Award,
+  CheckCircle2,
+  Thermometer,
+  Clock,
+  Languages,
+  Phone,
+  Utensils,
+  Car,
+  Hotel,
+  Banknote,
+  Wifi,
+  Smartphone,
+  Plane,
+  Navigation,
+  Zap,
+  FileText,
+  LifeBuoy,
+  Info,
+  Ship,
+  Globe2,
+  Newspaper,
+  Image as ImageIcon,
+  Maximize2,
+  Facebook
+} from 'lucide-react';
+import { translations, PROGRAM_DATA, SPEAKERS_DATA, VILLAGE_DATA } from './constants';
+import qrCodeImage from './Images/QR code.jpg';
+import heroImage from './Images/Hero.png';
+import Logo from './Images/Logo.png';
+import APROPOS from './Images/APROPOS.jpg';
+import Patenaire1 from './Images/Patenaire _1.png';
+import Patenaire2 from './Images/Patenaire _2.png';
+import Patenaire3 from './Images/Patenaire _3.png';
+import Patenaire4 from './Images/Patenaire _4.png';
+import Patenaire5 from './Images/Patenaire _5.png';
+import Patenaire6 from './Images/Patenaire _6.png';
+import Patenaire7 from './Images/Patenaire _7.png';
+import Patenaire8 from './Images/Patenaire _8.png';
+import Patenaire9 from './Images/Patenaire _9.png';
+import Patenaire10 from './Images/Patenaire _10.png';
+import FAURE_IMG from './Images/FAURE.jpg';
+import WAMKELE_IMG from './Images/Wamkele.jpg';
+import SIDI_IMG from './Images/Sidi.jpg';
+import ELOMBI_IMG from './Images/Elombi.jpg';
+import TAREK_IMG from './Images/Tarek.jpg';
+import LABONNE_IMG from './Images/Labonne.jpg';
+import TG1 from './Images/TG1.png';
+import TG2 from './Images/TG2.png';
+import TG3 from './Images/TG3.jpg';
+import TG4 from './Images/TG4.png';
+import TG5 from './Images/TG5.png';
+import TG6 from './Images/TG6.png';
+import Exploration from './Images/Exploration.png';
+import CP1 from './Photos/CP1.jpg';
+import CP2 from './Photos/CP2.jpg';
+import S1 from './Photos/S1.jpeg';
+import S2 from './Photos/S2.jpeg';
+import S3 from './Photos/S3.jpeg';
+import VIS1 from './Visuels/VIS1.jpg';
+import VIS2 from './Visuels/VIS2.jpg';
+import VIS3 from './Visuels/VIS3.jpeg';
+import VIS4 from './Visuels/VIS4.jpeg';
+import VIS6 from './Visuels/VIS6.jpeg';
+import { Language, Speaker, Exhibitor } from './types';
+
+const App: React.FC = () => {
+  const [lang, setLang] = useState<Language>('fr');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
+  const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+  const [galleryTab, setGalleryTab] = useState<'news' | 'events'>('news');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  const GALLERY_POSTS = [
+    {
+      id: 1,
+      image: VIS3,
+      text: lang === 'fr' 
+        ? "À l'approche de Biashara Afrika 2026, la capitale togolaise multiplie les initiatives pour accueillir les investisseurs."
+        : "As Biashara Afrika 2026 approaches, the Togolese capital is multiplying initiatives to welcome investors.",
+      date: "05 Mai 2025"
+    },
+    {
+      id: 4,
+      image: VIS6,
+      text: lang === 'fr' ? "Intelligence économique et transformation digitale." : "Economic intelligence and digital transformation.",
+      date: "12 Mai 2025"
+    },
+    {
+      id: 5,
+      image: VIS4,
+      text: lang === 'fr' 
+        ? "Expansion des zones franches industrielles : Un moteur pour le commerce continental."
+        : "Expansion of industrial free zones: A driver for continental trade.",
+      date: "15 Mai 2025"
+    },
+    {
+      id: 2,
+      image: VIS1,
+      text: lang === 'fr' 
+        ? "Biashara Afrika 2026 : Mobilisation des acteurs économiques pour une intégration régionale forte."
+        : "Biashara Afrika 2026: Mobilizing economic actors for strong regional integration.",
+      date: "02 Mai 2025"
+    },
+    {
+      id: 3,
+      image: VIS2,
+      text: lang === 'fr' 
+        ? "Focus sur les opportunités d'investissement et le développement des infrastructures en Afrique."
+        : "Focus on investment opportunities and infrastructure development in Africa.",
+      date: "28 Avril 2025"
+    }
+  ];
+
+  const EVENT_GALLERIES = [
+    {
+      id: 'press-conference',
+      title: lang === 'fr' ? "Conférence de presse de lancement" : "Launch Press Conference",
+      photos: [CP1, CP2]
+    },
+    {
+      id: 'grand-lome',
+      title: lang === 'fr' ? "Sensibilisation des opérateurs économiques du Grand Lomé" : "Awareness for Greater Lomé Economic Operators",
+      photos: [S1, S2, S3]
+    }
+  ];
+
+  const LOME_CITY_PHOTOS = [TG1, TG2, TG3, TG4, TG5, TG6];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentCityPhoto((prev) => (prev + 1) % LOME_CITY_PHOTOS.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [LOME_CITY_PHOTOS.length]);
+
+  const t = translations[lang];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const SPEAKER_IMAGES: Record<string, string> = {
+    faure: FAURE_IMG,
+    wamkele: WAMKELE_IMG,
+    sidi: SIDI_IMG,
+    elombi: ELOMBI_IMG,
+    tarek: TAREK_IMG,
+    labonne: LABONNE_IMG
+  };
+
+  const enrichedSpeakers = SPEAKERS_DATA.map(speaker => ({
+    ...speaker,
+    image: (speaker.id && SPEAKER_IMAGES[speaker.id]) || ''
+  })) as Speaker[];
+
+  const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  };
+
+  const toggleLang = () => setLang(prev => prev === 'fr' ? 'en' : 'fr');
+
+  return (
+    <div className="relative min-h-screen bg-brand-light overflow-hidden">
+      {/* Global Decorative Blobs */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-green/5 blur-[120px] rounded-full animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-[40%] right-[-10%] w-[40vw] h-[40vw] bg-brand-gold/5 blur-[100px] rounded-full animate-pulse" style={{ animationDuration: '12s' }} />
+        <div className="absolute bottom-[10%] left-[20%] w-[30vw] h-[30vw] bg-brand-red/5 blur-[80px] rounded-full animate-pulse" style={{ animationDuration: '10s' }} />
+      </div>
+      
+      {/* Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-brand-green/95 backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <span className={`font-display font-bold text-xl tracking-wider ${scrolled || mobileMenuOpen ? 'text-white' : 'text-black'}`}>
+              BIASHARA AFRIKA
+            </span>
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item)}
+                className={`text-sm font-medium tracking-wide transition-colors ${scrolled ? 'text-white/80 hover:text-brand-gold' : 'text-black/80 hover:text-brand-gold'}`}
+              >
+                {t.nav[item]}
+              </button>
+            ))}
+            
+            <div className="flex items-center gap-4 ml-4">
+              <button 
+                onClick={toggleLang}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${scrolled ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/5'}`}
+              >
+                <Globe className="w-4 h-4" />
+                <span className="text-xs font-bold uppercase">{lang}</span>
+              </button>
+              <button 
+                onClick={() => scrollToSection('register')}
+                className="bg-brand-red text-white font-bold text-xs uppercase px-6 py-2.5 rounded-sm hover:brightness-110 transition-all shadow-md"
+              >
+                {t.nav.register}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className={`md:hidden p-2 ${scrolled || mobileMenuOpen ? 'text-white' : 'text-black'}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            className="fixed inset-0 z-40 bg-brand-green flex flex-col items-center justify-center gap-8"
+          >
+            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="text-2xl font-display text-white hover:text-brand-gold transition-colors"
+              >
+                {t.nav[item]}
+              </button>
+            ))}
+            <button 
+              onClick={toggleLang}
+              className="text-white/60 font-bold uppercase p-2 border border-white/20 rounded-lg"
+            >
+              Change Language: {lang === 'fr' ? 'English' : 'Français'}
+            </button>
+            <button 
+              onClick={() => scrollToSection('register')}
+              className="mt-4 bg-brand-red text-white font-bold px-10 py-4 uppercase tracking-widest"
+            >
+              {t.nav.register}
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            className="w-full h-full object-cover opacity-30"
+            alt="Biashara Afrika Hero"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-light/40 via-transparent to-brand-light" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-green/10 border border-brand-green/20 text-brand-green font-bold text-xs uppercase tracking-widest mb-6">
+              <Calendar className="w-4 h-4" />
+              {t.hero.date}
+            </div>
+            
+            <h1 className="text-5xl md:text-8xl font-black text-black mb-6 leading-tight">
+              {t.hero.title}
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-black/70 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+              {t.hero.baseline}
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button 
+                onClick={() => scrollToSection('register')}
+                className="w-full sm:w-auto px-10 py-5 bg-brand-green text-white font-bold rounded-sm shadow-xl hover:bg-brand-green/90 transition-all flex items-center justify-center gap-2"
+              >
+                {t.hero.ctaRegister}
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => scrollToSection('program')}
+                className="w-full sm:w-auto px-10 py-5 border-2 border-brand-green text-brand-green font-bold rounded-sm hover:bg-brand-green hover:text-white transition-all"
+              >
+                {t.hero.ctaProgram}
+              </button>
+            </div>
+
+            <div className="mt-16 flex flex-wrap justify-center gap-8 text-black/60 font-medium">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-brand-gold" />
+                {t.hero.location}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30"
+        >
+          <div className="w-[1px] h-20 bg-black" />
+        </motion.div>
+      </section>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="section-padding bg-white/50 relative overflow-hidden backdrop-blur-sm">
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.03] pointer-events-none transform translate-x-1/4">
+          <svg viewBox="0 0 100 100" className="w-full h-full text-brand-green">
+             <circle cx="100" cy="50" r="50" fill="currentColor" />
+          </svg>
+        </div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="font-bold text-sm uppercase tracking-widest block mb-4" style={{ color: '#B73120' }}>The Platform</span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
+                {t.about.title}
+              </h2>
+              <p className="text-lg text-black/70 leading-relaxed mb-10 italic border-l-4 border-brand-green pl-6">
+                {t.about.description}
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { icon: <Users />, text: t.about.stats.participants, label: "Scale" },
+                  { icon: <Target />, text: t.about.stats.countries, label: "Impact" },
+                  { icon: <TrendingUp />, text: t.about.stats.speakers, label: "Vision" },
+                  { icon: <Building2 />, text: t.about.stats.exhibitors, label: "Execution" },
+                ].map((stat, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-white rounded-2xl border border-black/5 shadow-sm hover:shadow-xl hover:border-brand-gold/20 transition-all duration-300 group"
+                  >
+                    <div className="text-brand-green mb-3 group-hover:text-brand-red group-hover:scale-110 transition-all duration-300">{stat.icon}</div>
+                    <div className="font-display font-bold text-lg text-black">{stat.text}</div>
+                    <div className="text-xs text-black/40 uppercase tracking-widest">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div 
+               initial={{ opacity: 0, scale: 0.9 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+               whileHover={{ y: -10 }}
+               className="relative"
+            >
+              <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative z-10 border-8 border-white">
+                <motion.img 
+                  src={APROPOS} 
+                  className="w-full h-full object-cover" 
+                  alt="Africa Trade" 
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <div className="absolute inset-0 bg-brand-green/10 mix-blend-overlay" />
+              </div>
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 5, 0],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-10 -right-10 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl" 
+              />
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, -10, 0],
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute -bottom-10 -left-10 w-64 h-64 bg-brand-red/10 rounded-full blur-3xl opacity-50" 
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROGRAM SECTION */}
+      <section id="program" className="section-padding bg-brand-light/50 backdrop-blur-sm relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-brand-light/0 to-white/10" />
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="font-bold text-sm uppercase tracking-[0.3em] block mb-4"
+              style={{ color: '#B73120' }}
+            >
+              Agenda 2026
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">{t.program.title}</h2>
+            <div className="flex flex-col items-center gap-6">
+              <button className="group inline-flex items-center gap-3 text-black font-bold px-8 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-all border border-black/5">
+                <Download className="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform" />
+                {t.program.download}
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 mb-16 p-2 bg-white/50 backdrop-blur-sm rounded-full max-w-fit mx-auto border border-black/5">
+            {PROGRAM_DATA[lang].map((day, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveTab(i)}
+                className={`px-8 py-4 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-500 ${
+                  activeTab === i 
+                    ? 'bg-brand-red text-white shadow-xl scale-105' 
+                    : 'text-black/40 hover:text-black hover:bg-white'
+                }`}
+              >
+                {day.day.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold/0 via-brand-gold/30 to-brand-gold/0 hidden md:block" />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.5, ease: "circOut" }}
+                className="space-y-12"
+              >
+                <div className="text-center mb-12">
+                  <h3 className="text-2xl font-display font-bold text-brand-green mb-2">{PROGRAM_DATA[lang][activeTab].title}</h3>
+                  <p className="text-black/50 font-light italic">{PROGRAM_DATA[lang][activeTab].subtitle}</p>
+                </div>
+
+                {PROGRAM_DATA[lang][activeTab].items.map((item: any, j: number) => (
+                  <motion.div 
+                    key={j}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: j * 0.1 }}
+                    className={`relative flex flex-col md:flex-row gap-8 items-center ${j % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Time Marker */}
+                    <div className="absolute left-0 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-4 border-brand-red rounded-full z-20 hidden md:block shadow-sm" />
+
+                    <div className={`w-full md:w-1/2 ${j % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                       <div className="inline-block px-4 py-1 rounded bg-brand-green text-white font-bold text-[10px] tracking-tighter mb-4 shadow-sm">
+                        {item.time}
+                      </div>
+                      <h4 className="text-xl font-bold text-black mb-3 group-hover:text-brand-gold transition-colors">{item.title}</h4>
+                      {item.description && (
+                        <p className={`text-sm text-black/60 leading-relaxed font-light ${j % 2 === 0 ? '' : 'md:ml-auto max-w-sm'}`}>
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="hidden md:block md:w-1/2" />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      {/* SPEAKERS SECTION */}
+      <section id="speakers" className="section-padding bg-white/40 backdrop-blur-md relative overflow-hidden">
+        <div className="absolute inset-0 bg-texture-dots opacity-[0.02]" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+              <span className="font-bold text-sm uppercase tracking-widest block mb-4" style={{ color: '#B73120' }}>Afro-Optimism</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-black">{t.speakers.title}</h2>
+            </div>
+            <p className="max-w-md text-black/60">
+              Des leaders d'opinion et décideurs engagés pour la transformation structurelle de l'économie africaine.
+            </p>
+          </div>
+
+          <div className="relative group">
+            <motion.div 
+              className="flex gap-8 overflow-x-auto pb-12 no-scrollbar px-4"
+              initial={{ x: 20, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              {[...enrichedSpeakers, ...enrichedSpeakers].map((speaker, i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ y: -15, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="group relative w-[300px] sm:w-[400px] md:w-[500px] shrink-0"
+                >
+                  <div className="relative aspect-[4/5] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-black/5 bg-slate-100">
+                    <img 
+                      src={speaker.image} 
+                      className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" 
+                      alt={speaker.name} 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                    
+                    {/* Decorative Border Glow */}
+                    <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-all duration-500 rounded-3xl" />
+
+                    <div className="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                      <motion.div 
+                        initial={{ opacity: 0.8 }}
+                        className="text-[10px] font-black text-brand-gold uppercase tracking-[0.25em] mb-4 px-4 py-1.5 bg-black/40 backdrop-blur-xl inline-block rounded-full border border-white/10"
+                      >
+                        {speaker.category}
+                      </motion.div>
+                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-tight tracking-tight">
+                        {speaker.name}
+                      </h3>
+                      <p className="text-white/80 text-sm font-medium italic mb-3 flex items-center gap-2">
+                        <span className="w-4 h-[1px] bg-brand-red"></span>
+                        {speaker.role}
+                      </p>
+                      <div className="h-px w-12 bg-brand-gold/50 mb-4 group-hover:w-20 transition-all duration-500" />
+                      <p className="text-brand-gold font-black text-[11px] uppercase tracking-wider flex items-center gap-2">
+                         {speaker.institution}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+            
+            {/* Scroll Indicator */}
+            <div className="flex justify-center gap-3 mt-8">
+              <motion.div 
+                animate={{ width: [32, 48, 32] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="h-1.5 bg-brand-red rounded-full shadow-lg shadow-brand-red/20" 
+              />
+              <div className="w-1.5 h-1.5 bg-black/10 rounded-full" />
+              <div className="w-1.5 h-1.5 bg-black/10 rounded-full" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY LOME SECTION - PREMIUM CURVED DESIGN WITH SLIDER */}
+      <section id="why-lome" className="section-padding bg-[#FCFBFA] relative overflow-hidden">
+        {/* Architectural Curves and Shapes */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <svg className="absolute top-0 right-0 w-full h-full text-brand-gold/[0.03]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path d="M1000,0 Q800,500 0,1000 L1000,1000 Z" fill="currentColor" />
+          </svg>
+          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(177,14,35,0.02)_0%,transparent_50%)]" />
+          {/* Subtle architectural vertical lines */}
+          <div className="absolute inset-0 flex justify-around opacity-[0.05]">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="w-px h-full bg-gradient-to-b from-transparent via-black to-transparent" />
+            ))}
+          </div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            
+            {/* TEXT CONTENT & STATS */}
+            <div className="lg:col-span-6">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <span className="text-brand-red font-black text-xs uppercase tracking-[0.5em] block mb-6">
+                  Biashara Lomé 2026
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
+                  {t.whyLome.title}
+                </h2>
+                <div className="w-20 h-1.5 rounded-full mb-10" style={{ backgroundColor: '#036B21' }} />
+                <p className="text-lg text-black/60 font-light leading-relaxed mb-12 max-w-xl">
+                  {t.whyLome.description}
+                </p>
+
+                {/* Premium Info Cards Grid - Refined & Compact */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {t.whyLome.stats.map((stat: any, i: number) => (
+                    <motion.div 
+                      key={stat.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ y: -3, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+                      className="p-5 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm hover:shadow-lg hover:border-brand-gold/30 transition-all duration-300 group"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-white border border-black/5 flex items-center justify-center text-brand-red shrink-0 shadow-sm group-hover:bg-brand-red group-hover:text-white transition-all duration-500">
+                          {(() => {
+                            switch (stat.id) {
+                              case "port": return <Ship className="w-5 h-5" />;
+                              case "hub": return <Globe2 className="w-5 h-5" />;
+                              case "connectivity": return <Plane className="w-5 h-5" />;
+                              case "ecosystem": return <TrendingUp className="w-5 h-5" />;
+                              default: return <Info className="w-5 h-5" />;
+                            }
+                          })()}
+                        </div>
+                        <h4 className="font-bold text-black text-sm group-hover:text-brand-red transition-colors leading-tight">{stat.title}</h4>
+                      </div>
+                      <p className="mt-3 text-[11px] text-black/50 font-medium leading-relaxed">{stat.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* IMMERSIVE PORTRAIT SLIDER */}
+            <div className="lg:col-span-6 flex justify-center">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative rounded-[4rem] overflow-hidden shadow-2xl aspect-[9/16] w-full max-w-[450px] bg-brand-light group border-8 border-white"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentCityPhoto}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute inset-0"
+                  >
+                    <motion.img 
+                      src={LOME_CITY_PHOTOS[currentCityPhoto]}
+                      className="w-full h-full object-cover"
+                      alt="Lomé Vision"
+                      initial={{ scale: 1, opacity: 0 }}
+                      animate={{ scale: 1.1, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ 
+                        scale: { duration: 8, ease: "linear" },
+                        opacity: { duration: 1.5, ease: "easeInOut" }
+                      }}
+                    />
+                    
+                    {/* Subtle Gradient Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-red/10 to-transparent mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Minimal Slider Progress */}
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+                  {LOME_CITY_PHOTOS.map((_: any, i: number) => (
+                    <div key={i} className="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
+                      <motion.div 
+                        className="h-full bg-white"
+                        initial={{ width: "0%" }}
+                        animate={{ width: i === currentCityPhoto ? "100%" : i < currentCityPhoto ? "100%" : "0%" }}
+                        transition={{ 
+                          duration: i === currentCityPhoto ? 5 : 0.5, 
+                          ease: "linear" 
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Decorative architectural line */}
+                <div className="absolute top-10 right-10 w-24 h-24 border-t-2 border-r-2 border-white/40 rounded-tr-[3rem] pointer-events-none" />
+                <div className="absolute bottom-10 left-10 w-24 h-24 border-b-2 border-l-2 border-white/40 rounded-bl-[3rem] pointer-events-none" />
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* BUSINESS VILLAGE SECTION */}
+      <section id="village" className="section-padding bg-brand-green text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-red/5" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.village.title}</h2>
+            <div className="w-20 h-1 bg-brand-gold mx-auto" />
+          </div>
+
+          <motion.div 
+            className="flex gap-8 overflow-x-auto pb-12 cursor-grab active:cursor-grabbing no-scrollbar"
+            whileTap={{ cursor: "grabbing" }}
+          >
+            {[...VILLAGE_DATA, ...VILLAGE_DATA, ...VILLAGE_DATA].map((exhibitor, i) => (
+              <motion.div 
+                key={i}
+                className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm flex flex-col md:flex-row gap-8 items-center min-w-[300px] md:min-w-[600px] shrink-0"
+              >
+                <div className="w-24 h-24 bg-white border border-white rounded-full flex items-center justify-center shrink-0 shadow-xl overflow-hidden p-2">
+                  <img src={exhibitor.logo} alt={exhibitor.name} className="w-full h-full object-contain grayscale" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="px-2 py-0.5 bg-brand-gold/20 text-brand-gold text-[10px] font-bold uppercase rounded">
+                      {exhibitor.sector}
+                    </span>
+                    <span className="text-white/40 text-[10px] uppercase font-bold flex items-center gap-1">
+                      <MapPin className="w-3 h-3" /> {exhibitor.country}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-display font-bold mb-4">{exhibitor.name}</h3>
+                  <p className="text-white/60 mb-6 font-light leading-relaxed">
+                    {exhibitor.description}
+                  </p>
+                  <button className="flex items-center gap-2 text-brand-gold font-bold text-sm hover:gap-4 transition-all">
+                    {t.village.discover} <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* REGISTRATION SECTION */}
+      <section id="register" className="section-padding relative">
+        <div className="absolute inset-0 bg-brand-green overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white rounded-full animate-pulse" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/50 rounded-full" />
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-white"
+            >
+              <div className="w-20 h-1 bg-white mb-8" />
+              <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                {t.registration.title}
+              </h2>
+              <p className="text-xl text-white/70 mb-10 leading-relaxed font-light">
+                {t.registration.text}
+              </p>
+              
+              <ul className="space-y-6 mb-12">
+                {[
+                  lang === 'fr' ? 'Accès illimité aux plénières' : 'Unlimited plenary access',
+                  lang === 'fr' ? 'Networking premium' : 'Premium networking',
+                  lang === 'fr' ? 'Invitation au cocktail de bienvenue' : 'Welcome cocktail invitation'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-4 text-white font-bold">
+                    <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shadow-sm">
+                       <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              
+              <button 
+                onClick={() => scrollToSection('register')}
+                className="px-12 py-5 bg-brand-red text-white font-black rounded-full shadow-2xl hover:bg-brand-red/90 transition-all uppercase tracking-[0.2em] text-xs"
+              >
+                Inscrivez-vous maintenant
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative z-10 bg-white p-12 rounded-[2rem] shadow-2xl text-center">
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-brand-red text-white font-black px-8 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg">
+                  Official Registration
+                </div>
+                
+                <div className="mb-8 pt-4">
+                  <div className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden">
+                    <img 
+                      src={qrCodeImage} 
+                      alt="Registration QR Code" 
+                      className="w-48 h-48 object-contain"
+                    />
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-black mb-2">{t.registration.scan}</h3>
+                <p className="text-black/50 text-sm mb-8 italic">Veuillez utiliser votre smartphone pour scanner</p>
+                
+                <div className="flex items-center justify-center gap-4 py-4 border-t border-black/5">
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest">Venue</p>
+                    <p className="text-xs font-bold text-black">Palais des Congrès</p>
+                  </div>
+                  <div className="w-px h-8 bg-black/10" />
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest">Date</p>
+                    <p className="text-xs font-bold text-black">18 - 20 Mai 2026</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute -inset-4 border border-brand-gold/30 rounded-[2.5rem] -z-10 animate-pulse" />
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-brand-gold/20 rounded-full blur-3xl" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS SECTION - PREMIUM INFINITE CAROUSEL */}
+      <section className="section-padding bg-slate-50 border-t border-black/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-brand-red font-black text-xs uppercase tracking-[0.4em] block mb-4">
+              Biashara Lomé 2026
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-black mb-6 tracking-tight">{t.partners.title}</h2>
+            <div className="w-24 h-1.5 bg-brand-gold mx-auto rounded-full mb-8" />
+            <p className="text-black/50 max-w-2xl mx-auto italic font-medium text-lg leading-relaxed">
+              "{t.partners.text}"
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="relative w-full space-y-12 py-16 bg-white/20 backdrop-blur-xl border-y border-black/5 overflow-hidden group">
+          {/* Subtle architectural background pattern */}
+          <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+            <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+          </div>
+
+          {/* Row 1: Fast Left */}
+          <div className="flex w-full overflow-hidden">
+            <motion.div 
+              className="flex gap-12 md:gap-24 items-center whitespace-nowrap pl-12 md:pl-24"
+              animate={{ x: [0, "-50%"] }}
+              transition={{ 
+                duration: 25, 
+                repeat: Infinity, 
+                ease: "linear"
+              }}
+            >
+              {[...new Array(2)].flatMap(() => [Patenaire1, Patenaire2, Patenaire3, Patenaire4, Patenaire5, Patenaire6, Patenaire7, Patenaire8, Patenaire9, Patenaire10]).map((logo, index) => (
+                <motion.div
+                  key={`r1-${index}`}
+                  whileHover={{ 
+                    scale: 1.25, 
+                    rotate: -3,
+                    zIndex: 20
+                  }}
+                  className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-gold/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
+                >
+                  <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" />
+                  <div className="absolute inset-0 bg-brand-gold/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Row 2: Medium Right (Offset) */}
+          <div className="flex w-full overflow-hidden">
+            <motion.div 
+              className="flex gap-12 md:gap-24 items-center whitespace-nowrap pr-12 md:pl-24"
+              animate={{ x: ["-50%", 0] }}
+              transition={{ 
+                duration: 35, 
+                repeat: Infinity, 
+                ease: "linear"
+              }}
+            >
+              {[...new Array(2)].flatMap(() => [Patenaire10, Patenaire9, Patenaire8, Patenaire7, Patenaire6, Patenaire5, Patenaire4, Patenaire3, Patenaire2, Patenaire1]).map((logo, index) => (
+                <motion.div
+                  key={`r2-${index}`}
+                  whileHover={{ 
+                    scale: 1.25, 
+                    rotate: 3,
+                    zIndex: 20
+                  }}
+                  className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-red/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
+                >
+                  <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" />
+                  <div className="absolute inset-0 bg-brand-red/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Depth Masking */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-96 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-96 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10 pointer-events-none" />
+          
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none" />
+        </div>
+      </section>
+
+      {/* GALLERY SECTION */}
+      <section id="gallery" className="section-padding bg-slate-50 relative overflow-hidden">
+        {/* Premium Background Elements */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/5 blur-[120px] rounded-full -translate-x-1/4 -translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[150px] rounded-full translate-x-1/4 translate-y-1/4" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <motion.span 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-brand-red font-black text-[10px] uppercase tracking-[0.5em] block mb-6 px-4 py-1.5 bg-brand-red/5 w-fit mx-auto rounded-full border border-brand-red/10"
+            >
+              Exposition Visuelle
+            </motion.span>
+            <h2 className="text-5xl md:text-7xl font-bold text-black mb-12 tracking-tight">{t.gallery.title}</h2>
+            
+            <div className="flex justify-center p-1 bg-white/50 backdrop-blur-sm rounded-2xl w-fit mx-auto border border-black/5 shadow-xl">
+              <button
+                onClick={() => setGalleryTab('news')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'news' 
+                    ? 'bg-brand-green text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <Newspaper className="w-4 h-4" />
+                {t.gallery.newsTab}
+              </button>
+              <button
+                onClick={() => setGalleryTab('events')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'events' 
+                    ? 'bg-brand-red text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <ImageIcon className="w-4 h-4" />
+                {t.gallery.eventsTab}
+              </button>
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            {galleryTab === 'news' ? (
+              <motion.div
+                key="news"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="space-y-12"
+              >
+                {/* Visual Composition: One Main + Two Secondary */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                  {/* Main Featured Visual */}
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    className="md:col-span-8 group relative aspect-video md:aspect-auto md:h-[650px] rounded-[3.5rem] overflow-hidden shadow-2xl bg-black cursor-pointer"
+                    onClick={() => setSelectedImage(GALLERY_POSTS[0].image)}
+                  >
+                    <img src={GALLERY_POSTS[0].image} className="w-full h-full object-cover opacity-100 transition-all duration-1000 group-hover:scale-105" alt="Featured" />
+                    <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between">
+                      <span className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest">
+                        Afficher <Maximize2 className="w-4 h-4 text-brand-gold" />
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Secondary Visuals Stack */}
+                  <div className="md:col-span-4 flex flex-col gap-8">
+                    {[GALLERY_POSTS[1], GALLERY_POSTS[2]].map((post, i) => (
+                      <motion.div 
+                        key={post.id}
+                        initial={{ x: 20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.1 * (i + 1) }}
+                        whileHover={{ y: -10, scale: 1.02 }}
+                        className="flex-1 group relative rounded-[2.5rem] overflow-hidden shadow-xl bg-slate-900 cursor-pointer"
+                        onClick={() => setSelectedImage(post.image)}
+                      >
+                        <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Secondary" />
+                        <div className="absolute inset-0 bg-brand-green/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">
+                          <Maximize2 className="w-8 h-8 text-white transition-transform duration-500 transform translate-y-4 group-hover:translate-y-0" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Horizontal Auto-Scrolling Archive */}
+                <div className="relative pt-12">
+                  <div className="flex items-center justify-between mb-8 px-4">
+                    <h3 className="text-xs font-black uppercase tracking-[0.3em] text-black/40">Archive Visuelle</h3>
+                    <div className="h-[1px] flex-1 mx-8 bg-black/5" />
+                  </div>
+                  
+                  <div className="overflow-hidden relative group">
+                    <motion.div 
+                      className="flex gap-6 w-max"
+                      animate={{ x: [0, -1000] }}
+                      transition={{ 
+                        duration: 30, 
+                        repeat: Infinity, 
+                        ease: "linear",
+                        repeatType: "loop"
+                      }}
+                    >
+                      {[...GALLERY_POSTS, ...GALLERY_POSTS].map((post, idx) => (
+                        <motion.div 
+                          key={`${post.id}-${idx}`}
+                          whileHover={{ y: -10, scale: 1.02 }}
+                          className="w-72 aspect-square rounded-[2rem] overflow-hidden shadow-md cursor-pointer relative bg-white border border-black/5"
+                          onClick={() => setSelectedImage(post.image)}
+                        >
+                          <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Post" />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <Maximize2 className="w-5 h-5 text-white" />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+
+                    {/* Gradient Masks for Carousel */}
+                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="events"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="space-y-24"
+              >
+                {EVENT_GALLERIES.map((category, idx) => (
+                  <div key={category.id} className="space-y-8">
+                    <div className="flex items-end justify-between px-4">
+                      <h3 className="text-2xl font-bold text-black border-l-4 border-brand-green pl-6">{category.title}</h3>
+                      <div className="flex gap-2">
+                        <div className="w-2 h-2 rounded-full bg-brand-green" />
+                        <div className="w-12 h-2 rounded-full bg-slate-200" />
+                      </div>
+                    </div>
+                    
+                    <div className="relative group/carousel overflow-hidden">
+                      <motion.div 
+                        className="flex gap-6 w-max"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ 
+                          duration: category.photos.length * 12, 
+                          repeat: Infinity, 
+                          ease: "linear",
+                          repeatType: "loop"
+                        }}
+                      >
+                        {[...category.photos, ...category.photos].map((photo, i) => (
+                          <motion.div
+                            key={i}
+                            whileHover={{ y: -10, scale: 1.02 }}
+                            className="relative w-[280px] md:w-[500px] aspect-[4/3] rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl group/img bg-slate-100"
+                            onClick={() => setSelectedImage(photo)}
+                          >
+                            <img 
+                              src={photo} 
+                              className="w-full h-full object-cover transition-all duration-1000 group-hover/img:scale-110" 
+                              alt={`Event ${i}`} 
+                              referrerPolicy="no-referrer"
+                            />
+                            <div className="absolute inset-0 bg-brand-green/10 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-2xl transform translate-y-8 group-hover/img:translate-y-0 transition-all duration-500">
+                                <Maximize2 className="w-6 h-6 text-brand-green" />
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                      
+                      {/* Carousel Hint Overlays */}
+                      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+                      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* LIGHTBOX */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/95 backdrop-blur-lg"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X className="w-10 h-10" />
+            </button>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full aspect-video rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img src={selectedImage} className="w-full h-full object-contain bg-black/50" alt="Full view" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* PRACTICAL INFO SECTION - COMPACT DESIGN */}
+      <section id="practical" className="section-padding bg-brand-light relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-brand-red font-black text-xs uppercase tracking-[0.4em] block mb-6">Informations</span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
+                {t.practical.title}
+              </h2>
+              
+              <div className="space-y-6 mb-10">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-green border border-black/5 shrink-0">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-black text-sm uppercase tracking-wider mb-1">{t.nav.program}</h4>
+                    <p className="text-black/60 font-medium tracking-tight">18 - 20 Mai 2026</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-red border border-black/5 shrink-0">
+                    <Globe className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-black text-sm uppercase tracking-wider mb-1">Thème</h4>
+                    <p className="text-black/60 font-medium tracking-tight">
+                      {lang === 'fr' ? "Accélérer la ZLECAf par l'innovation" : "Accelerating AfCFTA through innovation"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-gold border border-black/5 shrink-0">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-black text-sm uppercase tracking-wider mb-1">Organisateurs</h4>
+                    <p className="text-black/60 font-medium tracking-tight">Gouvernement Togolais & Secrétariat de la ZLECAf</p>
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => setIsPracticalModalOpen(true)}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-bold rounded-full hover:bg-brand-red transition-all group"
+              >
+                {t.practical.learnMore}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="absolute -top-10 -left-10 p-6 bg-white rounded-2xl shadow-2xl z-20 border border-black/5 hidden md:block">
+                <p className="text-[10px] font-black text-brand-red uppercase tracking-widest mb-2">{t.practical.exploreTogo}</p>
+                <div className="flex -space-x-3">
+                  {t.practical.placesToVisit.items.map((item: any, i: number) => (
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-light">
+                      <img src={item.image} className="w-full h-full object-cover" alt={item.name} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl relative border-4 border-white">
+                <img 
+                  src={Exploration} 
+                  className="w-full h-full object-cover" 
+                  alt="Togo" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8">
+                  <p className="text-white font-display font-bold text-2xl mb-4">{t.practical.exploreTogo}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.practical.placesToVisit.items.map((item: any, i: number) => (
+                      <span key={i} className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-white text-[10px] font-bold border border-white/20">
+                        {item.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRACTICAL DETAILS MODAL */}
+      <AnimatePresence>
+        {isPracticalModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+          >
+            <div 
+              className="absolute inset-0 bg-black/80 backdrop-blur-md" 
+              onClick={() => setIsPracticalModalOpen(false)}
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-[2.5rem] relative shadow-2xl flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="p-8 md:p-12 border-b border-black/5 flex items-start justify-between bg-brand-light relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-24 opacity-5 rotate-12">
+                   <Globe className="w-64 h-64 text-brand-red" />
+                </div>
+                
+                <div className="relative z-10">
+                  <span className="text-brand-red font-black text-xs uppercase tracking-[0.4em] block mb-4">Guide Officiel</span>
+                  <h2 className="text-3xl md:text-5xl font-bold text-black mb-4">{t.practical.title}</h2>
+                  <p className="text-black/60 max-w-xl font-medium">{t.practical.subtitle}</p>
+                </div>
+                
+                <button 
+                  onClick={() => setIsPracticalModalOpen(false)}
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black shadow-sm border border-black/5 hover:bg-brand-red hover:text-white transition-all relative z-10"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              
+              {/* Modal Content */}
+              <div className="overflow-y-auto flex-1 p-8 md:p-12 bg-white">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {t.practical.details.map((detail: any) => (
+                    <div
+                      key={detail.id}
+                      className="group p-6 bg-brand-light rounded-2xl border border-transparent hover:border-brand-red/10 transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-red">
+                          {(() => {
+                            switch (detail.id) {
+                              case "destination": return <MapPin className="w-5 h-5" />;
+                              case "temp": return <Thermometer className="w-5 h-5" />;
+                              case "timezone": return <Clock className="w-5 h-5" />;
+                              case "language": return <Languages className="w-5 h-5" />;
+                              case "dial": return <Phone className="w-5 h-5" />;
+                              case "meal": return <Utensils className="w-5 h-5" />;
+                              case "taxi": return <Car className="w-5 h-5" />;
+                              case "hotel": return <Hotel className="w-5 h-5" />;
+                              case "currency": return <Banknote className="w-5 h-5" />;
+                              case "internet": return <Wifi className="w-5 h-5" />;
+                              case "mobile_money": return <Smartphone className="w-5 h-5" />;
+                              case "airport": return <Plane className="w-5 h-5" />;
+                              case "transpo": return <Navigation className="w-5 h-5" />;
+                              case "elec": return <Zap className="w-5 h-5" />;
+                              case "formalities": return <FileText className="w-5 h-5" />;
+                              case "emergency": return <LifeBuoy className="w-5 h-5" />;
+                              default: return <Info className="w-5 h-5" />;
+                            }
+                          })()}
+                        </div>
+                        <h3 className="text-[10px] font-black text-black/40 uppercase tracking-widest">{detail.label}</h3>
+                      </div>
+                      <p className="text-black font-bold leading-relaxed">{detail.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FOOTER */}
+      <footer className="bg-brand-green text-white py-20 px-6 border-t border-white/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-1 md:col-span-2">
+              <div className="mb-8">
+                <img src={Logo} alt="Biashara Afrika Logo" className="h-24 md:h-28 w-auto object-contain" />
+              </div>
+              <p className="text-white/40 max-w-sm mb-8 leading-relaxed font-light">
+                Biashara Afrika 2026 : Le rendez-vous stratégique pour le commerce intra-africain et la réussite de la ZLECAf.
+              </p>
+              <div className="flex gap-4">
+                 {['twitter', 'linkedin', 'facebook', 'instagram'].map(s => (
+                   <div key={s} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all cursor-pointer">
+                      <ArrowRight className="w-4 h-4 -rotate-45" />
+                   </div>
+                 ))}
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-8">Navigation</h4>
+              <ul className="space-y-4 text-white/60 text-sm">
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">{t.nav.about}</button></li>
+                <li><button onClick={() => scrollToSection('program')} className="hover:text-white transition-colors">{t.nav.program}</button></li>
+                <li><button onClick={() => scrollToSection('speakers')} className="hover:text-white transition-colors">{t.nav.speakers}</button></li>
+                <li><button onClick={() => scrollToSection('village')} className="hover:text-white transition-colors">{t.nav.village}</button></li>
+                <li><button onClick={() => scrollToSection('gallery')} className="hover:text-white transition-colors">{t.nav.gallery}</button></li>
+                <li><button onClick={() => scrollToSection('practical')} className="hover:text-white transition-colors">{t.nav.practical}</button></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-8">Support</h4>
+              <ul className="space-y-4 text-white/60 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms of Use</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-white/30 text-xs uppercase tracking-widest font-bold">
+            <p>© 2026 BIASHARA AFRIKA. ALL RIGHTS RESERVED.</p>
+            <p>Made for Africa</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
