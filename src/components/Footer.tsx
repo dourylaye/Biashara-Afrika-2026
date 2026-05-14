@@ -19,17 +19,17 @@ export const Footer: React.FC<FooterProps> = ({
   const t = translations[lang];
 
   return (
-    <footer className="bg-brand-green text-white py-20 px-6 border-t border-white/5">
+    <footer className="bg-brand-green text-white py-16 px-6 md:px-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-12">
           <div className="max-w-md">
-            <div className="mb-8">
-              <img src={Logo} alt="Biashara Afrika Logo" className="h-24 md:h-28 w-auto object-contain" />
+            <div className="mb-6">
+              <img src={Logo} alt="Biashara Afrika Logo" className="h-20 md:h-24 w-auto object-contain brightness-0 invert" />
             </div>
-            <p className="text-white/40 mb-8 leading-relaxed font-light">
+            <p className="text-white/50 mb-6 leading-relaxed font-light text-lg">
               Biashara Afrika 2026 : Le rendez-vous stratégique pour le commerce intra-africain et la réussite de la ZLECAf.
             </p>
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-wrap gap-5 mb-6">
               {[
                 { id: 'facebook', icon: <Facebook className="w-5 h-5" />, url: "https://www.facebook.com/CommercegouvTg?_rdc=1&_rdr#" },
                 { id: 'twitter', icon: <Twitter className="w-5 h-5" />, url: "https://x.com/CommercegouvTg" },
@@ -56,8 +56,8 @@ export const Footer: React.FC<FooterProps> = ({
           
           <div className="flex flex-col md:items-end">
             <div className="w-full md:max-w-xs">
-              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-8 md:text-right">Navigation</h4>
-              <ul className="grid grid-cols-2 md:grid-cols-1 gap-4 text-white/60 text-sm md:text-right">
+              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-6 md:text-right">Navigation</h4>
+              <ul className="grid grid-cols-2 md:grid-cols-1 gap-3 text-white/60 text-sm md:text-right">
                 <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">{t.nav.about}</button></li>
                 <li><button onClick={() => scrollToSection('program')} className="hover:text-white transition-colors">{t.nav.program}</button></li>
                 <li><button onClick={() => scrollToSection('speakers')} className="hover:text-white transition-colors">{t.nav.speakers}</button></li>
@@ -69,7 +69,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
         
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/30 text-[10px] uppercase font-bold tracking-widest">
             © 2026 Biashara Afrika. Tous droits réservés.
           </p>

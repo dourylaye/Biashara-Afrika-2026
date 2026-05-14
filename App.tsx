@@ -534,14 +534,14 @@ const App: React.FC = () => {
              <circle cx="100" cy="50" r="50" fill="currentColor" />
           </svg>
         </div>
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="font-bold text-sm uppercase tracking-widest block mb-4" style={{ color: '#B73120' }}>The Platform</span>
+              <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">The Platform</span>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
                 {t.about.title}
               </h2>
@@ -624,17 +624,18 @@ const App: React.FC = () => {
           </svg>
         </div>
         <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-brand-light/0 to-white/10" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-20">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-24 max-w-4xl mx-auto">
             <motion.span 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="font-bold text-sm uppercase tracking-[0.3em] block mb-4"
-              style={{ color: '#B73120' }}
+              className="font-bold text-sm uppercase tracking-[0.3em] block mb-6 px-6 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 w-fit mx-auto"
             >
               Agenda 2026
             </motion.span>
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">{t.program.title}</h2>
+            <h2 className="text-4xl md:text-7xl font-bold mb-10 text-black tracking-tight">{t.program.title}</h2>
+            <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full mb-4" />
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-16 p-2 bg-white/50 backdrop-blur-sm rounded-full max-w-fit mx-auto border border-black/5">
@@ -701,7 +702,8 @@ const App: React.FC = () => {
             </AnimatePresence>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* SPEAKERS SECTION */}
       <section id="speakers" className="section-padding bg-[#FCFBFA] relative overflow-hidden scroll-mt-20">
@@ -733,7 +735,7 @@ const App: React.FC = () => {
           <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-brand-red/5 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-10">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -741,14 +743,13 @@ const App: React.FC = () => {
               viewport={{ once: true }}
               className="flex-1"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px w-12 bg-brand-red" />
-                <span className="font-black text-xs uppercase tracking-[0.3em] text-brand-red">Leaders Mondiaux</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-display font-bold text-black mb-6 leading-tight">
+              <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">
+                Leaders Mondiaux
+              </span>
+              <h2 className="text-4xl md:text-7xl font-display font-bold text-black mb-8 leading-tight tracking-tight">
                 {t.speakers.title}
               </h2>
-              <div className="h-1.5 w-24 bg-brand-green" />
+              <div className="h-1.5 w-24 bg-brand-green rounded-full" />
             </motion.div>
             
             <motion.div
@@ -821,10 +822,10 @@ const App: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="text-brand-red font-black text-xs uppercase tracking-[0.5em] block mb-4">
+                <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">
                   Biashara Lomé 2026
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black leading-tight">
+                <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black leading-tight tracking-tight">
                   {t.whyLome.title}
                 </h2>
                 <div className="w-20 h-1.5 rounded-full mb-8" style={{ backgroundColor: '#036B21' }} />
@@ -931,12 +932,15 @@ const App: React.FC = () => {
       {/* BUSINESS VILLAGE SECTION */}
       <section id="village" className="section-padding bg-brand-green text-white overflow-hidden relative scroll-mt-20">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-red/5" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-20">
+            <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-white/10 text-white rounded-full border border-white/20 inline-block">
+              Village Expo
+            </span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
               {lang === 'fr' ? "Chiffres clés du Village" : "Key Village Figures"}
             </h2>
-            <div className="w-20 h-1 bg-white mx-auto" />
+            <div className="w-20 h-1.5 bg-brand-gold mx-auto rounded-full" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
@@ -987,7 +991,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -1209,21 +1213,19 @@ const App: React.FC = () => {
               viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-1.5 bg-brand-red rounded-full animate-ping" />
-                <span className="text-brand-red font-black text-[11px] uppercase tracking-[0.4em] px-4 py-1.5 bg-brand-red/5 rounded-full border border-brand-red/10">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-1.5 h-1.5 bg-brand-red rounded-full" />
+                <span className="font-bold text-xs uppercase tracking-[0.4em] px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">
                   L'Expérience Biashara 2026
                 </span>
               </div>
               
-              <h2 className="text-5xl md:text-8xl font-display font-bold text-black mb-10 tracking-tighter leading-none">
+              <h2 className="text-4xl md:text-7xl font-bold text-black mb-10 tracking-tight">
                 {t.gallery.title}
               </h2>
               
               <div className="flex items-center justify-center gap-4 mb-16">
-                <div className="h-px w-20 bg-brand-gold/40" />
-                <div className="w-2 h-2 rotate-45 bg-brand-gold" />
-                <div className="h-px w-20 bg-brand-gold/40" />
+                <div className="h-1.5 w-32 bg-brand-green rounded-full" />
               </div>
             </motion.div>
             
@@ -1440,8 +1442,8 @@ const App: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-brand-red font-black text-xs uppercase tracking-[0.4em] block mb-6">Informations</span>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
+              <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">Informations</span>
+              <h2 className="text-4xl md:text-6xl font-bold mb-10 text-black leading-tight tracking-tight">
                 {t.practical.title}
               </h2>
               
