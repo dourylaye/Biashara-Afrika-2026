@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUp, MessageSquare } from 'lucide-react';
+import { ChevronUp } from 'lucide-react';
 
 interface FloatingActionsProps {
-  onContactClick: () => void;
   lang: 'fr' | 'en';
 }
 
-export const FloatingActions: React.FC<FloatingActionsProps> = ({ onContactClick, lang }) => {
+export const FloatingActions: React.FC<FloatingActionsProps> = ({ lang }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -33,26 +32,6 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ onContactClick
   return (
     <div className="fixed bottom-8 right-8 z-[150] flex flex-col gap-4">
       <AnimatePresence>
-        {/* Contact Button */}
-        <motion.button
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          whileHover={{ scale: 1.1, y: -3 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onContactClick}
-          className="w-14 h-14 bg-brand-green text-white rounded-full flex items-center justify-center shadow-2xl hover:brightness-110 transition-all group relative"
-          title={lang === 'fr' ? "Nous écrire" : "Contact us"}
-        >
-          <MessageSquare className="w-6 h-6" />
-          <motion.div 
-            initial={{ opacity: 0, x: -10 }}
-            whileHover={{ opacity: 1, x: 0 }}
-            className="absolute right-full mr-4 px-4 py-2 bg-brand-green text-white text-[10px] uppercase font-black tracking-widest rounded-lg pointer-events-none whitespace-nowrap hidden md:block"
-          >
-            {lang === 'fr' ? "Nous écrire" : "Contact us"}
-          </motion.div>
-        </motion.button>
-
         {/* Back to Top */}
         {isVisible && (
           <motion.button

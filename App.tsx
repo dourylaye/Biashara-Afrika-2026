@@ -54,7 +54,6 @@ import { Counter } from './src/components/Counter';
 import { SpeakerCard } from './src/components/SpeakerCard';
 import { Navigation } from './src/components/Navigation';
 import { Footer } from './src/components/Footer';
-import { ContactModal } from './src/components/ContactModal';
 import { FloatingActions } from './src/components/FloatingActions';
 import qrCodeImage from './Images/QR code.jpg';
 import heroImage from './Images/Hero.png';
@@ -134,6 +133,13 @@ import VIS2 from './Visuels/VIS2.jpg';
 import VIS3 from './Visuels/VIS3.jpeg';
 import VIS4 from './Visuels/VIS4.jpeg';
 import VIS6 from './Visuels/VIS6.jpeg';
+import V7 from './Visuels/V7.jpeg';
+import V8 from './Visuels/V8.jpeg';
+import V9 from './Visuels/V9.jpeg';
+import V10 from './Visuels/V10.jpeg';
+import V11 from './Visuels/V11.jpeg';
+import V12 from './Visuels/V12.jpeg';
+import V13 from './Visuels/V13.jpeg';
 import { Language, Speaker, Exhibitor } from './types';
 
 const App: React.FC = () => {
@@ -142,10 +148,9 @@ const App: React.FC = () => {
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-  const [galleryTab, setGalleryTab] = useState<'news' | 'events'>('news');
+  const [galleryTab, setGalleryTab] = useState<'news' | 'events'>('events');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const speakersRef = useRef<HTMLDivElement>(null);
   const [isSpeakersHovered, setIsSpeakersHovered] = useState(false);
 
@@ -187,7 +192,14 @@ const App: React.FC = () => {
         ? "Focus sur les opportunités d'investissement et le développement des infrastructures en Afrique."
         : "Focus on investment opportunities and infrastructure development in Africa.",
       date: "28 Avril 2025"
-    }
+    },
+    { id: 7, image: V7, text: "", date: "16 Mai 2025" },
+    { id: 8, image: V8, text: "", date: "16 Mai 2025" },
+    { id: 9, image: V9, text: "", date: "17 Mai 2025" },
+    { id: 10, image: V10, text: "", date: "17 Mai 2025" },
+    { id: 11, image: V11, text: "", date: "18 Mai 2025" },
+    { id: 12, image: V12, text: "", date: "18 Mai 2025" },
+    { id: 13, image: V13, text: "", date: "19 Mai 2025" }
   ];
 
   const EVENT_GALLERIES = [
@@ -736,7 +748,7 @@ const App: React.FC = () => {
               <h2 className="text-4xl md:text-6xl font-display font-bold text-black mb-6 leading-tight">
                 {t.speakers.title}
               </h2>
-              <div className="h-1.5 w-24 bg-brand-gold/40" />
+              <div className="h-1.5 w-24 bg-brand-green" />
             </motion.div>
             
             <motion.div
@@ -800,7 +812,7 @@ const App: React.FC = () => {
         </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-16 items-center">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
             
             {/* TEXT CONTENT & STATS */}
             <div className="lg:col-span-6">
@@ -809,14 +821,14 @@ const App: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <span className="text-brand-red font-black text-xs uppercase tracking-[0.5em] block mb-6">
+                <span className="text-brand-red font-black text-xs uppercase tracking-[0.5em] block mb-4">
                   Biashara Lomé 2026
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold mb-8 text-black leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black leading-tight">
                   {t.whyLome.title}
                 </h2>
-                <div className="w-20 h-1.5 rounded-full mb-10" style={{ backgroundColor: '#036B21' }} />
-                <p className="text-lg text-black/60 font-light leading-relaxed mb-12 max-w-xl">
+                <div className="w-20 h-1.5 rounded-full mb-8" style={{ backgroundColor: '#036B21' }} />
+                <p className="text-lg text-black/60 font-light leading-relaxed mb-10 max-w-xl">
                   {t.whyLome.description}
                 </p>
 
@@ -859,7 +871,7 @@ const App: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="relative rounded-[4rem] overflow-hidden shadow-2xl aspect-[9/16] w-full max-w-[450px] bg-brand-light group border-8 border-white"
+                className="relative rounded-[4rem] overflow-hidden shadow-2xl aspect-[9/14.5] w-full max-w-[420px] bg-brand-light group border-8 border-white"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -924,7 +936,7 @@ const App: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               {lang === 'fr' ? "Chiffres clés du Village" : "Key Village Figures"}
             </h2>
-            <div className="w-20 h-1 bg-brand-gold mx-auto" />
+            <div className="w-20 h-1 bg-white mx-auto" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
@@ -1078,7 +1090,7 @@ const App: React.FC = () => {
               Biashara Lomé 2026
             </span>
             <h2 className="text-4xl md:text-5xl font-display font-bold text-black mb-6 tracking-tight">{t.partners.title}</h2>
-            <div className="w-24 h-1.5 bg-brand-gold mx-auto rounded-full mb-8" />
+            <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full mb-8" />
             <p className="text-black/50 max-w-2xl mx-auto italic font-medium text-lg leading-relaxed">
               "{t.partners.text}"
             </p>
@@ -1217,17 +1229,6 @@ const App: React.FC = () => {
             
             <div className="flex justify-center p-1.5 bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] backdrop-blur-md rounded-2xl w-fit mx-auto border border-black/5">
               <button
-                onClick={() => setGalleryTab('news')}
-                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
-                  galleryTab === 'news' 
-                    ? 'bg-brand-green text-white shadow-xl' 
-                    : 'text-black/40 hover:text-black'
-                }`}
-              >
-                <Newspaper className="w-4 h-4" />
-                {t.gallery.newsTab}
-              </button>
-              <button
                 onClick={() => setGalleryTab('events')}
                 className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
                   galleryTab === 'events' 
@@ -1237,6 +1238,17 @@ const App: React.FC = () => {
               >
                 <ImageIcon className="w-4 h-4" />
                 {t.gallery.eventsTab}
+              </button>
+              <button
+                onClick={() => setGalleryTab('news')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'news' 
+                    ? 'bg-brand-green text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <Newspaper className="w-4 h-4" />
+                {t.gallery.newsTab}
               </button>
             </div>
           </div>
@@ -1298,9 +1310,9 @@ const App: React.FC = () => {
                   <div className="overflow-hidden relative group">
                     <motion.div 
                       className="flex gap-6 w-max"
-                      animate={{ x: [0, -1000] }}
+                      animate={{ x: ["0%", "-50%"] }}
                       transition={{ 
-                        duration: 30, 
+                        duration: 40, 
                         repeat: Infinity, 
                         ease: "linear",
                         repeatType: "loop"
@@ -1610,14 +1622,6 @@ const App: React.FC = () => {
 
       {/* Floating Actions */}
       <FloatingActions 
-        onContactClick={() => setIsContactModalOpen(true)}
-        lang={lang}
-      />
-
-      {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
         lang={lang}
       />
     </div>
