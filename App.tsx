@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Globe, 
@@ -32,7 +32,7 @@ import {
   Wifi,
   Smartphone,
   Plane,
-  Navigation,
+  Navigation as NavigationIcon,
   Zap,
   FileText,
   LifeBuoy,
@@ -42,9 +42,20 @@ import {
   Newspaper,
   Image as ImageIcon,
   Maximize2,
-  Facebook
+  Facebook,
+  Linkedin,
+  Twitter,
+  MessageCircle,
+  Briefcase,
+  Store
 } from 'lucide-react';
-import { translations, PROGRAM_DATA, SPEAKERS_DATA, VILLAGE_DATA } from './constants';
+import { translations, PROGRAM_DATA, SPEAKERS_DATA } from './constants';
+import { Counter } from './src/components/Counter';
+import { SpeakerCard } from './src/components/SpeakerCard';
+import { Navigation } from './src/components/Navigation';
+import { Footer } from './src/components/Footer';
+import { ContactModal } from './src/components/ContactModal';
+import { FloatingActions } from './src/components/FloatingActions';
 import qrCodeImage from './Images/QR code.jpg';
 import heroImage from './Images/Hero.png';
 import Logo from './Images/Logo.png';
@@ -59,12 +70,38 @@ import Patenaire7 from './Images/Patenaire _7.png';
 import Patenaire8 from './Images/Patenaire _8.png';
 import Patenaire9 from './Images/Patenaire _9.png';
 import Patenaire10 from './Images/Patenaire _10.png';
+import Patenaire12 from './Images/Patenaire _12.png';
+import Patenaire13 from './Images/Patenaire _13.png';
+import Patenaire14 from './Images/Patenaire _14.png';
+import Patenaire15 from './Images/Patenaire _15.png';
+import Patenaire16 from './Images/Patenaire _16.png';
+import Patenaire17 from './Images/Patenaire _17.png';
+import Patenaire18 from './Images/Patenaire _18.png';
+import Patenaire19 from './Images/Patenaire _19.png';
+import Patenaire20 from './Images/Patenaire _20.png';
 import FAURE_IMG from './Images/FAURE.jpg';
 import WAMKELE_IMG from './Images/Wamkele.jpg';
 import SIDI_IMG from './Images/Sidi.jpg';
 import ELOMBI_IMG from './Images/Elombi.jpg';
 import TAREK_IMG from './Images/Tarek.jpg';
 import LABONNE_IMG from './Images/Labonne.jpg';
+import MAHAMADOU_IMG from './Images/Mahamadou_.jpg';
+import PAMELA_IMG from './Images/Pamela Coke.jpg';
+import FRAIZEE_IMG from './Images/Prof Fraizee.jpg';
+import LERATO_IMG from './Images/Lerato.jpg';
+import HANNANE_IMG from './Images/Hannane.jpg';
+import JOY_IMG from './Images/Dr Joy.jpg';
+import KANAYO_IMG from './Images/Kanayo.jpg';
+import YONI_IMG from './Images/Yomi.jpg';
+import STEPHEN_IMG from './Images/Stephen.jpg';
+import NSHUTI_IMG from './Images/Nshuti.jpg';
+import YAO_IMG from './Images/Dr Yao.jpg';
+import ROB_IMG from './Images/Dr Rob.jpg';
+import EKRA_IMG from './Images/Jean Louis.jpg';
+import JEREMY_IMG from './Images/Jeremy.jpg';
+import MAKINDE_IMG from './Images/Oluwaseyi.jpg';
+import GATETE_IMG from './Images/Claver Gatete.jpg';
+import FLORIZELLE_IMG from './Images/Florizelle liser.jpg';
 import TG1 from './Images/TG1.png';
 import TG2 from './Images/TG2.png';
 import TG3 from './Images/TG3.jpg';
@@ -77,6 +114,21 @@ import CP2 from './Photos/CP2.jpg';
 import S1 from './Photos/S1.jpeg';
 import S2 from './Photos/S2.jpeg';
 import S3 from './Photos/S3.jpeg';
+import R1 from './Photos/R1.jpeg';
+import R2 from './Photos/R2.jpeg';
+import R3 from './Photos/R3.jpeg';
+import R4 from './Photos/R4.jpeg';
+import R5 from './Photos/R5.jpeg';
+import R6 from './Photos/R6.jpeg';
+import R7 from './Photos/R7.jpeg';
+import R8 from './Photos/R8.jpeg';
+import R9 from './Photos/R9.jpeg';
+import R10 from './Photos/R10.jpeg';
+import R11 from './Photos/R11.jpeg';
+import R12 from './Photos/R12.jpeg';
+import R13 from './Photos/R13.jpeg';
+import R14 from './Photos/R14.jpeg';
+import R15 from './Photos/R15.jpeg';
 import VIS1 from './Visuels/VIS1.jpg';
 import VIS2 from './Visuels/VIS2.jpg';
 import VIS3 from './Visuels/VIS3.jpeg';
@@ -93,6 +145,9 @@ const App: React.FC = () => {
   const [galleryTab, setGalleryTab] = useState<'news' | 'events'>('news');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const speakersRef = useRef<HTMLDivElement>(null);
+  const [isSpeakersHovered, setIsSpeakersHovered] = useState(false);
 
   const GALLERY_POSTS = [
     {
@@ -137,6 +192,11 @@ const App: React.FC = () => {
 
   const EVENT_GALLERIES = [
     {
+      id: 'organizing-comittee',
+      title: lang === 'fr' ? "Rencontre des comités d’organisation" : "Organizing Committees Meeting",
+      photos: [R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15]
+    },
+    {
       id: 'press-conference',
       title: lang === 'fr' ? "Conférence de presse de lancement" : "Launch Press Conference",
       photos: [CP1, CP2]
@@ -167,12 +227,59 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-scroll for speakers carousel
+  useEffect(() => {
+    const scrollContainer = speakersRef.current;
+    if (!scrollContainer) return;
+
+    let animationId: number;
+    const scrollSpeed = 0.6; // Moderate, elegant pace
+
+    const scroll = () => {
+      if (!isSpeakersHovered) {
+        scrollContainer.scrollLeft += scrollSpeed;
+        
+        // Reset to start when half is reached for infinite effect
+        // (Items are doubled in the render: [...enrichedSpeakers, ...enrichedSpeakers])
+        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
+          scrollContainer.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    animationId = requestAnimationFrame(scroll);
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [isSpeakersHovered]);
+
   const SPEAKER_IMAGES: Record<string, string> = {
     faure: FAURE_IMG,
+    issoufou: MAHAMADOU_IMG,
     wamkele: WAMKELE_IMG,
-    sidi: SIDI_IMG,
+    pamela: PAMELA_IMG,
     elombi: ELOMBI_IMG,
+    fraizee: FRAIZEE_IMG,
+    lerato: LERATO_IMG,
+    hannane: HANNANE_IMG,
+    joy: JOY_IMG,
+    kanayo: KANAYO_IMG,
     tarek: TAREK_IMG,
+    yoni: YONI_IMG,
+    stephen: STEPHEN_IMG,
+    nshuti: NSHUTI_IMG,
+    yao: YAO_IMG,
+    rob: ROB_IMG,
+    ekra: EKRA_IMG,
+    jeremy: JEREMY_IMG,
+    makinde: MAKINDE_IMG,
+    gatete: GATETE_IMG,
+    florizelle: FLORIZELLE_IMG,
+    sidi: SIDI_IMG,
     labonne: LABONNE_IMG
   };
 
@@ -185,10 +292,7 @@ const App: React.FC = () => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -204,131 +308,193 @@ const App: React.FC = () => {
       </div>
       
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-brand-green/95 backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <span className={`font-display font-bold text-xl tracking-wider ${scrolled || mobileMenuOpen ? 'text-white' : 'text-black'}`}>
-              BIASHARA AFRIKA
-            </span>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
-              <button 
-                key={item} 
-                onClick={() => scrollToSection(item)}
-                className={`text-sm font-medium tracking-wide transition-colors ${scrolled ? 'text-white/80 hover:text-brand-gold' : 'text-black/80 hover:text-brand-gold'}`}
-              >
-                {t.nav[item]}
-              </button>
-            ))}
-            
-            <div className="flex items-center gap-4 ml-4">
-              <button 
-                onClick={toggleLang}
-                className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${scrolled ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/5'}`}
-              >
-                <Globe className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase">{lang}</span>
-              </button>
-              <button 
-                onClick={() => scrollToSection('register')}
-                className="bg-brand-red text-white font-bold text-xs uppercase px-6 py-2.5 rounded-sm hover:brightness-110 transition-all shadow-md"
-              >
-                {t.nav.register}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className={`md:hidden p-2 ${scrolled || mobileMenuOpen ? 'text-white' : 'text-black'}`}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            className="fixed inset-0 z-40 bg-brand-green flex flex-col items-center justify-center gap-8"
-          >
-            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="text-2xl font-display text-white hover:text-brand-gold transition-colors"
-              >
-                {t.nav[item]}
-              </button>
-            ))}
-            <button 
-              onClick={toggleLang}
-              className="text-white/60 font-bold uppercase p-2 border border-white/20 rounded-lg"
-            >
-              Change Language: {lang === 'fr' ? 'English' : 'Français'}
-            </button>
-            <button 
-              onClick={() => scrollToSection('register')}
-              className="mt-4 bg-brand-red text-white font-bold px-10 py-4 uppercase tracking-widest"
-            >
-              {t.nav.register}
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Navigation 
+        scrolled={scrolled}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        lang={lang}
+        toggleLang={toggleLang}
+        scrollToSection={scrollToSection}
+        translations={translations}
+      />
 
       {/* HERO SECTION */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-light">
         <div className="absolute inset-0">
-          <img 
+          <motion.img 
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.4 }}
+            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
             src={heroImage} 
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover"
             alt="Biashara Afrika Hero"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-light/40 via-transparent to-brand-light" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-light/70 via-transparent to-brand-light" />
+          
+          {/* Cinematic Atmospheric Layer */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            {/* Soft Light Rays */}
+            <div className="absolute -top-1/4 -left-1/4 w-[150%] h-[150%] opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent animate-slow-spin-zoom" />
+            
+            {/* Floating Dust Particles */}
+            <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }} />
+            
+            {/* Dynamic Light Beams */}
+            <motion.div 
+              animate={{ 
+                x: [-500, 500],
+                opacity: [0, 0.1, 0]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="absolute top-0 w-px h-full bg-white blur-[80px]"
+            />
+          </div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.4, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-green/10 border border-brand-green/20 text-brand-green font-bold text-xs uppercase tracking-widest mb-6">
-              <Calendar className="w-4 h-4" />
-              {t.hero.date}
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 1 }}
+              className="inline-flex flex-col items-center gap-4 mb-14"
+            >
+              <div className="px-10 py-3.5 rounded-full bg-brand-green/10 border border-brand-green/30 text-brand-green font-black text-[11px] uppercase tracking-[0.5em] inline-flex items-center gap-4 backdrop-blur-md shadow-2xl group transition-all hover:bg-brand-green hover:text-white cursor-default">
+                <div className="w-2 h-2 bg-brand-green rounded-full animate-pulse group-hover:bg-white" />
+                <Calendar className="w-4 h-4" />
+                {t.hero.date}
+              </div>
+            </motion.div>
             
-            <h1 className="text-5xl md:text-8xl font-black text-black mb-6 leading-tight">
-              {t.hero.title}
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-black/70 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-              {t.hero.baseline}
-            </p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, filter: "blur(40px)" }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1, 
+                filter: "blur(0px)",
+                brightness: 1,
+                transition: { duration: 1.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
+              }}
+              className="relative mb-12"
+            >
+              <div className="relative z-10">
+                <motion.div
+                  animate={{ 
+                    y: [0, -12, 0],
+                    scale: [1, 1.04, 1],
+                    rotate: [-0.5, 0.5, -0.5]
+                  }}
+                  transition={{ 
+                    duration: 6, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                  className="relative group"
+                >
+                  <img 
+                    src={Logo} 
+                    alt="Biashara Afrika Logo" 
+                    className="h-44 md:h-72 mx-auto object-contain brightness-110 drop-shadow-[0_45px_45px_rgba(0,0,0,0.3)] transition-all duration-700 group-hover:brightness-125" 
+                  />
+                  
+                  {/* Subtle Cinematic Shimmer Overlay */}
+                  <motion.div 
+                    animate={{ 
+                      x: ["-100%", "200%"],
+                      opacity: [0, 0.3, 0]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity, 
+                      repeatDelay: 4,
+                      ease: "easeInOut"
+                    }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none mix-blend-overlay"
+                  />
+                </motion.div>
+              </div>
+              
+              {/* Layered Floating Glows behind logo */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-full h-full">
+                {/* Core White/Warm Glow */}
+                <motion.div 
+                  animate={{ 
+                    scale: [1, 1.3, 1],
+                    opacity: [0.4, 0.6, 0.4]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 bg-white/30 blur-[100px] rounded-full" 
+                />
+                
+                {/* Brand Red Glow - Pulses occasionally */}
+                <motion.div 
+                  animate={{ 
+                    scale: [0.8, 1.2, 0.8],
+                    opacity: [0, 0.2, 0],
+                    x: [-20, 20, -20]
+                  }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute inset-0 bg-brand-red/15 blur-[120px] rounded-full" 
+                />
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button 
-                onClick={() => scrollToSection('register')}
-                className="w-full sm:w-auto px-10 py-5 bg-brand-green text-white font-bold rounded-sm shadow-xl hover:bg-brand-green/90 transition-all flex items-center justify-center gap-2"
+                {/* Brand Gold Glow - Offset pulses */}
+                <motion.div 
+                  animate={{ 
+                    scale: [1.2, 0.9, 1.2],
+                    opacity: [0, 0.15, 0],
+                    y: [-30, 30, -30]
+                  }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                  className="absolute inset-0 bg-brand-gold/15 blur-[140px] rounded-full" 
+                />
+              </div>
+            </motion.div>
+
+
+
+
+
+            <div className="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <motion.a 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-12 py-6 bg-brand-green text-white font-black rounded-sm shadow-[0_20px_50px_rgba(3,107,33,0.2)] hover:shadow-[0_25px_60px_rgba(3,107,33,0.3)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-[10px]"
               >
                 {t.hero.ctaRegister}
-                <ChevronRight className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => scrollToSection('program')}
-                className="w-full sm:w-auto px-10 py-5 border-2 border-brand-green text-brand-green font-bold rounded-sm hover:bg-brand-green hover:text-white transition-all"
+                <ArrowRight className="w-5 h-5" />
+              </motion.a>
+              <motion.a 
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.5, duration: 0.8 }}
+                href="#program"
+                className="w-full sm:w-auto px-12 py-6 border-2 border-brand-green/30 text-brand-green font-black rounded-sm hover:bg-brand-green hover:text-white transition-all uppercase tracking-widest text-[10px] shadow-xl flex items-center justify-center gap-3 backdrop-blur-sm"
               >
                 {t.hero.ctaProgram}
-              </button>
+                <ChevronRight className="w-5 h-5" />
+              </motion.a>
+            </div>
+
+            {/* Extra Premium Decorative Accents */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none -z-20">
+               <motion.div 
+                 animate={{ rotate: 360 }}
+                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                 className="absolute top-[10%] right-[10%] w-[500px] h-[500px] border border-brand-gold/5 rounded-full"
+               />
+               <motion.div 
+                 animate={{ rotate: -360 }}
+                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                 className="absolute bottom-[20%] left-[5%] w-[300px] h-[300px] border border-brand-red/5 rounded-full"
+               />
             </div>
 
             <div className="mt-16 flex flex-wrap justify-center gap-8 text-black/60 font-medium">
@@ -350,7 +516,7 @@ const App: React.FC = () => {
       </section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="section-padding bg-white/50 relative overflow-hidden backdrop-blur-sm">
+      <section id="about" className="section-padding bg-white/50 relative overflow-hidden backdrop-blur-sm scroll-mt-20">
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.03] pointer-events-none transform translate-x-1/4">
           <svg viewBox="0 0 100 100" className="w-full h-full text-brand-green">
              <circle cx="100" cy="50" r="50" fill="currentColor" />
@@ -434,7 +600,7 @@ const App: React.FC = () => {
       </section>
 
       {/* PROGRAM SECTION */}
-      <section id="program" className="section-padding bg-brand-light/50 backdrop-blur-sm relative overflow-hidden">
+      <section id="program" className="section-padding bg-brand-light/50 backdrop-blur-sm relative overflow-hidden scroll-mt-20">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -457,12 +623,6 @@ const App: React.FC = () => {
               Agenda 2026
             </motion.span>
             <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black">{t.program.title}</h2>
-            <div className="flex flex-col items-center gap-6">
-              <button className="group inline-flex items-center gap-3 text-black font-bold px-8 py-3 bg-white rounded-full shadow-sm hover:shadow-md transition-all border border-black/5">
-                <Download className="w-5 h-5 text-brand-green group-hover:scale-110 transition-transform" />
-                {t.program.download}
-              </button>
-            </div>
           </div>
 
           <div className="flex flex-wrap justify-center gap-3 mb-16 p-2 bg-white/50 backdrop-blur-sm rounded-full max-w-fit mx-auto border border-black/5">
@@ -532,65 +692,80 @@ const App: React.FC = () => {
       </section>
 
       {/* SPEAKERS SECTION */}
-      <section id="speakers" className="section-padding bg-white/40 backdrop-blur-md relative overflow-hidden">
-        <div className="absolute inset-0 bg-texture-dots opacity-[0.02]" />
+      <section id="speakers" className="section-padding bg-[#FCFBFA] relative overflow-hidden scroll-mt-20">
+        {/* Premium Immersive Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Multi-layered Gradients */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-red/[0.03] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-brand-gold/[0.04] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+          
+          {/* Abstract Architectural Fluid Lines */}
+          <svg className="absolute top-0 left-0 w-full h-full opacity-[0.04]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path d="M0,1000 C300,800 400,200 1000,0" stroke="#B73120" fill="transparent" strokeWidth="0.5" />
+            <path d="M0,800 C400,600 600,400 1000,200" stroke="#D4AF37" fill="transparent" strokeWidth="0.5" />
+            <path d="M200,1000 C500,700 700,300 1000,100" stroke="#036B21" fill="transparent" strokeWidth="0.3" />
+          </svg>
+
+          {/* Subtle African Geometric Pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.015]" 
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20L20 0ZM20 10L30 20L20 30L10 20L20 10Z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+              backgroundSize: '40px 40px'
+            }} 
+          />
+
+          {/* Decorative Floating Orbs */}
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-gold/5 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-brand-red/5 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-              <span className="font-bold text-sm uppercase tracking-widest block mb-4" style={{ color: '#B73120' }}>Afro-Optimism</span>
-              <h2 className="text-4xl md:text-5xl font-bold text-black">{t.speakers.title}</h2>
-            </div>
-            <p className="max-w-md text-black/60">
-              Des leaders d'opinion et décideurs engagés pour la transformation structurelle de l'économie africaine.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-10">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex-1"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px w-12 bg-brand-red" />
+                <span className="font-black text-xs uppercase tracking-[0.3em] text-brand-red">Leaders Mondiaux</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-black mb-6 leading-tight">
+                {t.speakers.title}
+              </h2>
+              <div className="h-1.5 w-24 bg-brand-gold/40" />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex-1 max-w-xl"
+            >
+              <p className="text-black/70 text-lg md:text-xl font-light leading-relaxed border-l-2 border-brand-red/10 pl-8">
+                Des leaders d'opinion et décideurs engagés pour la transformation structurelle de l'économie africaine.
+              </p>
+            </motion.div>
           </div>
 
           <div className="relative group">
             <motion.div 
-              className="flex gap-8 overflow-x-auto pb-12 no-scrollbar px-4"
+              ref={speakersRef}
+              onMouseEnter={() => setIsSpeakersHovered(true)}
+              onMouseLeave={() => setIsSpeakersHovered(false)}
+              onTouchStart={() => setIsSpeakersHovered(true)}
+              onTouchEnd={() => setIsSpeakersHovered(false)}
+              className="flex gap-10 overflow-x-auto pb-16 no-scrollbar px-4 cursor-grab active:cursor-grabbing"
               initial={{ x: 20, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
             >
               {[...enrichedSpeakers, ...enrichedSpeakers].map((speaker, i) => (
-                <motion.div 
-                  key={i}
-                  whileHover={{ y: -15, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="group relative w-[300px] sm:w-[400px] md:w-[500px] shrink-0"
-                >
-                  <div className="relative aspect-[4/5] w-full rounded-[2.5rem] overflow-hidden shadow-2xl border border-black/5 bg-slate-100">
-                    <img 
-                      src={speaker.image} 
-                      className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" 
-                      alt={speaker.name} 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-                    
-                    {/* Decorative Border Glow */}
-                    <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-all duration-500 rounded-3xl" />
-
-                    <div className="absolute bottom-0 left-0 p-8 w-full translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                      <motion.div 
-                        initial={{ opacity: 0.8 }}
-                        className="text-[10px] font-black text-brand-gold uppercase tracking-[0.25em] mb-4 px-4 py-1.5 bg-black/40 backdrop-blur-xl inline-block rounded-full border border-white/10"
-                      >
-                        {speaker.category}
-                      </motion.div>
-                      <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 leading-tight tracking-tight">
-                        {speaker.name}
-                      </h3>
-                      <p className="text-white/80 text-sm font-medium italic mb-3 flex items-center gap-2">
-                        <span className="w-4 h-[1px] bg-brand-red"></span>
-                        {speaker.role}
-                      </p>
-                      <div className="h-px w-12 bg-brand-gold/50 mb-4 group-hover:w-20 transition-all duration-500" />
-                      <p className="text-brand-gold font-black text-[11px] uppercase tracking-wider flex items-center gap-2">
-                         {speaker.institution}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+                <SpeakerCard key={i} speaker={speaker} index={i} />
               ))}
             </motion.div>
             
@@ -609,7 +784,7 @@ const App: React.FC = () => {
       </section>
 
       {/* WHY LOME SECTION - PREMIUM CURVED DESIGN WITH SLIDER */}
-      <section id="why-lome" className="section-padding bg-[#FCFBFA] relative overflow-hidden">
+      <section id="why-lome" className="section-padding bg-[#FCFBFA] relative overflow-hidden scroll-mt-20">
         {/* Architectural Curves and Shapes */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <svg className="absolute top-0 right-0 w-full h-full text-brand-gold/[0.03]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
@@ -742,51 +917,57 @@ const App: React.FC = () => {
       </section>
 
       {/* BUSINESS VILLAGE SECTION */}
-      <section id="village" className="section-padding bg-brand-green text-white overflow-hidden relative">
+      <section id="village" className="section-padding bg-brand-green text-white overflow-hidden relative scroll-mt-20">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-red/5" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.village.title}</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {lang === 'fr' ? "Chiffres clés du Village" : "Key Village Figures"}
+            </h2>
             <div className="w-20 h-1 bg-brand-gold mx-auto" />
           </div>
 
-          <motion.div 
-            className="flex gap-8 overflow-x-auto pb-12 cursor-grab active:cursor-grabbing no-scrollbar"
-            whileTap={{ cursor: "grabbing" }}
-          >
-            {[...VILLAGE_DATA, ...VILLAGE_DATA, ...VILLAGE_DATA].map((exhibitor, i) => (
-              <motion.div 
-                key={i}
-                className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm flex flex-col md:flex-row gap-8 items-center min-w-[300px] md:min-w-[600px] shrink-0"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
+            {[
+              { id: 1, value: 242, label: lang === 'fr' ? "Stands" : "Booths", icon: <Store className="w-8 h-8" />, color: "bg-brand-red" },
+              { id: 2, value: 20, label: lang === 'fr' ? "Pays" : "Countries", icon: <Globe2 className="w-8 h-8" />, color: "bg-brand-gold" },
+              { id: 3, value: 10, label: lang === 'fr' ? "Secteurs d’activité" : "Sectors of activity", icon: <Briefcase className="w-8 h-8" />, color: "bg-white/10" }
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="relative group p-10 bg-white/5 backdrop-blur-sm rounded-[3rem] border border-white/10 flex flex-col items-center text-center shadow-2xl overflow-hidden"
               >
-                <div className="w-24 h-24 bg-white border border-white rounded-full flex items-center justify-center shrink-0 shadow-xl overflow-hidden p-2">
-                  <img src={exhibitor.logo} alt={exhibitor.name} className="w-full h-full object-contain grayscale" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="px-2 py-0.5 bg-brand-gold/20 text-brand-gold text-[10px] font-bold uppercase rounded">
-                      {exhibitor.sector}
-                    </span>
-                    <span className="text-white/40 text-[10px] uppercase font-bold flex items-center gap-1">
-                      <MapPin className="w-3 h-3" /> {exhibitor.country}
-                    </span>
+                {/* Decorative background shape */}
+                <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-colors" />
+                
+                <div className={`w-20 h-20 ${stat.color} rounded-3xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                  <div className="text-white group-hover:rotate-12 transition-transform">
+                    {stat.icon}
                   </div>
-                  <h3 className="text-2xl font-display font-bold mb-4">{exhibitor.name}</h3>
-                  <p className="text-white/60 mb-6 font-light leading-relaxed">
-                    {exhibitor.description}
-                  </p>
-                  <button className="flex items-center gap-2 text-brand-gold font-bold text-sm hover:gap-4 transition-all">
-                    {t.village.discover} <ArrowRight className="w-4 h-4" />
-                  </button>
                 </div>
+
+                <div className="text-6xl md:text-7xl font-black mb-4 tracking-tighter flex items-center justify-center gap-1">
+                  <Counter value={stat.value} />
+                </div>
+
+                <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-white/60 mb-6">
+                  {stat.label}
+                </h3>
+                
+                <div className="w-12 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* REGISTRATION SECTION */}
-      <section id="register" className="section-padding relative">
+      <section id="register" className="section-padding relative scroll-mt-20">
         <div className="absolute inset-0 bg-brand-green overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white rounded-full animate-pulse" />
@@ -825,12 +1006,14 @@ const App: React.FC = () => {
                 ))}
               </ul>
               
-              <button 
-                onClick={() => scrollToSection('register')}
-                className="px-12 py-5 bg-brand-red text-white font-black rounded-full shadow-2xl hover:bg-brand-red/90 transition-all uppercase tracking-[0.2em] text-xs"
+              <a 
+                href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex px-12 py-5 bg-brand-red text-white font-black rounded-full shadow-2xl hover:bg-brand-red/90 transition-all uppercase tracking-[0.2em] text-xs hover:-translate-y-1"
               >
                 Inscrivez-vous maintenant
-              </button>
+              </a>
             </motion.div>
 
             <motion.div
@@ -845,13 +1028,18 @@ const App: React.FC = () => {
                 </div>
                 
                 <div className="mb-8 pt-4">
-                  <div className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden">
+                  <a 
+                    href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden hover:scale-105 transition-transform"
+                  >
                     <img 
                       src={qrCodeImage} 
                       alt="Registration QR Code" 
                       className="w-48 h-48 object-contain"
                     />
-                  </div>
+                  </a>
                 </div>
                 
                 <h3 className="text-2xl font-bold text-black mb-2">{t.registration.scan}</h3>
@@ -909,12 +1097,17 @@ const App: React.FC = () => {
               className="flex gap-12 md:gap-24 items-center whitespace-nowrap pl-12 md:pl-24"
               animate={{ x: [0, "-50%"] }}
               transition={{ 
-                duration: 25, 
+                duration: 45, 
                 repeat: Infinity, 
                 ease: "linear"
               }}
             >
-              {[...new Array(2)].flatMap(() => [Patenaire1, Patenaire2, Patenaire3, Patenaire4, Patenaire5, Patenaire6, Patenaire7, Patenaire8, Patenaire9, Patenaire10]).map((logo, index) => (
+              {[...new Array(2)].flatMap(() => [
+                Patenaire1, Patenaire2, Patenaire3, Patenaire4, Patenaire5, 
+                Patenaire6, Patenaire7, Patenaire8, Patenaire9, Patenaire10,
+                Patenaire12, Patenaire13, Patenaire14, Patenaire15, Patenaire16,
+                Patenaire17, Patenaire18, Patenaire19, Patenaire20
+              ]).map((logo, index) => (
                 <motion.div
                   key={`r1-${index}`}
                   whileHover={{ 
@@ -937,12 +1130,17 @@ const App: React.FC = () => {
               className="flex gap-12 md:gap-24 items-center whitespace-nowrap pr-12 md:pl-24"
               animate={{ x: ["-50%", 0] }}
               transition={{ 
-                duration: 35, 
+                duration: 55, 
                 repeat: Infinity, 
                 ease: "linear"
               }}
             >
-              {[...new Array(2)].flatMap(() => [Patenaire10, Patenaire9, Patenaire8, Patenaire7, Patenaire6, Patenaire5, Patenaire4, Patenaire3, Patenaire2, Patenaire1]).map((logo, index) => (
+              {[...new Array(2)].flatMap(() => [
+                Patenaire20, Patenaire19, Patenaire18, Patenaire17, Patenaire16,
+                Patenaire15, Patenaire14, Patenaire13, Patenaire12, Patenaire10,
+                Patenaire9, Patenaire8, Patenaire7, Patenaire6, Patenaire5,
+                Patenaire4, Patenaire3, Patenaire2, Patenaire1
+              ]).map((logo, index) => (
                 <motion.div
                   key={`r2-${index}`}
                   whileHover={{ 
@@ -968,24 +1166,56 @@ const App: React.FC = () => {
       </section>
 
       {/* GALLERY SECTION */}
-      <section id="gallery" className="section-padding bg-slate-50 relative overflow-hidden">
-        {/* Premium Background Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-green/5 blur-[120px] rounded-full -translate-x-1/4 -translate-y-1/4" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-gold/5 blur-[150px] rounded-full translate-x-1/4 translate-y-1/4" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <section id="gallery" className="section-padding bg-[#FAFAFA] relative overflow-hidden scroll-mt-20">
+        {/* Premium Immersive Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Layered Gradients */}
+          <div className="absolute top-0 left-0 w-full h-[600px] bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-brand-gold/[0.04] via-transparent to-transparent" />
+          <div className="absolute bottom-0 right-0 w-full h-[800px] bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-brand-red/[0.03] via-transparent to-transparent" />
+          
+          {/* Floating Glassmorphic Orbs - Strategic Placement */}
+          <div className="absolute top-1/4 left-10 w-64 h-64 bg-brand-green/[0.03] blur-[100px] rounded-full animate-pulse" />
+          <div className="absolute bottom-1/3 right-20 w-96 h-96 bg-brand-gold/[0.04] blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-1/2 right-0 w-48 h-[600px] bg-brand-red/[0.02] blur-[80px] rounded-[100px] rotate-45" />
+
+          {/* Elegant Flowing Curves (Architectural) */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.035]" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-100 600 C 100 400, 400 300, 1300 600" stroke="#B73120" strokeWidth="0.5" />
+            <path d="M-100 650 C 200 450, 500 350, 1300 650" stroke="#D4AF37" strokeWidth="0.5" />
+            <path d="M-100 550 C 300 350, 600 250, 1300 550" stroke="#036B21" strokeWidth="0.5" />
+          </svg>
+
+          {/* Global Texture */}
+          <div className="absolute inset-0 opacity-[0.015] grayscale" style={{ backgroundImage: 'radial-gradient(circle, #000 0.5px, transparent 0.5px)', backgroundSize: '30px 30px' }} />
+        </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-20">
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
+          <div className="text-center mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-brand-red font-black text-[10px] uppercase tracking-[0.5em] block mb-6 px-4 py-1.5 bg-brand-red/5 w-fit mx-auto rounded-full border border-brand-red/10"
+              viewport={{ once: true }}
+              className="flex flex-col items-center"
             >
-              Exposition Visuelle
-            </motion.span>
-            <h2 className="text-5xl md:text-7xl font-bold text-black mb-12 tracking-tight">{t.gallery.title}</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1.5 h-1.5 bg-brand-red rounded-full animate-ping" />
+                <span className="text-brand-red font-black text-[11px] uppercase tracking-[0.4em] px-4 py-1.5 bg-brand-red/5 rounded-full border border-brand-red/10">
+                  L'Expérience Biashara 2026
+                </span>
+              </div>
+              
+              <h2 className="text-5xl md:text-8xl font-display font-bold text-black mb-10 tracking-tighter leading-none">
+                {t.gallery.title}
+              </h2>
+              
+              <div className="flex items-center justify-center gap-4 mb-16">
+                <div className="h-px w-20 bg-brand-gold/40" />
+                <div className="w-2 h-2 rotate-45 bg-brand-gold" />
+                <div className="h-px w-20 bg-brand-gold/40" />
+              </div>
+            </motion.div>
             
-            <div className="flex justify-center p-1 bg-white/50 backdrop-blur-sm rounded-2xl w-fit mx-auto border border-black/5 shadow-xl">
+            <div className="flex justify-center p-1.5 bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] backdrop-blur-md rounded-2xl w-fit mx-auto border border-black/5">
               <button
                 onClick={() => setGalleryTab('news')}
                 className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
@@ -1190,7 +1420,7 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* PRACTICAL INFO SECTION - COMPACT DESIGN */}
-      <section id="practical" className="section-padding bg-brand-light relative overflow-hidden">
+      <section id="practical" className="section-padding bg-brand-light relative overflow-hidden scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -1350,7 +1580,7 @@ const App: React.FC = () => {
                               case "internet": return <Wifi className="w-5 h-5" />;
                               case "mobile_money": return <Smartphone className="w-5 h-5" />;
                               case "airport": return <Plane className="w-5 h-5" />;
-                              case "transpo": return <Navigation className="w-5 h-5" />;
+                              case "transpo": return <NavigationIcon className="w-5 h-5" />;
                               case "elec": return <Zap className="w-5 h-5" />;
                               case "formalities": return <FileText className="w-5 h-5" />;
                               case "emergency": return <LifeBuoy className="w-5 h-5" />;
@@ -1358,7 +1588,7 @@ const App: React.FC = () => {
                             }
                           })()}
                         </div>
-                        <h3 className="text-[10px] font-black text-black/40 uppercase tracking-widest">{detail.label}</h3>
+                        <h3 className="text-[15px] font-black text-brand-green leading-[23px] uppercase tracking-widest">{detail.label}</h3>
                       </div>
                       <p className="text-black font-bold leading-relaxed">{detail.value}</p>
                     </div>
@@ -1371,54 +1601,25 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* FOOTER */}
-      <footer className="bg-brand-green text-white py-20 px-6 border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
-            <div className="col-span-1 md:col-span-2">
-              <div className="mb-8">
-                <img src={Logo} alt="Biashara Afrika Logo" className="h-24 md:h-28 w-auto object-contain" />
-              </div>
-              <p className="text-white/40 max-w-sm mb-8 leading-relaxed font-light">
-                Biashara Afrika 2026 : Le rendez-vous stratégique pour le commerce intra-africain et la réussite de la ZLECAf.
-              </p>
-              <div className="flex gap-4">
-                 {['twitter', 'linkedin', 'facebook', 'instagram'].map(s => (
-                   <div key={s} className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-black transition-all cursor-pointer">
-                      <ArrowRight className="w-4 h-4 -rotate-45" />
-                   </div>
-                 ))}
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-8">Navigation</h4>
-              <ul className="space-y-4 text-white/60 text-sm">
-                <li><button onClick={() => scrollToSection('about')} className="hover:text-white transition-colors">{t.nav.about}</button></li>
-                <li><button onClick={() => scrollToSection('program')} className="hover:text-white transition-colors">{t.nav.program}</button></li>
-                <li><button onClick={() => scrollToSection('speakers')} className="hover:text-white transition-colors">{t.nav.speakers}</button></li>
-                <li><button onClick={() => scrollToSection('village')} className="hover:text-white transition-colors">{t.nav.village}</button></li>
-                <li><button onClick={() => scrollToSection('gallery')} className="hover:text-white transition-colors">{t.nav.gallery}</button></li>
-                <li><button onClick={() => scrollToSection('practical')} className="hover:text-white transition-colors">{t.nav.practical}</button></li>
-              </ul>
-            </div>
+      <Footer 
+        lang={lang}
+        translations={translations}
+        Logo={Logo}
+        scrollToSection={scrollToSection}
+      />
 
-            <div>
-              <h4 className="text-white font-bold uppercase text-xs tracking-widest mb-8">Support</h4>
-              <ul className="space-y-4 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Use</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-white/30 text-xs uppercase tracking-widest font-bold">
-            <p>© 2026 BIASHARA AFRIKA. ALL RIGHTS RESERVED.</p>
-            <p>Made for Africa</p>
-          </div>
-        </div>
-      </footer>
+      {/* Floating Actions */}
+      <FloatingActions 
+        onContactClick={() => setIsContactModalOpen(true)}
+        lang={lang}
+      />
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+        lang={lang}
+      />
     </div>
   );
 };

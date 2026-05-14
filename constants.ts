@@ -369,15 +369,148 @@ export const SPEAKERS_DATA = [
   {
     id: "faure",
     name: "Faure Essozimna Gnassingbé",
-    role: "Président du Conseil",
+    role: "Président de la République",
     institution: "République Togolaise",
     category: "Gouvernement"
   },
   {
+    id: "issoufou",
+    name: "H.E. Mahamadou Issoufou",
+    role: "AfCFTA Champion, ancien président du Niger",
+    institution: "AfCFTA",
+    category: "Gouvernement"
+  },
+  {
     id: "wamkele",
-    name: "Wamkele Mene",
-    role: "Secretary-General",
-    institution: "AfCFTA Secretariat",
+    name: "H.E. Wamkele Mene",
+    role: "Secrétaire général",
+    institution: "Secrétariat de la ZLECAf",
+    category: "Institutions"
+  },
+  {
+    id: "pamela",
+    name: "Pamela Coke-Hamilton",
+    role: "Directrice exécutive",
+    institution: "ITC",
+    category: "Institutions"
+  },
+  {
+    id: "elombi",
+    name: "Dr. George Elombi",
+    role: "Président du Board",
+    institution: "Afreximbank",
+    category: "Banking"
+  },
+  {
+    id: "fraizee",
+    name: "Prof. Fraizee Ismail",
+    role: "Conseiller principal",
+    institution: "Conseil AfCFTA",
+    category: "Institutions"
+  },
+  {
+    id: "lerato",
+    name: "Lerato Mbela",
+    role: "Co-animatrice",
+    institution: "Media",
+    category: "Media"
+  },
+  {
+    id: "hannane",
+    name: "Hannane Ferdjani",
+    role: "Co-animatrice",
+    institution: "Media",
+    category: "Media"
+  },
+  {
+    id: "joy",
+    name: "Dr. Joy Kategekwa",
+    role: "Directrice exécutive",
+    institution: "ITC",
+    category: "Institutions"
+  },
+  {
+    id: "kanayo",
+    name: "Kanayo Awani",
+    role: "Vice-présidente exécutive",
+    institution: "Afreximbank",
+    category: "Banking"
+  },
+  {
+    id: "tarek",
+    name: "Tarek Mosaad",
+    role: "PDG Moyen-Orient et Afrique",
+    institution: "Hyundai",
+    category: "Private Sector"
+  },
+  {
+    id: "yoni",
+    name: "Yoni Admelah",
+    role: "Directeur général",
+    institution: "Rendeavour Afrique de l'Ouest",
+    category: "Private Sector"
+  },
+  {
+    id: "stephen",
+    name: "Stephen Jennings",
+    role: "Fondateur",
+    institution: "Rendeavour",
+    category: "Private Sector"
+  },
+  {
+    id: "nshuti",
+    name: "Nshuti Mbabazi",
+    role: "Directrice générale",
+    institution: "Better Than Cash Alliance",
+    category: "Institutions"
+  },
+  {
+    id: "yao",
+    name: "Dr Yao Guevera",
+    role: "Vice-président Afrique",
+    institution: "US-Africa Business Center",
+    category: "Institutions"
+  },
+  {
+    id: "rob",
+    name: "Dr. Rob Davis",
+    role: "Président-Directeur Général",
+    institution: "Merck & Co.",
+    category: "Private Sector"
+  },
+  {
+    id: "ekra",
+    name: "Jean Louis Ekra",
+    role: "Président du Board",
+    institution: "AfCFTA Adjustment Fund",
+    category: "Institutions"
+  },
+  {
+    id: "jeremy",
+    name: "Jeremy Awori",
+    role: "CEO du Groupe",
+    institution: "Ecobank",
+    category: "Banking"
+  },
+  {
+    id: "makinde",
+    name: "Engr. Oluwaseyi Makinde",
+    role: "Gouverneur exécutif",
+    institution: "État d’Oyo",
+    category: "Gouvernement"
+  },
+  {
+    id: "gatete",
+    name: "Claver Gatete",
+    role: "Secrétaire exécutif",
+    institution: "CEA",
+    category: "Institutions"
+  },
+  {
+    id: "florizelle",
+    name: "Florizelle Liser",
+    role: "Présidente & CEO",
+    institution: "CCA",
     category: "Institutions"
   },
   {
@@ -386,20 +519,6 @@ export const SPEAKERS_DATA = [
     role: "President",
     institution: "African Development Bank",
     category: "Banking"
-  },
-  {
-    id: "elombi",
-    name: "George Elombi",
-    role: "President & Chairman",
-    institution: "Afreximbank",
-    category: "Banking"
-  },
-  {
-    id: "tarek",
-    name: "Tarek Ismail Mosaad",
-    role: "CEO",
-    institution: "Hyundai Motor Company Middle East & Africa",
-    category: "Private Sector"
   },
   {
     id: "labonne",

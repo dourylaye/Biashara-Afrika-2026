@@ -1,3 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  
+  --color-brand-red: #B73120;
+  --color-brand-gold: #D4AF37;
+  --color-brand-green: #036B21;
+  --color-brand-light: #FCFBFA;
+
+  @keyframes slow-spin-zoom {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.1; }
+    50% { transform: scale(1.1) rotate(5deg); opacity: 0.2; }
+    100% { transform: scale(1) rotate(0deg); opacity: 0.1; }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-150%) skewX(30deg); opacity: 0; }
+    50% { opacity: 0.4; }
+    100% { transform: translateX(250%) skewX(30deg); opacity: 0; }
+  }
+}
+
+@layer utilities {
+  .animate-slow-spin-zoom {
+    animation: slow-spin-zoom 20s infinite ease-in-out;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap');
 
 html {
