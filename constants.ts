@@ -369,7 +369,7 @@ export const SPEAKERS_DATA = [
   {
     id: "faure",
     name: "Faure Essozimna Gnassingbé",
-    role: "Président de la République",
+    role: "Président du Conseil",
     institution: "République Togolaise",
     category: "Gouvernement"
   },

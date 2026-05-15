@@ -20,28 +20,22 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({ speaker, index }) => {
           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" 
           alt={speaker.name} 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-500" />
+        {/* 50% Enhanced Bottom Gradient for Text Legibility */}
+        <div 
+          className="absolute inset-x-0 bottom-0 h-[50%] bg-[linear-gradient(to_top,rgba(0,0,0,1)_0%,rgba(0,0,0,0.8)_40%,transparent_100%)] z-0" 
+        />
         
         {/* Decorative Border Glow */}
         <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-500 rounded-[2rem]" />
 
-        <div className="absolute bottom-0 left-0 p-6 w-full translate-y-1 group-hover:translate-y-0 transition-transform duration-500">
-          <motion.div 
-            initial={{ opacity: 0.8 }}
-            className="text-[8px] font-black text-brand-gold uppercase tracking-[0.2em] mb-2 px-3 py-1 bg-black/40 backdrop-blur-md inline-block rounded-full border border-white/10"
-          >
-            {speaker.category}
-          </motion.div>
-          <h3 className="text-lg md:text-xl font-display font-bold text-white mb-1 leading-tight tracking-tight">
+        <div className="absolute bottom-0 left-0 p-8 w-full z-10">
+          <h3 className="text-xl md:text-2xl font-display font-black text-white mb-1 leading-tight tracking-tight drop-shadow-md">
             {speaker.name}
           </h3>
-          <p className="text-white/80 text-[10px] font-medium italic mb-2 flex items-center gap-2">
-            <span className="w-3 h-[1px] bg-brand-red"></span>
+          
+          <p className="text-white/70 font-medium text-xs md:text-sm flex items-center gap-2 leading-snug">
+            <span className="w-4 h-[1.5px] bg-brand-red shrink-0"></span>
             {speaker.role}
-          </p>
-          <div className="h-px w-8 bg-brand-gold/50 mb-2 group-hover:w-12 transition-all duration-500" />
-          <p className="text-brand-gold font-black text-[9px] uppercase tracking-wider flex items-center gap-2 leading-tight">
-             {speaker.institution}
           </p>
         </div>
       </div>

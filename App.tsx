@@ -57,6 +57,7 @@ import { Footer } from './src/components/Footer';
 import { FloatingActions } from './src/components/FloatingActions';
 import qrCodeImage from './Images/QR code.jpg';
 import heroImage from './Images/Hero.png';
+import FOND_IMG from './Images/FOND.png';
 import Logo from './Images/Logo.png';
 import APROPOS from './Images/APROPOS.jpg';
 import Patenaire1 from './Images/Patenaire _1.png';
@@ -334,14 +335,17 @@ const App: React.FC = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-light">
         <div className="absolute inset-0">
           <motion.img 
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.4 }}
-            transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
-            src={heroImage} 
-            className="w-full h-full object-cover"
-            alt="Biashara Afrika Hero"
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.6 }}
+            transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
+            src={FOND_IMG} 
+            className="w-full h-full object-cover object-center"
+            alt="Biashara Afrika Hero Background"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-light/70 via-transparent to-brand-light" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-light/80 via-transparent to-brand-light/90" />
+          
+          {/* Subtle dark overlay for better text contrast if needed */}
+          <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
           
           {/* Cinematic Atmospheric Layer */}
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -796,135 +800,193 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* WHY LOME SECTION - PREMIUM CURVED DESIGN WITH SLIDER */}
-      <section id="why-lome" className="section-padding bg-[#FCFBFA] relative overflow-hidden scroll-mt-20">
-        {/* Architectural Curves and Shapes */}
+      {/* WHY LOME SECTION - CENTRIC MASTERPIECE DESIGN */}
+      <section id="why-lome" className="section-padding bg-gradient-to-b from-[#FFFBF7] via-white to-[#FFF9F5] relative overflow-hidden scroll-mt-20">
+        {/* Background Atmospheric Layer */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          <svg className="absolute top-0 right-0 w-full h-full text-brand-gold/[0.03]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
-            <path d="M1000,0 Q800,500 0,1000 L1000,1000 Z" fill="currentColor" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-brand-gold/5 blur-[180px] rounded-full opacity-40" />
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-red/5 blur-[120px] rounded-full opacity-30" />
+          
+          <svg className="absolute top-0 left-0 w-full h-full text-brand-gold/[0.03]" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path d="M0,0 Q500,200 1000,0 L1000,1000 Q500,800 0,1000 Z" fill="currentColor" />
           </svg>
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(177,14,35,0.02)_0%,transparent_50%)]" />
-          {/* Subtle architectural vertical lines */}
-          <div className="absolute inset-0 flex justify-around opacity-[0.05]">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="w-px h-full bg-gradient-to-b from-transparent via-black to-transparent" />
-            ))}
-          </div>
+
+          {/* Large Organic Moving Shape */}
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, 0],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-1/3 -right-20 w-[800px] h-[800px] bg-brand-gold/5 blur-[150px] rounded-full" 
+          />
+          
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] opacity-[0.15] mix-blend-overlay" />
         </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* 1. TOP HEADER - CENTERED */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24 max-w-4xl mx-auto"
+          >
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-8 h-px bg-brand-red" />
+              <span className="font-bold text-xs uppercase tracking-[0.6em] text-brand-red">
+                Destination Togo
+              </span>
+              <div className="w-8 h-px bg-brand-red" />
+            </div>
             
-            {/* TEXT CONTENT & STATS */}
-            <div className="lg:col-span-6">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 inline-block">
-                  Biashara Lomé 2026
-                </span>
-                <h2 className="text-4xl md:text-6xl font-bold mb-8 text-black leading-tight tracking-tight">
-                  {t.whyLome.title}
-                </h2>
-                <div className="w-20 h-1.5 rounded-full mb-8" style={{ backgroundColor: '#036B21' }} />
-                <p className="text-lg text-black/60 font-light leading-relaxed mb-10 max-w-xl">
-                  {t.whyLome.description}
-                </p>
+            <h2 className="text-5xl md:text-8xl font-bold mb-8 text-black leading-tight tracking-tighter">
+              {t.whyLome.title}
+            </h2>
+            
+            <p className="text-xl md:text-2xl text-black/60 font-light leading-relaxed max-w-2xl mx-auto">
+              Une métropole dynamique, carrefour stratégique du commerce africain et hub d'excellence pour vos échanges internationaux.
+            </p>
+          </motion.div>
 
-                {/* Premium Info Cards Grid - Refined & Compact */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {t.whyLome.stats.map((stat: any, i: number) => (
-                    <motion.div 
-                      key={stat.id}
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      whileHover={{ y: -3, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
-                      className="p-5 bg-white/40 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm hover:shadow-lg hover:border-brand-gold/30 transition-all duration-300 group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-white border border-black/5 flex items-center justify-center text-brand-red shrink-0 shadow-sm group-hover:bg-brand-red group-hover:text-white transition-all duration-500">
-                          {(() => {
-                            switch (stat.id) {
-                              case "port": return <Ship className="w-5 h-5" />;
-                              case "hub": return <Globe2 className="w-5 h-5" />;
-                              case "connectivity": return <Plane className="w-5 h-5" />;
-                              case "ecosystem": return <TrendingUp className="w-5 h-5" />;
-                              default: return <Info className="w-5 h-5" />;
-                            }
-                          })()}
-                        </div>
-                        <h4 className="font-bold text-black text-sm group-hover:text-brand-red transition-colors leading-tight">{stat.title}</h4>
-                      </div>
-                      <p className="mt-3 text-[11px] text-black/50 font-medium leading-relaxed">{stat.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* IMMERSIVE PORTRAIT SLIDER */}
-            <div className="lg:col-span-6 flex justify-center">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="relative rounded-[4rem] overflow-hidden shadow-2xl aspect-[9/14.5] w-full max-w-[420px] bg-brand-light group border-8 border-white"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentCityPhoto}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1.5, ease: "easeInOut" }}
-                    className="absolute inset-0"
+          {/* 2. THE MASTERPIECE CENTER - SLIDER WITH FLOATING CARDS */}
+          <div className="relative">
+            
+            {/* GRID CONTAINER FOR DESKTOP POSITIONING */}
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              
+              {/* LEFT FLOATING CARDS (Desktop) */}
+              <div className="lg:col-span-3 order-2 lg:order-1 space-y-8 lg:space-y-12">
+                {[t.whyLome.stats[0], t.whyLome.stats[1]].map((stat: any, i: number) => (
+                  <motion.div 
+                    key={stat.id}
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.8 }}
+                    whileHover={{ x: 10, scale: 1.05 }}
+                    className="p-8 bg-white/40 backdrop-blur-2xl rounded-[2.5rem] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 group"
                   >
-                    <motion.img 
-                      src={LOME_CITY_PHOTOS[currentCityPhoto]}
-                      className="w-full h-full object-cover"
-                      alt="Lomé Vision"
-                      initial={{ scale: 1, opacity: 0 }}
-                      animate={{ scale: 1.1, opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ 
-                        scale: { duration: 8, ease: "linear" },
-                        opacity: { duration: 1.5, ease: "easeInOut" }
-                      }}
-                    />
-                    
-                    {/* Subtle Gradient Overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-red/10 to-transparent mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Minimal Slider Progress */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-30">
-                  {LOME_CITY_PHOTOS.map((_: any, i: number) => (
-                    <div key={i} className="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full bg-white"
-                        initial={{ width: "0%" }}
-                        animate={{ width: i === currentCityPhoto ? "100%" : i < currentCityPhoto ? "100%" : "0%" }}
-                        transition={{ 
-                          duration: i === currentCityPhoto ? 5 : 0.5, 
-                          ease: "linear" 
-                        }}
-                      />
+                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-brand-red mb-6 shadow-sm group-hover:bg-brand-red group-hover:text-white transition-all duration-500">
+                      {(() => {
+                        switch (stat.id) {
+                          case "port": return <Ship className="w-7 h-7" />;
+                          case "hub": return <Globe2 className="w-7 h-7" />;
+                          case "connectivity": return <Plane className="w-7 h-7" />;
+                          case "ecosystem": return <TrendingUp className="w-7 h-7" />;
+                          default: return <Info className="w-7 h-7" />;
+                        }
+                      })()}
                     </div>
-                  ))}
-                </div>
+                    <h4 className="font-bold text-black text-xl mb-3 leading-tight">{stat.title}</h4>
+                    <p className="text-sm text-black/50 font-medium leading-relaxed">{stat.description}</p>
+                  </motion.div>
+                ))}
+              </div>
 
-                {/* Decorative architectural line */}
-                <div className="absolute top-10 right-10 w-24 h-24 border-t-2 border-r-2 border-white/40 rounded-tr-[3rem] pointer-events-none" />
-                <div className="absolute bottom-10 left-10 w-24 h-24 border-b-2 border-l-2 border-white/40 rounded-bl-[3rem] pointer-events-none" />
-              </motion.div>
+              {/* CENTER SLIDER PIECE */}
+              <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative rounded-[6rem] overflow-hidden shadow-[0_100px_120px_-40px_rgba(0,0,0,0.35)] aspect-[3/5.2] w-full max-w-[500px] bg-brand-light group border-[18px] border-white ring-1 ring-black/5"
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentCityPhoto}
+                      initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                      transition={{ duration: 1.5, ease: "easeInOut" }}
+                      className="absolute inset-0"
+                    >
+                      <img 
+                        src={LOME_CITY_PHOTOS[currentCityPhoto]}
+                        className="w-full h-full object-cover"
+                        alt="Lomé Masterpiece"
+                        referrerPolicy="no-referrer"
+                      />
+                      
+                      {/* Atmospheric Overlays */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-brand-red/10 mix-blend-soft-light" />
+                    </motion.div>
+                  </AnimatePresence>
+   
+                  {/* Premium Indicators */}
+                  <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+                    {LOME_CITY_PHOTOS.map((_: any, i: number) => (
+                      <div key={i} className="w-16 h-1.5 bg-white/20 rounded-full overflow-hidden backdrop-blur-md">
+                        <motion.div 
+                          className="h-full bg-white shadow-[0_0_20px_rgba(255,255,255,1)]"
+                          initial={{ width: "0%" }}
+                          animate={{ width: i === currentCityPhoto ? "100%" : i < currentCityPhoto ? "100%" : "0%" }}
+                          transition={{ 
+                            duration: i === currentCityPhoto ? 5 : 0.5, 
+                            ease: "linear" 
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Floating Content Badge */}
+                  <div className="absolute top-12 left-12 right-12 flex justify-between items-start z-20">
+                     <div className="px-6 py-3 bg-white/10 backdrop-blur-2xl rounded-2xl border border-white/30 text-white text-[10px] font-black uppercase tracking-[0.4em] shadow-xl">
+                       Lomé Vision
+                     </div>
+                     <motion.div 
+                       animate={{ rotate: 360 }}
+                       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                       className="w-16 h-16 border-2 border-white/20 rounded-full flex items-center justify-center text-white/40"
+                     >
+                       <div className="w-1 h-1 bg-white rounded-full animate-ping" />
+                     </motion.div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* RIGHT FLOATING CARDS (Desktop) */}
+              <div className="lg:col-span-3 order-3 lg:order-3 space-y-8 lg:space-y-12">
+                {[t.whyLome.stats[2], t.whyLome.stats[3]].map((stat: any, i: number) => (
+                  <motion.div 
+                    key={stat.id}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.2, duration: 0.8 }}
+                    whileHover={{ x: -10, scale: 1.05 }}
+                    className="p-8 bg-white/40 backdrop-blur-2xl rounded-[2.5rem] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] transition-all duration-500 group"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-brand-red mb-6 shadow-sm group-hover:bg-brand-red group-hover:text-white transition-all duration-500">
+                      {(() => {
+                        switch (stat.id) {
+                          case "port": return <Ship className="w-7 h-7" />;
+                          case "hub": return <Globe2 className="w-7 h-7" />;
+                          case "connectivity": return <Plane className="w-7 h-7" />;
+                          case "ecosystem": return <TrendingUp className="w-7 h-7" />;
+                          default: return <Info className="w-7 h-7" />;
+                        }
+                      })()}
+                    </div>
+                    <h4 className="font-bold text-black text-xl mb-3 leading-tight">{stat.title}</h4>
+                    <p className="text-sm text-black/50 font-medium leading-relaxed">{stat.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+
             </div>
 
+            {/* Decorative Background Accents */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[120%] pointer-events-none opacity-[0.03] z-[-1] hidden lg:block">
+              <svg className="w-full h-full" viewBox="0 0 1000 1000">
+                <circle cx="500" cy="500" r="450" fill="none" stroke="#B10E23" strokeWidth="0.5" strokeDasharray="10 10" />
+                <circle cx="500" cy="500" r="550" fill="none" stroke="#B10E23" strokeWidth="0.5" strokeDasharray="20 20" />
+              </svg>
+            </div>
           </div>
         </div>
       </section>
