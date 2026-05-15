@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, MessageCircle } from 'lucide-react';
 
 interface FloatingActionsProps {
   lang: 'fr' | 'en';
@@ -30,7 +30,22 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({ lang }) => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[150] flex flex-col gap-4">
+    <div className="fixed bottom-8 right-8 z-[150] flex flex-col gap-4 items-center">
+      {/* WhatsApp Button */}
+      <motion.a
+        href="https://wa.me/22892545408"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.5, x: 20 }}
+        animate={{ opacity: 1, scale: 1, x: 0 }}
+        whileHover={{ scale: 1.1, y: -3 }}
+        whileTap={{ scale: 0.95 }}
+        className="w-14 h-14 bg-white text-[#25D366] border border-black/5 rounded-full flex items-center justify-center shadow-2xl hover:bg-slate-50 transition-all group"
+        title={lang === 'fr' ? "Contactez-nous sur WhatsApp" : "Contact us on WhatsApp"}
+      >
+        <MessageCircle className="w-7 h-7 fill-[#25D366]/5" />
+      </motion.a>
+
       <AnimatePresence>
         {/* Back to Top */}
         {isVisible && (

@@ -522,13 +522,6 @@ const App: React.FC = () => {
           </motion.div>
         </div>
 
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30"
-        >
-          <div className="w-[1px] h-20 bg-black" />
-        </motion.div>
       </section>
 
       {/* ABOUT SECTION */}

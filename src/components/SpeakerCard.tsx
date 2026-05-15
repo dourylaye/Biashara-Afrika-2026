@@ -12,7 +12,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({ speaker, index }) => {
     <motion.div 
       whileHover={{ y: -10, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="group relative w-[200px] sm:w-[240px] md:w-[280px] shrink-0"
+      className="group relative w-[230px] sm:w-[280px] md:w-[320px] shrink-0"
     >
       <div className="relative aspect-[3/4] w-full rounded-[2rem] overflow-hidden shadow-xl border border-black/5 bg-slate-100">
         <img 
@@ -28,7 +28,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({ speaker, index }) => {
         {/* Decorative Border Glow */}
         <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-500 rounded-[2rem]" />
 
-        <div className="absolute bottom-0 left-0 p-8 w-full z-10">
+        <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full z-10">
           <h3 className="text-xl md:text-2xl font-display font-black text-white mb-1 leading-tight tracking-tight drop-shadow-md">
             {speaker.name}
           </h3>
