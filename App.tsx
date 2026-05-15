@@ -148,10 +148,18 @@ const App: React.FC = () => {
   const [currentBg, setCurrentBg] = useState(0);
   const heroBackgrounds = [FOND_IMG, heroImage];
 
+  // Performance optimization: Preload hero images
+  useEffect(() => {
+    heroBackgrounds.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentBg((prev) => (prev + 1) % heroBackgrounds.length);
-    }, 6000);
+    }, 8000); // Slightly longer interval for a more relaxed feel
     return () => clearInterval(timer);
   }, [heroBackgrounds.length]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -342,17 +350,21 @@ const App: React.FC = () => {
 
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-light">
-        <div className="absolute inset-0">
-          <AnimatePresence mode="wait">
+        <div className="absolute inset-0 bg-brand-light">
+          <AnimatePresence initial={false}>
             <motion.img 
               key={currentBg}
-              initial={{ scale: 1.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.6 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              transition={{ 
+                duration: 2, 
+                ease: "linear" // Linear opacity fade is often smoother for high-res backgrounds
+              }}
               src={heroBackgrounds[currentBg]} 
               className="absolute inset-0 w-full h-full object-cover object-center"
               alt="Biashara Afrika Hero Background"
+              loading="eager"
             />
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-br from-brand-green/20 via-brand-light to-brand-gold/10" />
