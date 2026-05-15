@@ -56,8 +56,8 @@ import { Navigation } from './src/components/Navigation';
 import { Footer } from './src/components/Footer';
 import { FloatingActions } from './src/components/FloatingActions';
 import qrCodeImage from './Images/QR code.jpg';
-import heroImage from './Images/Hero.png';
-import FOND_IMG from './Images/FOND.png';
+import heroImage from './Images/FOND2.png';
+import FOND_IMG from './Images/FOND1.png';
 import Logo from './Images/Logo.png';
 import APROPOS from './Images/APROPOS.jpg';
 import Patenaire1 from './Images/Patenaire _1.png';
@@ -145,6 +145,15 @@ import { Language, Speaker, Exhibitor } from './types';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
+  const [currentBg, setCurrentBg] = useState(0);
+  const heroBackgrounds = [FOND_IMG, heroImage];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % heroBackgrounds.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [heroBackgrounds.length]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
@@ -334,14 +343,19 @@ const App: React.FC = () => {
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-light">
         <div className="absolute inset-0">
-          <motion.img 
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.6 }}
-            transition={{ duration: 2.5, ease: [0.22, 1, 0.36, 1] }}
-            src={FOND_IMG} 
-            className="w-full h-full object-cover object-center"
-            alt="Biashara Afrika Hero Background"
-          />
+          <AnimatePresence mode="wait">
+            <motion.img 
+              key={currentBg}
+              initial={{ scale: 1.1, opacity: 0 }}
+              animate={{ scale: 1, opacity: 0.6 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+              src={heroBackgrounds[currentBg]} 
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              alt="Biashara Afrika Hero Background"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-green/20 via-brand-light to-brand-gold/10" />
           <div className="absolute inset-0 bg-gradient-to-b from-brand-light/80 via-transparent to-brand-light/90" />
           
           {/* Subtle dark overlay for better text contrast if needed */}
