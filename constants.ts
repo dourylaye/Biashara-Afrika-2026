@@ -65,8 +65,9 @@ export const translations: Translation = {
     },
     gallery: {
       title: "Galerie Biashara Afrika 2026",
-      newsTab: "Actualité & Infos",
+      newsTab: "Bon à savoir",
       eventsTab: "Photos de l'Événement",
+      blogTab: "Blog",
     },
     whyLome: {
       title: "Pourquoi Lomé ?",
@@ -194,8 +195,9 @@ export const translations: Translation = {
     },
     gallery: {
       title: "Biashara Afrika Gallery 2026",
-      newsTab: "News & Info",
+      newsTab: "Good to Know",
       eventsTab: "Event Photos",
+      blogTab: "Blog",
     },
     whyLome: {
       title: "Why Lomé?",

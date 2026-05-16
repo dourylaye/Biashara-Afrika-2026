@@ -28,3 +28,12 @@ export interface ChatMessage {
   text: string;
   isError?: boolean;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  content: string;
+}

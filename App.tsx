@@ -55,92 +55,94 @@ import { SpeakerCard } from './src/components/SpeakerCard';
 import { Navigation } from './src/components/Navigation';
 import { Footer } from './src/components/Footer';
 import { FloatingActions } from './src/components/FloatingActions';
-import qrCodeImage from './Images/QR code.jpg';
-import heroImage from './Images/FOND1.png';
-import Logo from './Images/Logo.png';
-import APROPOS from './Images/APROPOS.jpg';
-import Patenaire1 from './Images/Patenaire _1.png';
-import Patenaire2 from './Images/Patenaire _2.png';
-import Patenaire3 from './Images/Patenaire _3.png';
-import Patenaire4 from './Images/Patenaire _4.png';
-import Patenaire5 from './Images/Patenaire _5.png';
-import Patenaire6 from './Images/Patenaire _6.png';
-import Patenaire7 from './Images/Patenaire _7.png';
-import Patenaire8 from './Images/Patenaire _8.png';
-import Patenaire9 from './Images/Patenaire _9.png';
-import Patenaire10 from './Images/Patenaire _10.png';
-import Patenaire12 from './Images/Patenaire _12.png';
-import Patenaire13 from './Images/Patenaire _13.png';
-import Patenaire14 from './Images/Patenaire _14.png';
-import Patenaire15 from './Images/Patenaire _15.png';
-import Patenaire16 from './Images/Patenaire _16.png';
-import Patenaire17 from './Images/Patenaire _17.png';
-import Patenaire18 from './Images/Patenaire _18.png';
-import Patenaire19 from './Images/Patenaire _19.png';
-import Patenaire20 from './Images/Patenaire _20.png';
-import FAURE_IMG from './Images/FAURE.jpg';
-import WAMKELE_IMG from './Images/Wamkele.jpg';
-import SIDI_IMG from './Images/Sidi.jpg';
-import ELOMBI_IMG from './Images/Elombi.jpg';
-import TAREK_IMG from './Images/Tarek.jpg';
-import LABONNE_IMG from './Images/Labonne.jpg';
-import MAHAMADOU_IMG from './Images/Mahamadou_.jpg';
-import PAMELA_IMG from './Images/Pamela Coke.jpg';
-import FRAIZEE_IMG from './Images/Prof Fraizee.jpg';
-import LERATO_IMG from './Images/Lerato.jpg';
-import HANNANE_IMG from './Images/Hannane.jpg';
-import JOY_IMG from './Images/Dr Joy.jpg';
-import KANAYO_IMG from './Images/Kanayo.jpg';
-import YONI_IMG from './Images/Yomi.jpg';
-import STEPHEN_IMG from './Images/Stephen.jpg';
-import NSHUTI_IMG from './Images/Nshuti.jpg';
-import YAO_IMG from './Images/Dr Yao.jpg';
-import ROB_IMG from './Images/Dr Rob.jpg';
-import EKRA_IMG from './Images/Jean Louis.jpg';
-import JEREMY_IMG from './Images/Jeremy.jpg';
-import MAKINDE_IMG from './Images/Oluwaseyi.jpg';
-import GATETE_IMG from './Images/Claver Gatete.jpg';
-import FLORIZELLE_IMG from './Images/Florizelle liser.jpg';
-import TG1 from './Images/TG1.png';
-import TG2 from './Images/TG2.png';
-import TG3 from './Images/TG3.jpg';
-import TG4 from './Images/TG4.png';
-import TG5 from './Images/TG5.png';
-import TG6 from './Images/TG6.png';
-import Exploration from './Images/Exploration.png';
-import CP1 from './Photos/CP1.jpg';
-import CP2 from './Photos/CP2.jpg';
-import S1 from './Photos/S1.jpeg';
-import S2 from './Photos/S2.jpeg';
-import S3 from './Photos/S3.jpeg';
-import R1 from './Photos/R1.jpeg';
-import R2 from './Photos/R2.jpeg';
-import R3 from './Photos/R3.jpeg';
-import R4 from './Photos/R4.jpeg';
-import R5 from './Photos/R5.jpeg';
-import R6 from './Photos/R6.jpeg';
-import R7 from './Photos/R7.jpeg';
-import R8 from './Photos/R8.jpeg';
-import R9 from './Photos/R9.jpeg';
-import R10 from './Photos/R10.jpeg';
-import R11 from './Photos/R11.jpeg';
-import R12 from './Photos/R12.jpeg';
-import R13 from './Photos/R13.jpeg';
-import R14 from './Photos/R14.jpeg';
-import R15 from './Photos/R15.jpeg';
-import VIS1 from './Visuels/VIS1.jpg';
-import VIS2 from './Visuels/VIS2.jpg';
-import VIS3 from './Visuels/VIS3.jpeg';
-import VIS4 from './Visuels/VIS4.jpeg';
-import VIS6 from './Visuels/VIS6.jpeg';
-import V7 from './Visuels/V7.jpeg';
-import V8 from './Visuels/V8.jpeg';
-import V9 from './Visuels/V9.jpeg';
-import V10 from './Visuels/V10.jpeg';
-import V11 from './Visuels/V11.jpeg';
-import V12 from './Visuels/V12.jpeg';
-import V13 from './Visuels/V13.jpeg';
-import { Language, Speaker, Exhibitor } from './types';
+const qrCodeImage = '/Images/QR code.jpg';
+const heroImage = '/Images/FOND1.png';
+const Logo = '/Images/Logo.png';
+const APROPOS = '/Images/APROPOS.jpg';
+const Patenaire1 = '/Images/Patenaire _1.png';
+const Patenaire2 = '/Images/Patenaire _2.png';
+const Patenaire3 = '/Images/Patenaire _3.png';
+const Patenaire4 = '/Images/Patenaire _4.png';
+const Patenaire5 = '/Images/Patenaire _5.png';
+const Patenaire6 = '/Images/Patenaire _6.png';
+const Patenaire7 = '/Images/Patenaire _7.png';
+const Patenaire8 = '/Images/Patenaire _8.png';
+const Patenaire9 = '/Images/Patenaire _9.png';
+const Patenaire10 = '/Images/Patenaire _10.png';
+const Patenaire12 = '/Images/Patenaire _12.png';
+const Patenaire13 = '/Images/Patenaire _13.png';
+const Patenaire14 = '/Images/Patenaire _14.png';
+const Patenaire15 = '/Images/Patenaire _15.png';
+const Patenaire16 = '/Images/Patenaire _16.png';
+const Patenaire17 = '/Images/Patenaire _17.png';
+const Patenaire18 = '/Images/Patenaire _18.png';
+const Patenaire19 = '/Images/Patenaire _19.png';
+const Patenaire20 = '/Images/Patenaire _20.png';
+const FAURE_IMG = '/Images/FAURE.jpg';
+const WAMKELE_IMG = '/Images/Wamkele.jpg';
+const SIDI_IMG = '/Images/Sidi.jpg';
+const ELOMBI_IMG = '/Images/Elombi.jpg';
+const TAREK_IMG = '/Images/Tarek.jpg';
+const LABONNE_IMG = '/Images/Labonne.jpg';
+const MAHAMADOU_IMG = '/Images/Mahamadou_.jpg';
+const PAMELA_IMG = '/Images/Pamela Coke.jpg';
+const FRAIZEE_IMG = '/Images/Prof Fraizee.jpg';
+const LERATO_IMG = '/Images/Lerato.jpg';
+const HANNANE_IMG = '/Images/Hannane.jpg';
+const JOY_IMG = '/Images/Dr Joy.jpg';
+const KANAYO_IMG = '/Images/Kanayo.jpg';
+const YONI_IMG = '/Images/Yomi.jpg';
+const STEPHEN_IMG = '/Images/Stephen.jpg';
+const NSHUTI_IMG = '/Images/Nshuti.jpg';
+const YAO_IMG = '/Images/Dr Yao.jpg';
+const ROB_IMG = '/Images/Dr Rob.jpg';
+const EKRA_IMG = '/Images/Jean Louis.jpg';
+const JEREMY_IMG = '/Images/Jeremy.jpg';
+const MAKINDE_IMG = '/Images/Oluwaseyi.jpg';
+const GATETE_IMG = '/Images/Claver Gatete.jpg';
+const FLORIZELLE_IMG = '/Images/Florizelle liser.jpg';
+const TG1 = '/Images/TG1.png';
+const TG2 = '/Images/TG2.png';
+const TG3 = '/Images/TG3.jpg';
+const TG4 = '/Images/TG4.png';
+const TG5 = '/Images/TG5.png';
+const TG6 = '/Images/TG6.png';
+const Exploration = '/Images/Exploration.png';
+const CP1 = '/Photos/CP1.jpg';
+const CP2 = '/Photos/CP2.jpg';
+const S1 = '/Photos/S1.jpeg';
+const S2 = '/Photos/S2.jpeg';
+const S3 = '/Photos/S3.jpeg';
+const R1 = '/Photos/R1.jpeg';
+const R2 = '/Photos/R2.jpeg';
+const R3 = '/Photos/R3.jpeg';
+const R4 = '/Photos/R4.jpeg';
+const R5 = '/Photos/R5.jpeg';
+const R6 = '/Photos/R6.jpeg';
+const R7 = '/Photos/R7.jpeg';
+const R8 = '/Photos/R8.jpeg';
+const R9 = '/Photos/R9.jpeg';
+const R10 = '/Photos/R10.jpeg';
+const R11 = '/Photos/R11.jpeg';
+const R12 = '/Photos/R12.jpeg';
+const R13 = '/Photos/R13.jpeg';
+const R14 = '/Photos/R14.jpeg';
+const R15 = '/Photos/R15.jpeg';
+const VIS1 = '/Visuels/VIS1.jpg';
+const VIS2 = '/Visuels/VIS2.jpg';
+const VIS3 = '/Visuels/VIS3.jpeg';
+const VIS4 = '/Visuels/VIS4.jpeg';
+const VIS6 = '/Visuels/VIS6.jpeg';
+const V7 = '/Visuels/V7.jpeg';
+const V8 = '/Visuels/V8.jpeg';
+const V9 = '/Visuels/V9.jpeg';
+const V10 = '/BLOG/Blog1.png';
+const V11 = '/Visuels/V11.jpeg';
+const V12 = '/Visuels/V12.jpeg';
+const V13 = '/Visuels/V13.jpeg';
+import ReactMarkdown from 'react-markdown';
+import { Language, Speaker, Exhibitor, BlogPost } from './types';
+import { BLOG_POSTS_DATA } from './blogData';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
@@ -148,8 +150,9 @@ const App: React.FC = () => {
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-  const [galleryTab, setGalleryTab] = useState<'news' | 'events'>('events');
+  const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog'>('blog');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const speakersRef = useRef<HTMLDivElement>(null);
   const [isSpeakersHovered, setIsSpeakersHovered] = useState(false);
@@ -220,6 +223,13 @@ const App: React.FC = () => {
     }
   ];
 
+  const BLOG_POSTS: BlogPost[] = BLOG_POSTS_DATA.map(post => ({
+    ...post,
+    title: post.title[lang],
+    description: post.description[lang],
+    content: post.content[lang]
+  }));
+
   const LOME_CITY_PHOTOS = [TG1, TG2, TG3, TG4, TG5, TG6];
 
   useEffect(() => {
@@ -228,6 +238,24 @@ const App: React.FC = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, [LOME_CITY_PHOTOS.length]);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('blog');
+    if (blogId) {
+      const post = BLOG_POSTS.find(p => p.id === parseInt(blogId));
+      if (post) {
+        setSelectedBlogPost(post);
+        setGalleryTab('blog');
+        setTimeout(() => {
+          const gallerySection = document.getElementById('gallery');
+          if (gallerySection) {
+            gallerySection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  }, []); // Run only on mount
 
   const t = translations[lang];
 
@@ -309,6 +337,32 @@ const App: React.FC = () => {
   };
 
   const toggleLang = () => setLang(prev => prev === 'fr' ? 'en' : 'fr');
+
+  const handleShare = (platform: 'facebook' | 'twitter' | 'linkedin' | 'whatsapp', post: BlogPost) => {
+    // Generate a unique URL for the blog post
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${baseUrl}?blog=${post.id}`;
+    
+    const text = `${post.title}\n\n${post.description}\n\n`;
+    
+    let finalUrl = '';
+    switch (platform) {
+      case 'facebook':
+        finalUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        break;
+      case 'twitter':
+        finalUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`;
+        break;
+      case 'linkedin':
+        finalUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+        break;
+      case 'whatsapp':
+        finalUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + shareUrl)}`;
+        break;
+    }
+    
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="relative min-h-screen bg-brand-light overflow-hidden">
@@ -393,7 +447,6 @@ const App: React.FC = () => {
                 opacity: 1, 
                 scale: 1, 
                 filter: "blur(0px)",
-                brightness: 1,
                 transition: { duration: 1.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }
               }}
               className="relative mb-12"
@@ -1285,10 +1338,21 @@ const App: React.FC = () => {
               </div>
             </motion.div>
             
-            <div className="flex justify-center p-1.5 bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] backdrop-blur-md rounded-2xl w-fit mx-auto border border-black/5">
+            <div className="flex flex-wrap justify-center p-1.5 bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] backdrop-blur-md rounded-2xl w-fit mx-auto border border-black/5 gap-2">
+              <button
+                onClick={() => setGalleryTab('blog')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'blog' 
+                    ? 'bg-brand-gold text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                {t.gallery.blogTab}
+              </button>
               <button
                 onClick={() => setGalleryTab('events')}
-                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                   galleryTab === 'events' 
                     ? 'bg-brand-red text-white shadow-xl' 
                     : 'text-black/40 hover:text-black'
@@ -1299,7 +1363,7 @@ const App: React.FC = () => {
               </button>
               <button
                 onClick={() => setGalleryTab('news')}
-                className={`flex items-center gap-2 px-8 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                   galleryTab === 'news' 
                     ? 'bg-brand-green text-white shadow-xl' 
                     : 'text-black/40 hover:text-black'
@@ -1312,7 +1376,106 @@ const App: React.FC = () => {
           </div>
 
           <AnimatePresence mode="wait">
-            {galleryTab === 'news' ? (
+            {galleryTab === 'blog' ? (
+              <motion.div
+                key="blog"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="space-y-16"
+              >
+                {/* Featured Post (Latest) */}
+                {BLOG_POSTS.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ y: -5 }}
+                    className="relative group cursor-pointer overflow-hidden rounded-[3.5rem] bg-white shadow-[0_30px_100px_-20px_rgba(0,0,0,0.15)] border border-black/5"
+                    onClick={() => setSelectedBlogPost(BLOG_POSTS[0])}
+                  >
+                    <div className="flex flex-col lg:flex-row min-h-[500px]">
+                      <div className="lg:w-3/5 relative overflow-hidden">
+                        <img 
+                          src={BLOG_POSTS[0].image} 
+                          alt={BLOG_POSTS[0].title}
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent lg:hidden" />
+                      </div>
+                      <div className="lg:w-2/5 p-8 md:p-14 flex flex-col justify-center relative bg-white">
+                        <div className="flex items-center gap-3 mb-6">
+                          <span className="px-5 py-2 bg-brand-red text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-brand-red/20">
+                            {lang === 'fr' ? 'À LA UNE' : 'FEATURED'}
+                          </span>
+                          <span className="text-[10px] font-bold text-black/40 uppercase tracking-widest">
+                            • {BLOG_POSTS[0].date}
+                          </span>
+                        </div>
+                        <h3 className="text-3xl md:text-4xl font-bold text-black mb-6 leading-tight group-hover:text-brand-green transition-colors">
+                          {BLOG_POSTS[0].title}
+                        </h3>
+                        <p className="text-black/60 text-lg leading-relaxed mb-10 line-clamp-4">
+                          {BLOG_POSTS[0].description}
+                        </p>
+                        <div className="flex items-center gap-3 text-brand-green font-black text-xs uppercase tracking-[0.2em] group-hover:gap-5 transition-all">
+                          {lang === 'fr' ? 'Lire l\'article Complet' : 'Read Full Article'}
+                          <ArrowRight className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Others Slider */}
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-8 px-2">
+                    <h4 className="text-sm font-black text-black/30 uppercase tracking-[0.4em]">
+                      {lang === 'fr' ? 'Plus d\'actualités' : 'More News'}
+                    </h4>
+                    <div className="h-px flex-1 bg-black/5 mx-8" />
+                  </div>
+                  
+                  <div className="overflow-x-auto no-scrollbar pb-8 -mx-4 px-4">
+                    <div className="flex gap-8 w-max">
+                      {BLOG_POSTS.slice(1).map((post, i) => (
+                        <motion.div
+                          key={post.id}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          whileHover={{ y: -10 }}
+                          className="w-[350px] bg-white rounded-[2.5rem] overflow-hidden shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] border border-black/5 group flex flex-col h-full cursor-pointer"
+                          onClick={() => setSelectedBlogPost(post)}
+                        >
+                          <div className="aspect-[16/10] overflow-hidden relative">
+                            <img 
+                              src={post.image} 
+                              alt={post.title} 
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div className="absolute top-6 left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-black text-brand-red uppercase tracking-widest shadow-lg">
+                              {post.date}
+                            </div>
+                          </div>
+                          <div className="p-8 flex flex-col flex-grow">
+                            <h3 className="text-lg font-bold text-black mb-4 group-hover:text-brand-green transition-colors line-clamp-2">
+                              {post.title}
+                            </h3>
+                            <p className="text-black/60 text-xs leading-relaxed mb-8 line-clamp-3">
+                              {post.description}
+                            </p>
+                            <div className="mt-auto inline-flex items-center gap-2 text-brand-green font-black text-[10px] uppercase tracking-widest group/btn group-hover:gap-4 transition-all">
+                              {lang === 'fr' ? 'Découvrir' : 'Discover'}
+                              <ArrowRight className="w-4 h-4" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ) : galleryTab === 'news' ? (
               <motion.div
                 key="news"
                 initial={{ opacity: 0 }}
@@ -1484,6 +1647,98 @@ const App: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <img src={selectedImage} className="w-full h-full object-contain bg-black/50" alt="Full view" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* BLOG POST MODAL */}
+      <AnimatePresence>
+        {selectedBlogPost && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[250] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl"
+            onClick={() => setSelectedBlogPost(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 50 }}
+              className="bg-white w-full max-w-4xl max-h-[90vh] rounded-[3rem] overflow-hidden shadow-2xl relative flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="absolute top-6 right-6 z-10 w-12 h-12 bg-black/10 hover:bg-black/20 text-black rounded-full flex items-center justify-center backdrop-blur-md transition-colors"
+                onClick={() => setSelectedBlogPost(null)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="overflow-y-auto no-scrollbar">
+                <div className="aspect-[21/9] w-full relative">
+                  <img src={selectedBlogPost.image} className="w-full h-full object-cover" alt={selectedBlogPost.title} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+                </div>
+
+                <div className="p-8 md:p-14">
+                  <div className="flex items-center gap-4 mb-8">
+                    <span className="px-5 py-2 bg-brand-red/5 text-brand-red font-black text-[10px] uppercase tracking-widest rounded-full border border-brand-red/10">
+                      {selectedBlogPost.date}
+                    </span>
+                    <div className="h-px flex-1 bg-black/5" />
+                  </div>
+
+                  <h2 className="text-3xl md:text-5xl font-bold text-black mb-10 leading-tight">
+                    {selectedBlogPost.title}
+                  </h2>
+
+                  <div className="prose prose-lg max-w-none text-black/70 leading-relaxed space-y-6">
+                    <p className="text-xl text-black font-medium leading-relaxed italic border-l-4 border-brand-green pl-6 py-2 bg-brand-green/[0.02]">
+                      {selectedBlogPost.description}
+                    </p>
+                    <div className="prose prose-lg max-w-none text-black/80 leading-relaxed">
+                      <ReactMarkdown>{selectedBlogPost.content}</ReactMarkdown>
+                    </div>
+                  </div>
+
+                  {/* Share Buttons */}
+                  <div className="mt-16 pt-10 border-t border-black/5">
+                    <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.3em] mb-6 text-center">Partager cet article</p>
+                    <div className="flex justify-center gap-6">
+                      <button 
+                        onClick={() => handleShare('facebook', selectedBlogPost)}
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all hover:-translate-y-1 group"
+                        title="Partager sur Facebook"
+                      >
+                        <Facebook className="w-5 h-5 shadow-sm" />
+                      </button>
+                      <button 
+                        onClick={() => handleShare('twitter', selectedBlogPost)}
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all hover:-translate-y-1 group"
+                        title="Partager sur Twitter"
+                      >
+                        <Twitter className="w-5 h-5 shadow-sm" />
+                      </button>
+                      <button 
+                        onClick={() => handleShare('linkedin', selectedBlogPost)}
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all hover:-translate-y-1 group"
+                        title="Partager sur LinkedIn"
+                      >
+                        <Linkedin className="w-5 h-5 shadow-sm" />
+                      </button>
+                      <button 
+                        onClick={() => handleShare('whatsapp', selectedBlogPost)}
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all hover:-translate-y-1 group"
+                        title="Partager sur WhatsApp"
+                      >
+                        <MessageCircle className="w-5 h-5 shadow-sm" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
