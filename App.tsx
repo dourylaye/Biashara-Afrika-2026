@@ -55,94 +55,93 @@ import { SpeakerCard } from './src/components/SpeakerCard';
 import { Navigation } from './src/components/Navigation';
 import { Footer } from './src/components/Footer';
 import { FloatingActions } from './src/components/FloatingActions';
-const qrCodeImage = '/Images/QR code.jpg';
-const heroImage = '/Images/FOND1.png';
-const Logo = '/Images/Logo.png';
-const APROPOS = '/Images/APROPOS.jpg';
-const Patenaire1 = '/Images/Patenaire _1.png';
-const Patenaire2 = '/Images/Patenaire _2.png';
-const Patenaire3 = '/Images/Patenaire _3.png';
-const Patenaire4 = '/Images/Patenaire _4.png';
-const Patenaire5 = '/Images/Patenaire _5.png';
-const Patenaire6 = '/Images/Patenaire _6.png';
-const Patenaire7 = '/Images/Patenaire _7.png';
-const Patenaire8 = '/Images/Patenaire _8.png';
-const Patenaire9 = '/Images/Patenaire _9.png';
-const Patenaire10 = '/Images/Patenaire _10.png';
-const Patenaire12 = '/Images/Patenaire _12.png';
-const Patenaire13 = '/Images/Patenaire _13.png';
-const Patenaire14 = '/Images/Patenaire _14.png';
-const Patenaire15 = '/Images/Patenaire _15.png';
-const Patenaire16 = '/Images/Patenaire _16.png';
-const Patenaire17 = '/Images/Patenaire _17.png';
-const Patenaire18 = '/Images/Patenaire _18.png';
-const Patenaire19 = '/Images/Patenaire _19.png';
-const Patenaire20 = '/Images/Patenaire _20.png';
-const FAURE_IMG = '/Images/FAURE.jpg';
-const WAMKELE_IMG = '/Images/Wamkele.jpg';
-const SIDI_IMG = '/Images/Sidi.jpg';
-const ELOMBI_IMG = '/Images/Elombi.jpg';
-const TAREK_IMG = '/Images/Tarek.jpg';
-const LABONNE_IMG = '/Images/Labonne.jpg';
-const MAHAMADOU_IMG = '/Images/Mahamadou_.jpg';
-const PAMELA_IMG = '/Images/Pamela Coke.jpg';
-const FRAIZEE_IMG = '/Images/Prof Fraizee.jpg';
-const LERATO_IMG = '/Images/Lerato.jpg';
-const HANNANE_IMG = '/Images/Hannane.jpg';
-const JOY_IMG = '/Images/Dr Joy.jpg';
-const KANAYO_IMG = '/Images/Kanayo.jpg';
-const YONI_IMG = '/Images/Yomi.jpg';
-const STEPHEN_IMG = '/Images/Stephen.jpg';
-const NSHUTI_IMG = '/Images/Nshuti.jpg';
-const YAO_IMG = '/Images/Dr Yao.jpg';
-const ROB_IMG = '/Images/Dr Rob.jpg';
-const EKRA_IMG = '/Images/Jean Louis.jpg';
-const JEREMY_IMG = '/Images/Jeremy.jpg';
-const MAKINDE_IMG = '/Images/Oluwaseyi.jpg';
-const GATETE_IMG = '/Images/Claver Gatete.jpg';
-const FLORIZELLE_IMG = '/Images/Florizelle liser.jpg';
-const TG1 = '/Images/TG1.png';
-const TG2 = '/Images/TG2.png';
-const TG3 = '/Images/TG3.jpg';
-const TG4 = '/Images/TG4.png';
-const TG5 = '/Images/TG5.png';
-const TG6 = '/Images/TG6.png';
-const Exploration = '/Images/Exploration.png';
-const CP1 = '/Photos/CP1.jpg';
-const CP2 = '/Photos/CP2.jpg';
-const S1 = '/Photos/S1.jpeg';
-const S2 = '/Photos/S2.jpeg';
-const S3 = '/Photos/S3.jpeg';
-const R1 = '/Photos/R1.jpeg';
-const R2 = '/Photos/R2.jpeg';
-const R3 = '/Photos/R3.jpeg';
-const R4 = '/Photos/R4.jpeg';
-const R5 = '/Photos/R5.jpeg';
-const R6 = '/Photos/R6.jpeg';
-const R7 = '/Photos/R7.jpeg';
-const R8 = '/Photos/R8.jpeg';
-const R9 = '/Photos/R9.jpeg';
-const R10 = '/Photos/R10.jpeg';
-const R11 = '/Photos/R11.jpeg';
-const R12 = '/Photos/R12.jpeg';
-const R13 = '/Photos/R13.jpeg';
-const R14 = '/Photos/R14.jpeg';
-const R15 = '/Photos/R15.jpeg';
-const VIS1 = '/Visuels/VIS1.jpg';
-const VIS2 = '/Visuels/VIS2.jpg';
-const VIS3 = '/Visuels/VIS3.jpeg';
-const VIS4 = '/Visuels/VIS4.jpeg';
-const VIS6 = '/Visuels/VIS6.jpeg';
-const V7 = '/Visuels/V7.jpeg';
-const V8 = '/Visuels/V8.jpeg';
-const V9 = '/Visuels/V9.jpeg';
-const V10 = '/BLOG/Blog1.png';
-const V11 = '/Visuels/V11.jpeg';
-const V12 = '/Visuels/V12.jpeg';
-const V13 = '/Visuels/V13.jpeg';
+import qrCodeImage from './Images/QR code.jpg';
+import heroImage from './Images/FOND1.png';
+import Logo from './Images/Logo.png';
+import APROPOS from './Images/APROPOS.jpg';
+import Patenaire1 from './Images/Patenaire _1.png';
+import Patenaire2 from './Images/Patenaire _2.png';
+import Patenaire3 from './Images/Patenaire _3.png';
+import Patenaire4 from './Images/Patenaire _4.png';
+import Patenaire5 from './Images/Patenaire _5.png';
+import Patenaire6 from './Images/Patenaire _6.png';
+import Patenaire7 from './Images/Patenaire _7.png';
+import Patenaire8 from './Images/Patenaire _8.png';
+import Patenaire9 from './Images/Patenaire _9.png';
+import Patenaire10 from './Images/Patenaire _10.png';
+import Patenaire12 from './Images/Patenaire _12.png';
+import Patenaire13 from './Images/Patenaire _13.png';
+import Patenaire14 from './Images/Patenaire _14.png';
+import Patenaire15 from './Images/Patenaire _15.png';
+import Patenaire16 from './Images/Patenaire _16.png';
+import Patenaire17 from './Images/Patenaire _17.png';
+import Patenaire18 from './Images/Patenaire _18.png';
+import Patenaire19 from './Images/Patenaire _19.png';
+import Patenaire20 from './Images/Patenaire _20.png';
+import FAURE_IMG from './Images/FAURE.jpg';
+import WAMKELE_IMG from './Images/Wamkele.jpg';
+import SIDI_IMG from './Images/Sidi.jpg';
+import ELOMBI_IMG from './Images/Elombi.jpg';
+import TAREK_IMG from './Images/Tarek.jpg';
+import LABONNE_IMG from './Images/Labonne.jpg';
+import MAHAMADOU_IMG from './Images/Mahamadou_.jpg';
+import PAMELA_IMG from './Images/Pamela Coke.jpg';
+import FRAIZEE_IMG from './Images/Prof Fraizee.jpg';
+import LERATO_IMG from './Images/Lerato.jpg';
+import HANNANE_IMG from './Images/Hannane.jpg';
+import JOY_IMG from './Images/Dr Joy.jpg';
+import KANAYO_IMG from './Images/Kanayo.jpg';
+import YONI_IMG from './Images/Yomi.jpg';
+import STEPHEN_IMG from './Images/Stephen.jpg';
+import NSHUTI_IMG from './Images/Nshuti.jpg';
+import YAO_IMG from './Images/Dr Yao.jpg';
+import ROB_IMG from './Images/Dr Rob.jpg';
+import EKRA_IMG from './Images/Jean Louis.jpg';
+import JEREMY_IMG from './Images/Jeremy.jpg';
+import MAKINDE_IMG from './Images/Oluwaseyi.jpg';
+import GATETE_IMG from './Images/Claver Gatete.jpg';
+import FLORIZELLE_IMG from './Images/Florizelle liser.jpg';
+import TG1 from './Images/TG1.png';
+import TG2 from './Images/TG2.png';
+import TG3 from './Images/TG3.jpg';
+import TG4 from './Images/TG4.png';
+import TG5 from './Images/TG5.png';
+import TG6 from './Images/TG6.png';
+import Exploration from './Images/Exploration.png';
+import CP1 from './Photos/CP1.jpg';
+import CP2 from './Photos/CP2.jpg';
+import S1 from './Photos/S1.jpeg';
+import S2 from './Photos/S2.jpeg';
+import S3 from './Photos/S3.jpeg';
+import R1 from './Photos/R1.jpeg';
+import R2 from './Photos/R2.jpeg';
+import R3 from './Photos/R3.jpeg';
+import R4 from './Photos/R4.jpeg';
+import R5 from './Photos/R5.jpeg';
+import R6 from './Photos/R6.jpeg';
+import R7 from './Photos/R7.jpeg';
+import R8 from './Photos/R8.jpeg';
+import R9 from './Photos/R9.jpeg';
+import R10 from './Photos/R10.jpeg';
+import R11 from './Photos/R11.jpeg';
+import R12 from './Photos/R12.jpeg';
+import R13 from './Photos/R13.jpeg';
+import R14 from './Photos/R14.jpeg';
+import R15 from './Photos/R15.jpeg';
+import VIS1 from './Visuels/VIS1.jpg';
+import VIS2 from './Visuels/VIS2.jpg';
+import VIS3 from './Visuels/VIS3.jpeg';
+import VIS4 from './Visuels/VIS4.jpeg';
+import VIS6 from './Visuels/VIS6.jpeg';
+import V7 from './Visuels/V7.jpeg';
+import V8 from './Visuels/V8.jpeg';
+import V9 from './Visuels/V9.jpeg';
+import V10 from './Visuels/V10.jpeg';
+import V11 from './Visuels/V11.jpeg';
+import V12 from './Visuels/V12.jpeg';
+import V13 from './Visuels/V13.jpeg';
 import ReactMarkdown from 'react-markdown';
 import { Language, Speaker, Exhibitor, BlogPost } from './types';
-import { BLOG_POSTS_DATA } from './blogData';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
@@ -223,12 +222,127 @@ const App: React.FC = () => {
     }
   ];
 
-  const BLOG_POSTS: BlogPost[] = BLOG_POSTS_DATA.map(post => ({
-    ...post,
-    title: post.title[lang],
-    description: post.description[lang],
-    content: post.content[lang]
-  }));
+  const BLOG_POSTS: BlogPost[] = [
+    {
+      id: 4,
+      title: lang === 'fr' 
+        ? "Défis liés au commerce et à l’investissement intra-africain : Les décideurs et investisseurs en quête de solutions concrètes à Lomé" 
+        : "Intra-African Trade and Investment Challenges: Decision Makers and Investors Seeking Concrete Solutions in Lomé",
+      description: lang === 'fr'
+        ? "Lomé accueille la 3e édition de Biashara Afrika pour transformer la ZLECAf en résultats économiques concrets et lever les barrières commerciales."
+        : "Lomé hosts the 3rd edition of Biashara Afrika to transform AfCFTA into concrete economic results and remove trade barriers.",
+      image: V10,
+      date: "16 Mai 2025",
+      content: lang === 'fr'
+        ? `Lomé, la capitale togolaise, abrite, du 18 au 20 mai, la 3e édition de **Biashara Afrika**, un forum panafricain capital sur le commerce et l’investissement intra-africains, portant sur le thème, « Stimuler la transformation économique de l’Afrique grâce à la ZLECAf ». Placé sous le haut patronage du Président du Conseil, **Faure Essozimna Gnassingbé**, cette plateforme continentale stratégique, qui vise à accélérer le passage de la politique à la pratique, est organisée par le Secrétariat de la Zone de libre-échange continentale africaine (ZLECAf) et le gouvernement togolais. Elle réunit divers acteurs de haut niveau, appelés à identifier les principaux obstacles à la facilitation du commerce intra-africain, mais aussi à mettre en lumière les opportunités d’investissement et de commerce dans les secteurs prioritaires de la ZLECAf.
+
+La Zone de libre-échange continentale africaine (ZLECAf), qui réunit 55 pays au sein d’un marché unique de plus de 1,4 milliard de personnes, avec un PIB combiné dépassant 3,4 trillions de dollars, constitue une avancée majeure et historique vers l’intégration économique régionale. Appelée à redéfinir en profondeur la trajectoire du commerce, de l’industrialisation et de la transformation économique de l’Afrique, la ZLECAf, sur la base d’un accord, s’est dotée d’une architecture juridique et institutionnelle afin de permettre son opérationnalisation, l’alignement au niveau national et l’implication croissante du secteur privé.
+
+### Les défis à surmonter
+Mais malgré les avancées avec l’existence de ce cadre juridique et institutionnel, le chemin pour atteindre les objectifs de la Zone est parsemé d’obstacles empêchant de traduire l’Accord en résultats économiques concrets. Parmi ces obstacles, l’on peut retenir notamment :
+- la persistance des barrières non tarifaires ;
+- l’accès limité au financement du commerce ;
+- les contraintes logistiques et d’infrastructure ;
+- la fragmentation des chaînes de valeur ;
+- la faible participation des Micro, petites et moyennes entreprises (MPME) au commerce transfrontalier.
+
+Dans le même temps, les évolutions de l’économie mondiale, notamment la reconfiguration des chaînes d’approvisionnement, la montée du protectionnisme, les transformations technologiques et l’incertitude géopolitique, créent à la fois des risques et des opportunités pour l’Afrique de bâtir des marchés régionaux plus résistants et intégrés.
+
+### Plusieurs acteurs pour mettre en évidence le rôle central de la ZLECAf
+Dans ce contexte, Biashara Afrika 2026 s’impose comme un rendez-vous d’importance capitale, visant à promouvoir les investissements, renforcer les chaînes de valeur régionales, créer des opportunités commerciales, et contribuer à l’élimination des obstacles persistants au commerce intra-africain.
+
+Selon les organisateurs, Biashara Afrika 2026 va regrouper durant trois jours près de 1000 participants, incluant :
+- des chefs d’État et de gouvernements africains ;
+- les acteurs du secteur privé ;
+- les institutions de financement ;
+- les fonds souverains ;
+- les banques commerciales ;
+- les startups ;
+- les universités ;
+- les centres de réflexion ;
+- les analystes ;
+- les professionnels des médias.
+
+### Les priorités et plateformes d’action
+Les échanges vont s’articuler autour des priorités ayant trait :
+- au renforcement du rôle des entreprises africaines à fort potentiel dans l’industrialisation ;
+- au développement des chaînes de valeur régionales ;
+- à l’accélération de la facilitation des échanges ;
+- au commerce numérique ;
+- aux systèmes de paiement ;
+- aux investissements dans les infrastructures logistiques.
+
+D’autres priorités visent également à :
+- consolider le leadership politique ;
+- renforcer l’alignement entre priorités nationales et objectifs continentaux ;
+- renforcer le dialogue public-privé ;
+- favoriser l’accès des MPME, des femmes et des jeunes aux marchés et opportunités de partenariat.
+
+Biashara Afrika 2026 s’articule autour de cinq plateformes d’action :
+- **La Deal Room** : annonces d’investissements et conclusion de partenariats commerciaux ;
+- **La plateforme des sociétés de commerce** : opérationnalisation des sociétés de commerce de la ZLECAf et structuration des réseaux de distribution ;
+- **Le laboratoire de facilitation des échanges** : résolution des obstacles concrets au commerce ;
+- **L’accélérateur de chaînes de valeur** : développement de partenariats sectoriels ;
+- **La plateforme d’accès au marché pour les PME** : connexion des entreprises aux opportunités commerciales.
+
+En somme, Lomé constitue une étape déterminante dans la concrétisation du potentiel de la ZLECAf ainsi qu’une contribution majeure pour accélérer la transformation économique de l’Afrique et renforcer sa position dans l’économie mondiale.`
+        : `Lomé, the Togolese capital, is hosting from May 18 to 20 the 3rd edition of **Biashara Afrika**, a vital pan-African forum focusing on trade and intra-African investment, themed "Boosting Africa's economic transformation through AfCFTA". This strategic platform aims to accelerate the transition from policy to practice.
+
+### Overcoming Obstacles
+Despite the legal framework, several barriers remain:
+- Persistence of non-tariff barriers;
+- Limited access to trade finance;
+- Logistics and infrastructure constraints;
+- Fragmentation of value chains;
+- Low participation of MSMEs in cross-border trade.
+
+### Key Platforms
+Biashara Afrika 2026 is built around five specific action platforms:
+1. **The Deal Room**: Investment announcements and trade partnerships;
+2. **Trade Companies Platform**: Operationalizing AfCFTA trade companies;
+3. **Trade Facilitation Lab**: Resolving concrete trade obstacles;
+4. **Value Chain Accelerator**: Developing sector partnerships;
+5. **MSME Market Access Platform**: Connecting businesses to trade opportunities.
+
+Lomé remains a decisive step in realizing the potential of AfCFTA and contributing to Africa's economic transformation.`
+    },
+    {
+      id: 1,
+      title: lang === 'fr' ? "L'impact de la ZLECAf sur le commerce intra-africain" : "The impact of AfCFTA on intra-African trade",
+      description: lang === 'fr' 
+        ? "Découvrez comment les nouvelles réglementations transforment les échanges commerciaux à travers le continent africain."
+        : "Discover how new regulations are transforming trade across the African continent.",
+      image: VIS1,
+      date: "10 Mai 2025",
+      content: lang === 'fr'
+        ? "La Phase 2 de la ZLECAf apporte des changements majeurs dans les protocoles d'investissement, de droits de propriété intellectuelle et de politique de concurrence. Ces évolutions sont cruciales pour créer un environnement commercial prévisible et sécurisé pour les investisseurs africains et internationaux. Le forum de Lomé sera l'occasion de détailler ces avancées et de présenter des cas concrets de réussite entrepreneuriale favorisée par ces nouvelles règles."
+        : "AfCFTA Phase 2 brings major changes in investment protocols, intellectual property rights, and competition policy. These developments are crucial for creating a predictable and secure business environment for African and international investors. The Lomé forum will be an opportunity to detail these advances and present concrete cases of entrepreneurial success favored by these new rules."
+    },
+    {
+      id: 2,
+      title: lang === 'fr' ? "L'innovation digitale au service de l'intégration" : "Digital innovation serving integration",
+      description: lang === 'fr'
+        ? "Le rôle crucial des technologies numériques dans la facilitation du commerce transfrontalier en Afrique."
+        : "The crucial role of digital technologies in facilitating cross-border trade in Africa.",
+      image: VIS3,
+      date: "12 Mai 2025",
+      content: lang === 'fr'
+        ? "La numérisation des procédures douanières et l'interopérabilité des systèmes de paiement sont des piliers de l'accélération de la ZLECAf. À Biashara Afrika 2026, nous explorerons comment les Fintechs africaines révolutionnent le transfert de fonds et comment l'intelligence artificielle peut optimiser les chaînes d'approvisionnement continentales. L'intégration n'est plus seulement physique mais aussi numérique."
+        : "The digitization of customs procedures and the interoperability of payment systems are pillars of AfCFTA acceleration. At Biashara Afrika 2026, we will explore how African Fintechs are revolutionizing remittances and how artificial intelligence can optimize continental supply chains. Integration is no longer just physical but also digital."
+    },
+    {
+      id: 3,
+      title: lang === 'fr' ? "Le Togo, hub logistique de l'Afrique de l'Ouest" : "Togo, logistics hub of West Africa",
+      description: lang === 'fr'
+        ? "Pourquoi le Port Autonome de Lomé est devenu un acteur incontournable du commerce régional."
+        : "Why the Autonomous Port of Lomé has become a key player in regional trade.",
+      image: VIS4,
+      date: "15 Mai 2025",
+      content: lang === 'fr'
+        ? "Avec ses infrastructures modernes et son tirant d'eau exceptionnel, le Port de Lomé se positionne comme la porte d'entrée privilégiée pour les pays de l'hinterland. Cet article analyse les investissements récents dans les corridors logistiques reliant le Togo au Burkina Faso, au Mali et au Niger, illustrant parfaitement la vision d'une Afrique interconnectée."
+        : "With its modern infrastructure and exceptional draft, the Port of Lomé positions itself as the preferred gateway for hinterland countries. This article analyzes recent investments in logistics corridors linking Togo to Burkina Faso, Mali, and Niger, perfectly illustrating the vision of an interconnected Africa."
+    }
+  ];
 
   const LOME_CITY_PHOTOS = [TG1, TG2, TG3, TG4, TG5, TG6];
 
@@ -238,24 +352,6 @@ const App: React.FC = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, [LOME_CITY_PHOTOS.length]);
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const blogId = urlParams.get('blog');
-    if (blogId) {
-      const post = BLOG_POSTS.find(p => p.id === parseInt(blogId));
-      if (post) {
-        setSelectedBlogPost(post);
-        setGalleryTab('blog');
-        setTimeout(() => {
-          const gallerySection = document.getElementById('gallery');
-          if (gallerySection) {
-            gallerySection.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      }
-    }
-  }, []); // Run only on mount
 
   const t = translations[lang];
 
@@ -338,30 +434,24 @@ const App: React.FC = () => {
 
   const toggleLang = () => setLang(prev => prev === 'fr' ? 'en' : 'fr');
 
-  const handleShare = (platform: 'facebook' | 'twitter' | 'linkedin' | 'whatsapp', post: BlogPost) => {
-    // Generate a unique URL for the blog post
-    const baseUrl = window.location.origin + window.location.pathname;
-    const shareUrl = `${baseUrl}?blog=${post.id}`;
+  const handleShare = (platform: 'facebook' | 'twitter' | 'linkedin', post: BlogPost) => {
+    const url = window.location.href;
+    const text = `${post.title} - Biashara Afrika 2026`;
     
-    const text = `${post.title}\n\n${post.description}\n\n`;
-    
-    let finalUrl = '';
+    let shareUrl = '';
     switch (platform) {
       case 'facebook':
-        finalUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
       case 'twitter':
-        finalUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`;
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
         break;
       case 'linkedin':
-        finalUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
-        break;
-      case 'whatsapp':
-        finalUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + shareUrl)}`;
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
         break;
     }
     
-    window.open(finalUrl, '_blank', 'noopener,noreferrer');
+    window.open(shareUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -1709,31 +1799,21 @@ const App: React.FC = () => {
                     <div className="flex justify-center gap-6">
                       <button 
                         onClick={() => handleShare('facebook', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#1877F2] hover:text-white transition-all hover:-translate-y-1 group"
-                        title="Partager sur Facebook"
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-red hover:text-white transition-all hover:-translate-y-1"
                       >
-                        <Facebook className="w-5 h-5 shadow-sm" />
+                        <Facebook className="w-5 h-5" />
                       </button>
                       <button 
                         onClick={() => handleShare('twitter', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#1DA1F2] hover:text-white transition-all hover:-translate-y-1 group"
-                        title="Partager sur Twitter"
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-all hover:-translate-y-1"
                       >
-                        <Twitter className="w-5 h-5 shadow-sm" />
+                        <Twitter className="w-5 h-5" />
                       </button>
                       <button 
                         onClick={() => handleShare('linkedin', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#0A66C2] hover:text-white transition-all hover:-translate-y-1 group"
-                        title="Partager sur LinkedIn"
+                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-all hover:-translate-y-1"
                       >
-                        <Linkedin className="w-5 h-5 shadow-sm" />
-                      </button>
-                      <button 
-                        onClick={() => handleShare('whatsapp', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all hover:-translate-y-1 group"
-                        title="Partager sur WhatsApp"
-                      >
-                        <MessageCircle className="w-5 h-5 shadow-sm" />
+                        <Linkedin className="w-5 h-5" />
                       </button>
                     </div>
                   </div>
