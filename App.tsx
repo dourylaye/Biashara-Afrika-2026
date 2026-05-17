@@ -42,6 +42,9 @@ import {
   Newspaper,
   Image as ImageIcon,
   Maximize2,
+  Share2,
+  Copy,
+  Check,
   Facebook,
   Linkedin,
   Twitter,
@@ -78,6 +81,7 @@ import Patenaire17 from './Images/Patenaire _17.png';
 import Patenaire18 from './Images/Patenaire _18.png';
 import Patenaire19 from './Images/Patenaire _19.png';
 import Patenaire20 from './Images/Patenaire _20.png';
+import Blog1 from './Blog/Blog1.jpeg';
 import FAURE_IMG from './Images/FAURE.jpg';
 import WAMKELE_IMG from './Images/Wamkele.jpg';
 import SIDI_IMG from './Images/Sidi.jpg';
@@ -153,6 +157,7 @@ const App: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
   const speakersRef = useRef<HTMLDivElement>(null);
   const [isSpeakersHovered, setIsSpeakersHovered] = useState(false);
 
@@ -223,6 +228,82 @@ const App: React.FC = () => {
   ];
 
   const BLOG_POSTS: BlogPost[] = [
+    {
+      id: 5,
+      title: lang === 'fr' 
+        ? "LE FORUM PANAFRICAIN BIASHARA AFRIKA S’OUVRE LUNDI A LOME" 
+        : "BIASHARA AFRIKA PAN-AFRICAN FORUM OPENS MONDAY IN LOME",
+      description: lang === 'fr'
+        ? "Une opportunité de promotion internationale pour les PME/PMI togolaises"
+        : "An international promotion opportunity for Togolese SMEs",
+      image: Blog1,
+      date: "18 Mai 2026",
+      content: lang === 'fr'
+        ? `Après la 1ère édition en Afrique du Sud en 2023 et la 2ème au Rwanda en 2024, Lomé accueille à partir ce lundi 18 mai 2026, le 3ème acte du forum du secteur privé africain Biashara Afrika. Fort de son rayonnement dans la sous-région et de ses infrastructures d’accueil appréciables, le Togo va prêter son cadre idéal et ce jusqu’au 18 mai, à cette plateforme stratégique de dialogue, d’innovation et d’action, destinée à connecter les marchés d’affaires, faciliter les échanges entre les entreprises et renforcer les opportunités économiques sur le continent.
+
+Ce rendez-vous panafricain, organisé sous le haut patronage du Président du Conseil, Faure Essozimna Gnassingbé, est un cadre d’opportunités d’affaires offert aux opérateurs économiques, surtout togolais, pour se faire valoir, s’affirmer sur le continent et renforcer les échanges dans un système commercial mondialisé. Son organisation à Lomé témoigne du leadership et de l’engagement résolu du Président du Conseil à positionner le Togo comme un hub logistique et commercial de référence en Afrique de l’Ouest.
+
+Pendant trois jours, cette initiative conjointe du Secrétariat de la Zone de libre-échange continentale africaine (ZLECAf) et du gouvernement togolais ouvre ses débats autour du thème :
+
+**« Accélérer la transformation économique de l’Afrique grâce à la ZLECAf »**.
+
+Des débats qui concernent l’ensemble des opérateurs économiques africains :
+- PME/PMI ;
+- investisseurs ;
+- institutions privées et publiques ;
+- organisations professionnelles du secteur privé.
+
+Ils sont invités à des échanges constructifs et pragmatiques mettant l’accent sur des critères de qualité et de représentativité nationale afin de mettre en lumière les potentialités économiques de l’Afrique de manière optimale.
+
+Selon les organisateurs, c’est plus de 1.500 participants qui devraient se retrouver et débattre des politiques de facilitation commerciale, des stratégies de transformation économique ainsi que des opportunités offertes par la ZLECAf pour une Afrique unie et ambitieuse.
+
+Panels thématiques, espaces d’exposition et sessions de partenariat vont offrir des perspectives concrètes pour stimuler les échanges et renforcer la coopération régionale.
+
+### Nouer des partenariats avec les opérateurs économiques du continent
+
+Pour les opérateurs économiques, surtout togolais, Biashara Afrika 2026 est un catalyseur d’opportunités pour leurs entreprises et pour l’ensemble des PME/PMI.
+
+Ce forum constitue également une opportunité de promotion internationale pour les PME/PMI du Togo et du continent.
+
+En effet, la présence d’acteurs économiques africains et internationaux permettra de mettre en valeur :
+- les réformes économiques engagées par le gouvernement ;
+- les opportunités d’investissement dans les secteurs prioritaires ;
+- les infrastructures logistiques et commerciales du pays.
+
+Selon les données du ministère en charge du Commerce et du Contrôle de la Qualité, les PME représentent plus de 80 % du tissu économique togolais et constituent un levier essentiel pour la création d’emplois et la transformation industrielle du pays.
+
+A cet égard, le présent forum va leur offrir :
+- des outils ;
+- des réseaux ;
+- des plateformes nécessaires pour accéder aux marchés africains.
+
+Le forum offre également une tribune permettant aux investisseurs internationaux d’identifier des opportunités dans différents secteurs économiques togolais et au sein d’autres pays du continent.
+
+Il encourage les entreprises africaines à collaborer afin de :
+- transformer localement les ressources naturelles du continent ;
+- développer les chaînes de valeur régionales.
+
+En outre, Biashara Afrika 2026 est une occasion permettant aux PME/PMI de la place de nouer des partenariats avec les opérateurs économiques du continent.
+
+À moyen et long terme, il contribuera :
+- à renforcer l’attractivité du Togo ;
+- à stimuler la création d’emplois ;
+- à développer l’industrie locale ;
+- à promouvoir les exportations vers le marché africain.
+
+Créée sous l’égide de l’Union Africaine, la Zone de libre-échange continentale africaine (ZLECAf), à travers son secrétariat sis à Accra au Ghana, assiste les États membres et veille au respect des règles de libre circulation des marchandises au sein des pays africains.
+
+La mise en œuvre de cette Zone permet à l’Afrique de s’engager dans la construction du plus grand marché intégré du monde, regroupant plus de 1,3 milliard de consommateurs et représentant un produit intérieur brut combiné de plus de 3 400 milliards de dollars.`
+        : `After the 1st edition in South Africa in 2023 and the 2nd in Rwanda in 2024, Lomé is hosting from this Monday, May 18, 2026, the 3rd act of the African private sector forum Biashara Afrika.
+
+This pan-African meeting, organized under the high patronage of the President of the Council, Faure Essozimna Gnassingbé, is an opportunity for economic operators to assert themselves on the continent and strengthen exchanges in a globalized trading system.
+
+Over three days, this joint initiative of the AfCFTA Secretariat and the Togolese government will focus on the theme:
+
+**"Accelerating Africa's economic transformation through AfCFTA"**.
+
+According to the organizers, more than 1,500 participants are expected to discuss trade facilitation policies, economic transformation strategies, and opportunities offered by AfCFTA for a united and ambitious Africa.`
+    },
     {
       id: 4,
       title: lang === 'fr' 
@@ -434,9 +515,9 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
 
   const toggleLang = () => setLang(prev => prev === 'fr' ? 'en' : 'fr');
 
-  const handleShare = (platform: 'facebook' | 'twitter' | 'linkedin', post: BlogPost) => {
-    const url = window.location.href;
-    const text = `${post.title} - Biashara Afrika 2026`;
+  const handleShare = (platform: 'facebook' | 'twitter' | 'linkedin' | 'whatsapp', post: BlogPost) => {
+    const url = `${window.location.origin}${window.location.pathname}?blog=${post.id}`;
+    const text = `${post.title} - ${post.description} \n\nDécouvrez l'article complet ici : ${url}`;
     
     let shareUrl = '';
     switch (platform) {
@@ -444,10 +525,13 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
         break;
       case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(post.title)}`;
         break;
       case 'linkedin':
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case 'whatsapp':
+        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
         break;
     }
     
@@ -1508,7 +1592,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                           {BLOG_POSTS[0].description}
                         </p>
                         <div className="flex items-center gap-3 text-brand-green font-black text-xs uppercase tracking-[0.2em] group-hover:gap-5 transition-all">
-                          {lang === 'fr' ? 'Lire l\'article Complet' : 'Read Full Article'}
+                          {lang === 'fr' ? 'Lire l\'article' : 'Read Article'}
                           <ArrowRight className="w-5 h-5" />
                         </div>
                       </div>
@@ -1555,7 +1639,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                               {post.description}
                             </p>
                             <div className="mt-auto inline-flex items-center gap-2 text-brand-green font-black text-[10px] uppercase tracking-widest group/btn group-hover:gap-4 transition-all">
-                              {lang === 'fr' ? 'Découvrir' : 'Discover'}
+                              {lang === 'fr' ? 'Lire l\'article' : 'Read Article'}
                               <ArrowRight className="w-4 h-4" />
                             </div>
                           </div>
@@ -1794,27 +1878,54 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                   </div>
 
                   {/* Share Buttons */}
-                  <div className="mt-16 pt-10 border-t border-black/5">
-                    <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.3em] mb-6 text-center">Partager cet article</p>
-                    <div className="flex justify-center gap-6">
+                  <div className="mt-16 pt-10 border-t border-black/5 space-y-10">
+                    <div className="bg-slate-50 p-6 md:p-8 rounded-[2rem] border border-black/5 flex flex-col md:flex-row items-center justify-between gap-6">
+                      <div className="text-center md:text-left flex-1">
+                        <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.3em] mb-2">Lien unique de l'article</p>
+                        <p className="text-xs font-mono text-brand-green break-all select-all">{`${window.location.origin}${window.location.pathname}?blog=${selectedBlogPost.id}`}</p>
+                      </div>
                       <button 
-                        onClick={() => handleShare('facebook', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-red hover:text-white transition-all hover:-translate-y-1"
+                        onClick={() => {
+                          const link = `${window.location.origin}${window.location.pathname}?blog=${selectedBlogPost.id}`;
+                          navigator.clipboard.writeText(link);
+                          setCopySuccess(true);
+                          setTimeout(() => setCopySuccess(false), 2000);
+                        }}
+                        className={`flex items-center gap-2 px-8 py-4 ${copySuccess ? 'bg-brand-green text-white' : 'bg-white text-black'} text-[10px] font-black uppercase tracking-widest rounded-2xl border border-black/5 shadow-sm hover:bg-brand-green hover:text-white transition-all active:scale-95 shrink-0`}
                       >
-                        <Facebook className="w-5 h-5" />
+                        {copySuccess ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        {copySuccess ? (lang === 'fr' ? 'Copié !' : 'Copied!') : (lang === 'fr' ? 'Copier le lien' : 'Copy link')}
                       </button>
-                      <button 
-                        onClick={() => handleShare('twitter', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-gold hover:text-white transition-all hover:-translate-y-1"
-                      >
-                        <Twitter className="w-5 h-5" />
-                      </button>
-                      <button 
-                        onClick={() => handleShare('linkedin', selectedBlogPost)}
-                        className="w-12 h-12 rounded-full border border-black/5 flex items-center justify-center hover:bg-brand-green hover:text-white transition-all hover:-translate-y-1"
-                      >
-                        <Linkedin className="w-5 h-5" />
-                      </button>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.3em] mb-6">Partager sur les réseaux</p>
+                      <div className="flex justify-center gap-4 md:gap-8 flex-wrap">
+                        <button 
+                          onClick={() => handleShare('facebook', selectedBlogPost)}
+                          className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all hover:-translate-y-2 shadow-sm"
+                        >
+                          <Facebook className="w-6 h-6" />
+                        </button>
+                        <button 
+                          onClick={() => handleShare('twitter', selectedBlogPost)}
+                          className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-[#1DA1F2] hover:bg-[#1DA1F2] hover:text-white transition-all hover:-translate-y-2 shadow-sm"
+                        >
+                          <Twitter className="w-6 h-6" />
+                        </button>
+                        <button 
+                          onClick={() => handleShare('linkedin', selectedBlogPost)}
+                          className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all hover:-translate-y-2 shadow-sm"
+                        >
+                          <Linkedin className="w-6 h-6" />
+                        </button>
+                        <button 
+                          onClick={() => handleShare('whatsapp', selectedBlogPost)}
+                          className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all hover:-translate-y-2 shadow-sm"
+                        >
+                          <MessageCircle className="w-6 h-6" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
