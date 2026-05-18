@@ -6,6 +6,24 @@
 
 export type Language = 'fr' | 'en';
 
+export interface ProgramItem {
+  time: string;
+  title: string;
+  description?: string;
+  speakers?: string[];
+  panellists?: string[];
+  moderators?: string[];
+  keynotes?: string[];
+  tracks?: { name: string; title: string }[];
+}
+
+export interface ProgramDay {
+  day: string;
+  title: string;
+  subtitle: string;
+  items: ProgramItem[];
+}
+
 export interface Speaker {
   id?: string;
   name: string;

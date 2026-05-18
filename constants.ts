@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ProgramDay, ProgramItem } from './types';
 
 interface Translation {
   [key: string]: {
@@ -41,10 +42,10 @@ export const translations: Translation = {
       title: "Programme",
       download: "Télécharger le programme complet",
       days: {
-        day0: "17 Mai - Pré-forum",
-        day1: "18 Mai - Vision to Opportunities",
-        day2: "19 Mai - Opportunities to Execution",
-        day3: "20 Mai - Commitments",
+        day0: "17 Mai 2026",
+        day1: "18 Mai 2026",
+        day2: "19 Mai 2026",
+        day3: "20 Mai 2026",
       }
     },
     speakers: {
@@ -68,6 +69,12 @@ export const translations: Translation = {
       newsTab: "Bon à savoir",
       eventsTab: "Photos de l'Événement",
       blogTab: "Blog",
+    },
+    programLabels: {
+      speakers: "Intervenants",
+      moderators: "Modérateurs",
+      panellists: "Panélistes",
+      keynotes: "Keynotes",
     },
     whyLome: {
       title: "Pourquoi Lomé ?",
@@ -171,10 +178,10 @@ export const translations: Translation = {
       title: "Program",
       download: "Download full program",
       days: {
-        day0: "May 17 - Pre-forum",
-        day1: "May 18 - Vision to Opportunities",
-        day2: "May 19 - Opportunities to Execution",
-        day3: "May 20 - Commitments",
+        day0: "May 17, 2026",
+        day1: "May 18, 2026",
+        day2: "May 19, 2026",
+        day3: "May 20, 2026",
       }
     },
     speakers: {
@@ -198,6 +205,12 @@ export const translations: Translation = {
       newsTab: "Good to Know",
       eventsTab: "Event Photos",
       blogTab: "Blog",
+    },
+    programLabels: {
+      speakers: "Speakers",
+      moderators: "Moderators",
+      panellists: "Panellists",
+      keynotes: "Keynotes",
     },
     whyLome: {
       title: "Why Lomé?",
@@ -270,98 +283,506 @@ export const translations: Translation = {
   }
 };
 
-export const PROGRAM_DATA = {
+export const PROGRAM_DATA: { fr: ProgramDay[], en: ProgramDay[] } = {
   fr: [
     {
-      day: "17 Mai",
-      title: "Activités Pré-Forum & Masterclasses",
-      subtitle: "Une journée dédiée à l'accueil et au renforcement des capacités.",
+      day: "17 Mai 2026",
+      title: "Inscription • Masterclass • Réunions stratégiques",
+      subtitle: "Prélude au sommet : Préparation et Alignement",
       items: [
-        { time: "08:00 – 17:00", title: "Enregistrement des participants" },
-        { time: "09:00 – 16:00", title: "Atelier Sectoriel", description: "Construire une industrie africaine du coton, du textile et de l’habillement compétitive et intégrée." },
-        { time: "09:00 – 16:00", title: "Masterclasses PME", description: "Évaluation de la valeur ajoutée et intelligence compétitive des PME." },
-        { time: "14:00 – 18:00", title: "Atelier Média et Plaidoyer", description: "Session conjointe ZLECAf / ITC." }
+        { 
+          time: "08:00 – 17:00", 
+          title: "Inscription des participants",
+          description: "Accueil et retrait des badges."
+        },
+        { 
+          time: "09:00 – 16:00", 
+          title: "Table ronde : Chaîne de valeur africaine du coton, textile et habillement sous la ZLECAf",
+          description: "Session stratégique sectorielle."
+        },
+        { 
+          time: "14:00 – 18:00", 
+          title: "Atelier média & plaidoyer",
+          description: "Session de sensibilisation pour les professionnels des médias."
+        },
+        { 
+          time: "15:00 – 18:00", 
+          title: "Masterclasses",
+          tracks: [
+            { name: "Track 1", title: "Préparation à l’exportation & valorisation des PME" },
+            { name: "Track 2", title: "Intelligence compétitive" }
+          ]
+        },
+        { 
+          time: "16:00 – 19:00", 
+          title: "Réunion de coordination AfCFTA – Afreximbank",
+          description: "Réunion technique institutionnelle."
+        }
       ]
     },
     {
-      day: "18 Mai",
-      title: "De la Vision aux Opportunités",
-      subtitle: "Libérer le potentiel de la ZLECAf et l'intégration économique.",
+      day: "18 Mai 2026",
+      title: "De la vision aux opportunités : libérer le potentiel de la ZLECAf",
+      subtitle: "Cérémonie d’Ouverture & Plénières Stratégiques",
       items: [
-        { time: "09:30 – 11:30", title: "CÉRÉMONIE OFFICIELLE D’OUVERTURE", description: "Discours de S.E. Wamkele Mene et Conversation phare avec S.E. Faure Essozimna Gnassingbé." },
-        { time: "11:30 – 13:00", title: "Plénières Stratégiques", description: "Chaînes de valeur africaines et hubs commerciaux sous-nationaux." },
-        { time: "14:00 – 16:30", title: "Sessions Techniques", description: "ZES, Systèmes douaniers et l’avenir de l’industrie automobile." },
-        { time: "16:30 – 18:30", title: "Sessions Parallèles & Plateformes d’Action", description: "Femmes dans le commerce, Halieutique et Accès des PME au marché." },
-        { time: "19:00", title: "Soirée de Bienvenue", description: "Cocktail et Dîner Ministériel offert par le Gouvernement togolais." }
+        { 
+          time: "07:00 – 09:00", 
+          title: "Installation & Arrivée des autorités",
+          description: "Installation des délégués et accueil des officiels."
+        },
+        { 
+          time: "09:00 – 11:00", 
+          title: "Cérémonie officielle d’ouverture",
+          speakers: [
+            "Honourable Badanam Patoki",
+            "Dr. Jumoke Oduwole",
+            "H.E. Oluseyi Abiodun Makinde",
+            "H.E. Wamkele Mene",
+            "H.E. Dr George Elombi",
+            "H.E. Issoufou Mahamadou",
+            "H.E. Faure Essozimna Gnassingbé"
+          ]
+        },
+        { 
+          time: "11:30 – 12:15", 
+          title: "Plénière 1 : Construire des chaînes de valeur africaines compétitives",
+          keynotes: ["Ms. Pamela Coke"],
+          panellists: [
+            "Dr. Joy Kategekwa – AfDB",
+            "Ms. Ibukun Awosika – Chair Centre Group",
+            "Ms. Happiness Nyiti – AJA Limited",
+            "Mr. Souleymane Diagne – Ecobank",
+            "Mr. Enselme Gouthon – Robusta Coffee Agency",
+            "Mr Jean Arsene Yerima – Afreximbank"
+          ],
+          moderators: ["Mr. Alfred Ocansey – TV3 Ghana"]
+        },
+        { 
+          time: "12:15 – 12:30", 
+          title: "Signature de protocoles d’accord",
+          description: "Partenariats stratégiques."
+        },
+        { 
+          time: "12:30 – 12:50", 
+          title: "Plénière 2 : Les hubs commerciaux régionaux & la ZLECAf",
+          speakers: ["H.E. Oluseyi Abiodun Makinde"],
+          moderators: ["Ms. Lerato Mbele"]
+        },
+        { 
+          time: "12:50 – 13:30", 
+          title: "Plénière 3 : La phase de négociation terminée – Quelle suite ?",
+          speakers: [
+            "H.E. Wamkele Mene – AfCFTA Secretariat",
+            "Honourable Prudence Sebahizi – Rwanda",
+            "Honourable Jumoke Oduwole – Nigeria",
+            "Honourable Guibolo Fanga Mathieu – Chad",
+            "Julien Paluku Kahongya – RDC",
+            "Ms. Kanayo Awani – Afreximbank"
+          ],
+          moderators: ["Ms Hannane Ferdjani"]
+        },
+        { 
+          time: "14:30 – 15:30", 
+          title: "Plénière 4 : Sociétés commerciales, ZES & réseaux de distribution",
+          keynotes: ["Stephen Jennings – Rendeavour"],
+          panellists: [
+            "Mr. Arthur Trimua – Gouvernement Togolais",
+            "Mr. Yomi Ademola – Rendeavour",
+            "Mr. Felix Chege – RealSources",
+            "Mr. Daniel Mackorley – McDan",
+            "Mr. Stewart Makura – ATDC",
+            "Mr Christian Ndikumagenge – Afreximbank"
+          ],
+          moderators: ["Godfrey Mutizwa – CNBC Africa"]
+        },
+        { 
+          time: "15:30 – 16:15", 
+          title: "Plénière 5 : Harmonisation des systèmes douaniers",
+          speakers: [
+            "Mr. Dumisani Masilela – SACU",
+            "Mr. Nafiu Isiyaku – Nigeria Customs",
+            "Ms. Demitta Gyang – AfCFTA Secretariat",
+            "Mr. Fioklou Toulan – Douanes Togo",
+            "Mr. Kizito Ebhohimen – Bergmans Security",
+            "Dr Gainmore Zanamwe – Afreximbank"
+          ],
+          moderators: ["Stephane Tchriffo"]
+        },
+        { 
+          time: "16:15 – 16:35", 
+          title: "Plénière 6 : L’avenir automobile africain",
+          speakers: ["Mr. Tarek Ismail Mosaad – CEO Hyundai Motor"],
+          moderators: ["Godfrey Mutizwa – CNBC Africa"]
+        },
+        { 
+          time: "16:45 – 18:30", 
+          title: "Sessions parallèles / Breakout Sessions",
+          tracks: [
+            { name: "Track 1", title: "PME & Inclusion des femmes" },
+            { name: "Track 2", title: "Industrialisation verte" },
+            { name: "Side Event", title: "Transformation digitale & intégration des marchés africains" }
+          ]
+        },
+        { 
+          time: "18:30 – 20:00", 
+          title: "Cocktail de bienvenue & Dîner Ministériel",
+          description: "Moment de networking offert par le gouvernement togolais."
+        }
       ]
     },
     {
-      day: "19 Mai",
-      title: "Des Opportunités à l'Exécution",
-      subtitle: "Secteurs porteurs, digital et investissements massifs.",
+      day: "19 Mai 2026",
+      title: "Des opportunités à l’exécution",
+      subtitle: "Focus Agriculture, Infrastructures & Paiements",
       items: [
-        { time: "08:30 – 10:30", title: "Agriculture & Résilience Alimentaire", description: "Commerce agricole et transformation locale." },
-        { time: "11:00 – 13:00", title: "Infrastructures & Digital Trade", description: "Ports, corridors commerciaux et paiements transfrontaliers." },
-        { time: "14:00 – 16:00", title: "Invest in Africa", description: "Afreximbank Roadshow et financement de projets." },
-        { time: "16:30 – 18:30", title: "Youth in Trade Forum", description: "L'entrepreneuriat des jeunes au cœur de l'Afrique." },
-        { time: "20:00", title: "Dîner de Gala", description: "Célébration de l'excellence commerciale africaine." }
+        { 
+          time: "08:00 – 10:00", 
+          title: "Sessions petit-déjeuner",
+          tracks: [
+            { name: "Banking", title: "Harmonisation des régulations financières" },
+            { name: "Logistique", title: "Ports, maritime & logistique" }
+          ]
+        },
+        { 
+          time: "10:00 – 10:45", 
+          title: "Plénière 7 : Agriculture, commerce & résilience",
+          speakers: [
+            "Hon. Prudence Sebahizi",
+            "Dr. Gainmore Zanamwe",
+            "Mr. Daniel Njiwa",
+            "Mr. Komla Bissi",
+            "Mr. Djiwa Oyetounde",
+            "Mr. Kolawole Sofola"
+          ],
+          moderators: ["Dr. Faizel Ismal"]
+        },
+        { 
+          time: "10:45 – 11:40", 
+          title: "Plénière 8 : Connecter l’Afrique – infrastructures, ports & corridors",
+          speakers: [
+            "Mr. Mohamed Diop – AGL",
+            "Mr. Patient Sayiba",
+            "Dr Hortense ME",
+            "Ms. Adeline Gabillaud – CMA-CGM",
+            "Mr. Khalid Bichou",
+            "Mr Jean Arsene Yerima – Afreximbank"
+          ],
+          moderators: ["Godfrey Mutizwa"]
+        },
+        { 
+          time: "11:50 – 12:30", 
+          title: "Lancement du Rapport Coton, Textile & Habillement",
+          description: "Présentation des résultats stratégiques."
+        },
+        { 
+          time: "12:30 – 13:00", 
+          title: "Plénière 10 : Relations commerciales USA – Afrique",
+          speakers: [
+            "Ms. Florizelle Liser – CCA",
+            "Dr. Yao Guevera – US Chamber of Commerce",
+            "Mme Zeinab Camara – Tony Blair Institute"
+          ]
+        },
+        { 
+          time: "14:00 – 14:50", 
+          title: "Plénière 11 : Paiements transfrontaliers & marché africain",
+          speakers: [
+            "Dr. Jumoke Oduwole",
+            "Mr. Shaibu Haruna – MTN MoMo",
+            "Mrs Annerose Ngemu – Afreximbank",
+            "Dr. Talkmore Chidede – AfCFTA Secretariat",
+            "Mr. Isaac Kamuta – Ecobank",
+            "Ms. Jaël Midjresso-Amouzou – Chom Factory"
+          ],
+          moderators: ["Mrs. Nshuti Mbabazi"]
+        },
+        { 
+          time: "20:00 – 22:00", 
+          title: "Dîner de Gala",
+          description: "Célébration de l'excellence commerciale africaine."
+        }
       ]
     },
     {
-      day: "20 Mai",
+      day: "20 Mai 2026",
       title: "Engagements & Partenariats",
-      subtitle: "Concrétisation des accords et call to action.",
+      subtitle: "Financement & Clôture du Sommet",
       items: [
-        { time: "09:00 – 11:00", title: "Secteur Privé & Industrie", description: "Dialogue leadership et financement de la transformation industrielle." },
-        { time: "11:30 – 13:00", title: "Créativité & Inclusion", description: "Women in Action et Industries Culturelles et Créatives." },
-        { time: "14:30 – 16:00", title: "Cérémonie de Clôture", description: "Annonce des résultats officiels et Call to Action." }
+        { 
+          time: "10:00 – 10:50", 
+          title: "Plénière 12 : Mobiliser le secteur privé africain",
+          speakers: [
+            "Ms. Benedicta Lassi",
+            "Dr. Lucy Newman",
+            "Mr. Patrick Obath",
+            "Mr. Jaouadi Zied",
+            "Mr. Sekar Ramamoorthy",
+            "Ms. Briggette Harrington",
+            "Ms. Nevine Nakhla"
+          ]
+        },
+        { 
+          time: "10:50 – 11:40", 
+          title: "Plénière 13 : Financer la transformation industrielle africaine",
+          speakers: [
+            "Ms Saloua Karkri Belkeziz",
+            "Mr. Oumar Sangare",
+            "Ms. Yeabsira Zewdie",
+            "Dr Ebenezer Onyeagwu",
+            "Mr. Paolo Gomes",
+            "Ms. Dana Mopulunga",
+            "Ms. Rose Kayi Mivedor"
+          ]
+        },
+        { 
+          time: "11:40 – 12:10", 
+          title: "Plénière 14 : Fonds d’ajustement de la ZLECAf",
+          speakers: ["Mr. Jean-Louis Ekra", "Mr. Emeka Uzomba"],
+          moderators: ["Ms Lerato Mbele"]
+        },
+        { 
+          time: "12:10 – 12:40", 
+          title: "Conversation de clôture avec Salif Traoré (Magic System)",
+          moderators: ["Mr. Patrick Amendah"]
+        },
+        { 
+          time: "12:40 – 13:00", 
+          title: "Résultats officiels & Discours de clôture",
+          speakers: ["H.E. Wamkele Mene – Secretary General"]
+        }
       ]
     }
   ],
   en: [
     {
-      day: "May 17",
-      title: "Pre-Forum Activities & Masterclasses",
-      subtitle: "A day dedicated to onboarding and capacity building.",
+      day: "17 Mai 2026",
+      title: "Registration • Masterclasses • Strategic Meetings",
+      subtitle: "Summit Prelude: Preparation and Alignment",
       items: [
-        { time: "08:00 – 17:00", title: "Registration" },
-        { time: "09:00 – 16:00", title: "Sectoral Workshop", description: "Building a competitive African Cotton, Textiles and Apparel Industry." },
-        { time: "09:00 – 16:00", title: "SME Masterclasses", description: "Value Addition Assessment and Export Readiness Programme." },
-        { time: "14:00 – 18:00", title: "Media Advocacy Workshop", description: "Joint AfCFTA / ITC session." }
+        { time: "08:00 – 17:00", title: "Delegates Registration" },
+        { time: "09:00 – 16:00", title: "Roundtable: African Cotton, Textile & Apparel Value Chains under the AfCFTA" },
+        { time: "14:00 – 18:00", title: "Media Advocacy Workshop" },
+        { 
+          time: "15:00 – 18:00", 
+          title: "Masterclasses",
+          tracks: [
+            { name: "Track 1", title: "SME Value Addition & Export Readiness Programme" },
+            { name: "Track 2", title: "Competitiveness Intelligence" }
+          ]
+        },
+        { time: "16:00 – 19:00", title: "AfCFTA – Afreximbank Coordination Meeting" }
       ]
     },
     {
-      day: "May 18",
-      title: "From Vision to Opportunities",
-      subtitle: "Unlocking AfCFTA Potential and Economic Integration.",
+      day: "18 Mai 2026",
+      title: "From Vision to Opportunities: Unlocking AfCFTA Potential",
+      subtitle: "Official Opening Ceremony & Strategic Plenaries",
       items: [
-        { time: "09:30 – 11:30", title: "OFFICIAL OPENING CEREMONY", description: "Address by H.E. Wamkele Mene and Keynote by H.E. Faure Essozimna Gnassingbé." },
-        { time: "11:30 – 13:00", title: "Strategic Plenaries", description: "African Value Chains and Subnational Trade Hubs." },
-        { time: "14:00 – 16:30", title: "Technical Sessions", description: "SEZs, Customs systems and Africa's Automotive future." },
-        { time: "16:30 – 18:30", title: "Breakout Sessions & Action Platforms", description: "Women in Trade, Fisheries and SME Market Access." },
-        { time: "19:00", title: "Welcome Evening", description: "Cocktail and Ministerial Dinner hosted by the Government of Togo." }
+        { time: "07:00 – 09:00", title: "Delegates seated & Arrival of official dignitaries" },
+        { 
+          time: "09:00 – 11:00", 
+          title: "Official Opening Ceremony",
+          speakers: [
+            "Honourable Badanam Patoki",
+            "Dr. Jumoke Oduwole",
+            "H.E. Oluseyi Abiodun Makinde",
+            "H.E. Wamkele Mene",
+            "H.E. Dr George Elombi",
+            "H.E. Issoufou Mahamadou",
+            "H.E. Faure Essozimna Gnassingbé"
+          ]
+        },
+        { 
+          time: "11:30 – 12:15", 
+          title: "Plenary 1: Building Competitive African Value Chains",
+          keynotes: ["Ms. Pamela Coke"],
+          panellists: [
+            "Dr. Joy Kategekwa – AfDB",
+            "Ms. Ibukun Awosika – Chair Centre Group",
+            "Ms. Happiness Nyiti – AJA Limited",
+            "Mr. Souleymane Diagne – Ecobank",
+            "Mr. Enselme Gouthon – Robusta Coffee Agency",
+            "Mr Jean Arsene Yerima – Afreximbank"
+          ],
+          moderators: ["Mr. Alfred Ocansey – TV3 Ghana"]
+        },
+        { time: "12:15 – 12:30", title: "MoUs Signing" },
+        { 
+          time: "12:30 – 12:50", 
+          title: "Plenary 2: Leveraging AfCFTA – Subnational Trade Hubs",
+          speakers: ["H.E. Oluseyi Abiodun Makinde"],
+          moderators: ["Ms. Lerato Mbele"]
+        },
+        { 
+          time: "12:50 – 13:30", 
+          title: "Plenary 3: The Negotiation Phase Concluded – What’s Next?",
+          speakers: [
+            "H.E. Wamkele Mene – AfCFTA Secretariat",
+            "Honourable Prudence Sebahizi – Rwanda",
+            "Honourable Jumoke Oduwole – Nigeria",
+            "Honourable Guibolo Fanga Mathieu – Chad",
+            "Julien Paluku Kahongya – RDC",
+            "Ms. Kanayo Awani – Afreximbank"
+          ],
+          moderators: ["Ms Hannane Ferdjani"]
+        },
+        { 
+          time: "14:30 – 15:30", 
+          title: "Plenary 4: Trading Companies, SEZs & Distribution Networks",
+          keynotes: ["Stephen Jennings – Rendeavour"],
+          panellists: [
+            "Mr. Arthur Trimua – Togolese Government",
+            "Mr. Yomi Ademola – Rendeavour",
+            "Mr. Felix Chege – RealSources",
+            "Mr. Daniel Mackorley – McDan",
+            "Mr. Stewart Makura – ATDC",
+            "Mr Christian Ndikumagenge – Afreximbank"
+          ],
+          moderators: ["Godfrey Mutizwa – CNBC Africa"]
+        },
+        { 
+          time: "15:30 – 16:15", 
+          title: "Plenary 5: Customs Systems Harmonisation",
+          speakers: [
+            "Mr. Dumisani Masilela – SACU",
+            "Mr. Nafiu Isiyaku – Nigeria Customs",
+            "Ms. Demitta Gyang – AfCFTA Secretariat",
+            "Mr. Fioklou Toulan – Togo Customs",
+            "Mr. Kizito Ebhohimen – Bergmans Security",
+            "Dr Gainmore Zanamwe – Afreximbank"
+          ],
+          moderators: ["Stephane Tchriffo"]
+        },
+        { 
+          time: "16:15 – 16:35", 
+          title: "Plenary 6: Driving Africa’s Automotive Future",
+          speakers: ["Mr. Tarek Ismail Mosaad – CEO Hyundai Motor"],
+          moderators: ["Godfrey Mutizwa – CNBC Africa"]
+        },
+        { 
+          time: "16:45 – 18:30", 
+          title: "Breakout Sessions",
+          tracks: [
+            { name: "Track 1", title: "SMEs & Women Inclusion" },
+            { name: "Track 2", title: "Green Industrialisation" },
+            { name: "Side Event", title: "Digital Transformation & African Market Integration" }
+          ]
+        },
+        { time: "18:30 – 20:00", title: "Welcome Cocktail & Ministerial Dinner" }
       ]
     },
     {
-      day: "May 19",
+      day: "19 Mai 2026",
       title: "From Opportunities to Execution",
-      subtitle: "Key sectors, digital landscape and massive investment.",
+      subtitle: "Focus Agriculture, Infrastructure & Payments",
       items: [
-        { time: "08:30 – 10:30", title: "Agriculture & Food Resilience", description: "Agri-trade and local processing." },
-        { time: "11:00 – 13:00", title: "Infrastructure & Digital Trade", description: "Ports, corridors and cross-border payments." },
-        { time: "14:00 – 16:00", title: "Invest in Africa", description: "Afreximbank Roadshow and project financing." },
-        { time: "16:30 – 18:30", title: "Youth in Trade Forum", description: "Youth entrepreneurship at the heart of Africa." },
-        { time: "20:00", title: "Gala Dinner", description: "Celebrating African commercial excellence." }
+        { 
+          time: "08:00 – 10:00", 
+          title: "Breakfast Sessions",
+          tracks: [
+            { name: "Banking", title: "Harmonising Financial Regulations" },
+            { name: "Logistics", title: "Maritime, Ports & Logistics Roundtable" }
+          ]
+        },
+        { 
+          time: "10:00 – 10:45", 
+          title: "Plenary 7: Agriculture, Trade & Resilience",
+          speakers: [
+            "Hon. Prudence Sebahizi",
+            "Dr. Gainmore Zanamwe",
+            "Mr. Daniel Njiwa",
+            "Mr. Komla Bissi",
+            "Mr. Djiwa Oyetounde",
+            "Mr. Kolawole Sofola"
+          ],
+          moderators: ["Dr. Faizel Ismal"]
+        },
+        { 
+          time: "10:45 – 11:40", 
+          title: "Plenary 8: Connecting Africa – Infrastructure, Ports & Corridors",
+          speakers: [
+            "Mr. Mohamed Diop – AGL",
+            "Mr. Patient Sayiba",
+            "Dr Hortense ME",
+            "Ms. Adeline Gabillaud – CMA-CGM",
+            "Mr. Khalid Bichou",
+            "Mr Jean Arsene Yerima – Afreximbank"
+          ],
+          moderators: ["Godfrey Mutizwa"]
+        },
+        { time: "11:50 – 12:30", title: "Launch of the Cotton, Textile & Apparel Report" },
+        { 
+          time: "12:30 – 13:00", 
+          title: "Plenary 10: US – Africa Trade Relations",
+          speakers: [
+            "Ms. Florizelle Liser – CCA",
+            "Dr. Yao Guevera – US Chamber of Commerce",
+            "Mme Zeinab Camara – Tony Blair Institute"
+          ]
+        },
+        { 
+          time: "14:00 – 14:50", 
+          title: "Plenary 11: Seamless Cross-Border Payments",
+          speakers: [
+            "Dr. Jumoke Oduwole",
+            "Mr. Shaibu Haruna – MTN MoMo",
+            "Mrs Annerose Ngemu – Afreximbank",
+            "Dr. Talkmore Chidede – AfCFTA Secretariat",
+            "Mr. Isaac Kamuta – Ecobank",
+            "Ms. Jaël Midjresso-Amouzou – Chom Factory"
+          ],
+          moderators: ["Mrs. Nshuti Mbabazi"]
+        },
+        { time: "20:00 – 22:00", title: "Gala Dinner" }
       ]
     },
     {
-      day: "May 20",
+      day: "20 Mai 2026",
       title: "Commitments & Partnerships",
-      subtitle: "Solidifying agreements and call to action.",
+      subtitle: "Financing & Closing Ceremony",
       items: [
-        { time: "09:00 – 11:00", title: "Private Sector & Industry", description: "Leadership dialogue and financing industrial transformation." },
-        { time: "11:30 – 13:00", title: "Creativity & Inclusion", description: "Women in Action and Cultural & Creative Industries." },
-        { time: "14:30 – 16:00", title: "Closing Ceremony", description: "Outcomes announcement and Call to Action." }
+        { 
+          time: "10:00 – 10:50", 
+          title: "Plenary 12: Mobilising Africa’s Private Sector",
+          speakers: [
+            "Ms. Benedicta Lassi",
+            "Dr. Lucy Newman",
+            "Mr. Patrick Obath",
+            "Mr. Jaouadi Zied",
+            "Mr. Sekar Ramamoorthy",
+            "Ms. Briggette Harrington",
+            "Ms. Nevine Nakhla"
+          ]
+        },
+        { 
+          time: "10:50 – 11:40", 
+          title: "Plenary 13: Financing Africa’s Industrial Transformation",
+          speakers: [
+            "Ms Saloua Karkri Belkeziz",
+            "Mr. Oumar Sangare",
+            "Ms. Yeabsira Zewdie",
+            "Dr Ebenezer Onyeagwu",
+            "Mr. Paolo Gomes",
+            "Ms. Dana Mopulunga",
+            "Ms. Rose Kayi Mivedor"
+          ]
+        },
+        { 
+          time: "11:40 – 12:10", 
+          title: "Plenary 14: The AfCFTA Adjustment Fund",
+          speakers: ["Mr. Jean-Louis Ekra", "Mr. Emeka Uzomba"],
+          moderators: ["Ms Lerato Mbele"]
+        },
+        { 
+          time: "12:10 – 12:40", 
+          title: "Closing Conversation with Salif Traoré (Magic System)",
+          moderators: ["Mr. Patrick Amendah"]
+        },
+        { 
+          time: "12:40 – 13:00", 
+          title: "Official Outcomes & Closing Address",
+          speakers: ["H.E. Wamkele Mene – Secretary General"]
+        }
       ]
     }
   ]

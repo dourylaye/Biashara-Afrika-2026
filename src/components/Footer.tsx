@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-12">
           <div className="max-w-md">
             <div className="mb-6">
-              <img src={Logo} alt="Biashara Afrika Logo" className="h-20 md:h-24 w-auto object-contain brightness-0 invert" />
+              <img src={Logo} alt="Biashara Afrika Logo" className="h-20 md:h-24 w-auto object-contain brightness-0 invert" loading="lazy" decoding="async" />
             </div>
             <p className="text-white/50 mb-6 leading-relaxed font-light text-lg">
               Biashara Afrika 2026 : Le rendez-vous stratégique pour le commerce intra-africain et la réussite de la ZLECAf.

@@ -19,6 +19,8 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({ speaker, index }) => {
           src={speaker.image} 
           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" 
           alt={speaker.name} 
+          loading="lazy"
+          decoding="async"
         />
         {/* 50% Enhanced Bottom Gradient for Text Legibility */}
         <div 

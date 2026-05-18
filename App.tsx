@@ -569,6 +569,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
             className="absolute inset-0 w-full h-full object-cover object-center"
             alt="Biashara Afrika Hero Background"
             loading="eager"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-green/20 via-brand-light to-brand-gold/10" />
           <div className="absolute inset-0 bg-gradient-to-b from-brand-light/80 via-transparent to-brand-light/90" />
@@ -643,6 +644,8 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                     src={Logo} 
                     alt="Biashara Afrika Logo" 
                     className="h-44 md:h-72 mx-auto object-contain brightness-110 drop-shadow-[0_45px_45px_rgba(0,0,0,0.3)] transition-all duration-700 group-hover:brightness-125" 
+                    loading="eager"
+                    decoding="async"
                   />
                   
                   {/* Subtle Cinematic Shimmer Overlay */}
@@ -810,6 +813,8 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                   src={APROPOS} 
                   className="w-full h-full object-cover" 
                   alt="Africa Trade" 
+                  loading="lazy"
+                  decoding="async"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 />
@@ -863,66 +868,166 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
             <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full mb-4" />
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 mb-16 p-2 bg-white/50 backdrop-blur-sm rounded-full max-w-fit mx-auto border border-black/5">
+          <div className="flex flex-wrap justify-center gap-4 mb-20 p-2 bg-white/40 backdrop-blur-xl rounded-[2.5rem] max-w-fit mx-auto border border-black/5 shadow-inner">
             {PROGRAM_DATA[lang].map((day, i) => (
               <button
                 key={i}
                 onClick={() => setActiveTab(i)}
-                className={`px-8 py-4 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-500 ${
+                className={`relative px-10 py-5 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] transition-all duration-700 overflow-hidden group ${
                   activeTab === i 
-                    ? 'bg-brand-red text-white shadow-xl scale-105' 
-                    : 'text-black/40 hover:text-black hover:bg-white'
+                    ? 'text-white' 
+                    : 'text-black/50 hover:text-black hover:bg-white/50'
                 }`}
               >
-                {day.day.toUpperCase()}
+                {activeTab === i && (
+                  <motion.div 
+                    layoutId="activeTabBg"
+                    className="absolute inset-0 bg-brand-red shadow-[0_10px_30px_rgba(183,49,32,0.3)]"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{day.day}</span>
               </button>
             ))}
           </div>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold/0 via-brand-gold/30 to-brand-gold/0 hidden md:block" />
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                transition={{ duration: 0.5, ease: "circOut" }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-12"
               >
-                <div className="text-center mb-12">
-                  <h3 className="text-2xl font-display font-bold text-brand-green mb-2">{PROGRAM_DATA[lang][activeTab].title}</h3>
-                  <p className="text-black/50 font-light italic">{PROGRAM_DATA[lang][activeTab].subtitle}</p>
+                <div className="text-center mb-16">
+                  <motion.h3 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-3xl md:text-5xl font-display font-bold text-brand-green mb-4 leading-tight"
+                  >
+                    {PROGRAM_DATA[lang][activeTab].title}
+                  </motion.h3>
+                  <p className="text-black/50 font-light text-lg italic max-w-2xl mx-auto border-t border-black/5 pt-6">
+                    {PROGRAM_DATA[lang][activeTab].subtitle}
+                  </p>
                 </div>
 
-                {PROGRAM_DATA[lang][activeTab].items.map((item: any, j: number) => (
-                  <motion.div 
-                    key={j}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: j * 0.1 }}
-                    className={`relative flex flex-col md:flex-row gap-8 items-center ${j % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-                  >
-                    {/* Time Marker */}
-                    <div className="absolute left-0 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-4 border-brand-red rounded-full z-20 hidden md:block shadow-sm" />
+                <div className="grid grid-cols-1 gap-8">
+                  {PROGRAM_DATA[lang][activeTab].items.map((item, j) => (
+                    <motion.div 
+                      key={j}
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: j * 0.05, duration: 0.7 }}
+                      whileHover={{ y: -5 }}
+                      className="group relative bg-white/70 backdrop-blur-md rounded-[2.5rem] p-8 md:p-12 border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.02)] hover:shadow-[0_45px_100px_rgba(0,0,0,0.08)] hover:bg-white transition-all duration-500"
+                    >
+                      {/* Premium Accent Line */}
+                      <div className="absolute top-0 left-12 w-16 h-1.5 bg-brand-green rounded-full group-hover:w-32 transition-all duration-700" />
+                      
+                      <div className="flex flex-col lg:flex-row gap-10">
+                        {/* Time Column */}
+                        <div className="lg:w-48 shrink-0">
+                          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-brand-red text-white font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-brand-red/20 mb-4">
+                            <Clock className="w-4 h-4" />
+                            {item.time}
+                          </div>
+                        </div>
 
-                    <div className={`w-full md:w-1/2 ${j % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                       <div className="inline-block px-4 py-1 rounded bg-brand-green text-white font-bold text-[10px] tracking-tighter mb-4 shadow-sm">
-                        {item.time}
+                        {/* Content Column */}
+                        <div className="flex-1">
+                          <h4 className="text-2xl md:text-3xl font-bold text-black mb-6 leading-tight group-hover:text-brand-green transition-colors duration-500">
+                            {item.title}
+                          </h4>
+                          
+                          {item.description && (
+                            <p className="text-black/60 text-lg font-light leading-relaxed mb-8 max-w-3xl">
+                              {item.description}
+                            </p>
+                          )}
+
+                          {/* Detail Grids */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                            {/* Keynotes & Speakers */}
+                            {(item.keynotes || item.speakers) && (
+                              <div className="space-y-4">
+                                {item.keynotes && (
+                                  <div className="space-y-3">
+                                    <h5 className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em]">{t.programLabels.keynotes}</h5>
+                                    <div className="flex flex-wrap gap-2">
+                                      {item.keynotes.map((name, k) => (
+                                        <span key={k} className="px-4 py-2 bg-brand-gold/5 text-brand-gold rounded-xl text-xs font-bold border border-brand-gold/10">
+                                          {name}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                                {item.speakers && (
+                                  <div className="space-y-3">
+                                    <h5 className="text-[10px] font-black text-brand-green uppercase tracking-[0.3em]">{t.programLabels.speakers}</h5>
+                                    <div className="flex flex-wrap gap-2">
+                                      {item.speakers.map((name, k) => (
+                                        <span key={k} className="px-4 py-2 bg-brand-green/5 text-brand-green rounded-xl text-xs font-bold border border-brand-green/10">
+                                          {name}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Panellists & Moderators */}
+                            {(item.panellists || item.moderators) && (
+                              <div className="space-y-4">
+                                {item.panellists && (
+                                  <div className="space-y-3">
+                                    <h5 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">{t.programLabels.panellists}</h5>
+                                    <div className="flex flex-wrap gap-2">
+                                      {item.panellists.map((name, k) => (
+                                        <span key={k} className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold border border-slate-200">
+                                          {name}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                                {item.moderators && (
+                                  <div className="space-y-3">
+                                    <h5 className="text-[10px] font-black text-brand-red uppercase tracking-[0.3em]">{t.programLabels.moderators}</h5>
+                                    <div className="flex flex-wrap gap-2">
+                                      {item.moderators.map((name, k) => (
+                                        <span key={k} className="px-4 py-2 bg-brand-red/5 text-brand-red rounded-xl text-xs font-bold border border-brand-red/10">
+                                          {name}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Tracks Handle */}
+                            {item.tracks && (
+                              <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                                {item.tracks.map((track, k) => (
+                                  <div key={k} className="p-6 bg-brand-light/50 rounded-2xl border border-black/5 group/track hover:bg-white transition-all">
+                                    <span className="text-[9px] font-black text-brand-gold uppercase tracking-widest block mb-2">{track.name}</span>
+                                    <p className="text-sm font-bold text-black group-hover/track:text-brand-green transition-colors">{track.title}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                      <h4 className="text-xl font-bold text-black mb-3 group-hover:text-brand-gold transition-colors">{item.title}</h4>
-                      {item.description && (
-                        <p className={`text-sm text-black/60 leading-relaxed font-light ${j % 2 === 0 ? '' : 'md:ml-auto max-w-sm'}`}>
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
-                    <div className="hidden md:block md:w-1/2" />
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -1108,28 +1213,30 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
 
               {/* CENTER SLIDER PIECE */}
               <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative rounded-[6rem] overflow-hidden shadow-[0_100px_120px_-40px_rgba(0,0,0,0.35)] aspect-[3/5.2] w-full max-w-[500px] bg-brand-light group border-[18px] border-white ring-1 ring-black/5"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentCityPhoto}
-                      initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                      exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-                      transition={{ duration: 1.5, ease: "easeInOut" }}
-                      className="absolute inset-0"
-                    >
-                      <img 
-                        src={LOME_CITY_PHOTOS[currentCityPhoto]}
-                        className="w-full h-full object-cover"
-                        alt="Lomé Masterpiece"
-                        referrerPolicy="no-referrer"
-                      />
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative rounded-[6rem] overflow-hidden shadow-[0_100px_120px_-40px_rgba(0,0,0,0.35)] aspect-[3/5.2] w-full max-w-[500px] bg-brand-light group border-[18px] border-white ring-1 ring-black/5"
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentCityPhoto}
+                        initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+                        transition={{ duration: 1.5, ease: "easeInOut" }}
+                        className="absolute inset-0"
+                      >
+                        <img 
+                          src={LOME_CITY_PHOTOS[currentCityPhoto]}
+                          className="w-full h-full object-cover"
+                          alt="Lomé Masterpiece"
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                        />
                       
                       {/* Atmospheric Overlays */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
@@ -1327,18 +1434,20 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 </div>
                 
                 <div className="mb-8 pt-4">
-                  <a 
-                    href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden hover:scale-105 transition-transform"
-                  >
-                    <img 
-                      src={qrCodeImage} 
-                      alt="Registration QR Code" 
-                      className="w-48 h-48 object-contain"
-                    />
-                  </a>
+                    <a 
+                      href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden hover:scale-105 transition-transform"
+                    >
+                      <img 
+                        src={qrCodeImage} 
+                        alt="Registration QR Code" 
+                        className="w-48 h-48 object-contain"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
                 </div>
                 
                 <h3 className="text-2xl font-bold text-black mb-2">{t.registration.scan}</h3>
@@ -1407,18 +1516,18 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 Patenaire12, Patenaire13, Patenaire14, Patenaire15, Patenaire16,
                 Patenaire17, Patenaire18, Patenaire19, Patenaire20
               ]).map((logo, index) => (
-                <motion.div
-                  key={`r1-${index}`}
-                  whileHover={{ 
-                    scale: 1.25, 
-                    rotate: -3,
-                    zIndex: 20
-                  }}
-                  className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-gold/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
-                >
-                  <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" />
-                  <div className="absolute inset-0 bg-brand-gold/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-                </motion.div>
+                  <motion.div
+                    key={`r1-${index}`}
+                    whileHover={{ 
+                      scale: 1.25, 
+                      rotate: -3,
+                      zIndex: 20
+                    }}
+                    className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-gold/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
+                  >
+                    <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" loading="lazy" decoding="async" />
+                    <div className="absolute inset-0 bg-brand-gold/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+                  </motion.div>
               ))}
             </motion.div>
           </div>
@@ -1440,18 +1549,18 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 Patenaire9, Patenaire8, Patenaire7, Patenaire6, Patenaire5,
                 Patenaire4, Patenaire3, Patenaire2, Patenaire1
               ]).map((logo, index) => (
-                <motion.div
-                  key={`r2-${index}`}
-                  whileHover={{ 
-                    scale: 1.25, 
-                    rotate: 3,
-                    zIndex: 20
-                  }}
-                  className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-red/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
-                >
-                  <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" />
-                  <div className="absolute inset-0 bg-brand-red/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-                </motion.div>
+                  <motion.div
+                    key={`r2-${index}`}
+                    whileHover={{ 
+                      scale: 1.25, 
+                      rotate: 3,
+                      zIndex: 20
+                    }}
+                    className="relative flex-shrink-0 w-32 md:w-56 h-24 md:h-36 flex items-center justify-center p-6 bg-white/60 rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl hover:border-brand-red/30 backdrop-blur-sm transition-all duration-500 cursor-pointer"
+                  >
+                    <img src={logo} className="max-w-full max-h-full object-contain pointer-events-none filter brightness-90 hover:brightness-110 transition-all" alt="Partner" loading="lazy" decoding="async" />
+                    <div className="absolute inset-0 bg-brand-red/5 opacity-0 hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+                  </motion.div>
               ))}
             </motion.div>
           </div>
@@ -1573,6 +1682,8 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                           src={BLOG_POSTS[0].image} 
                           alt={BLOG_POSTS[0].title}
                           className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent lg:hidden" />
                       </div>
@@ -1626,6 +1737,8 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                               src={post.image} 
                               alt={post.title} 
                               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                              loading="lazy"
+                              decoding="async"
                             />
                             <div className="absolute top-6 left-6 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-black text-brand-red uppercase tracking-widest shadow-lg">
                               {post.date}
@@ -1660,13 +1773,13 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 {/* Visual Composition: One Main + Two Secondary */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                   {/* Main Featured Visual */}
-                  <motion.div 
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    className="md:col-span-8 group relative aspect-video md:aspect-auto md:h-[650px] rounded-[3.5rem] overflow-hidden shadow-2xl bg-black cursor-pointer"
-                    onClick={() => setSelectedImage(GALLERY_POSTS[0].image)}
-                  >
-                    <img src={GALLERY_POSTS[0].image} className="w-full h-full object-cover opacity-100 transition-all duration-1000 group-hover:scale-105" alt="Featured" />
+                    <motion.div 
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      className="md:col-span-8 group relative aspect-video md:aspect-auto md:h-[650px] rounded-[3.5rem] overflow-hidden shadow-2xl bg-black cursor-pointer"
+                      onClick={() => setSelectedImage(GALLERY_POSTS[0].image)}
+                    >
+                      <img src={GALLERY_POSTS[0].image} className="w-full h-full object-cover opacity-100 transition-all duration-1000 group-hover:scale-105" alt="Featured" loading="lazy" decoding="async" />
                     <div className="absolute inset-x-0 bottom-0 p-12 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between">
                       <span className="flex items-center gap-2 text-white font-black text-[10px] uppercase tracking-widest">
                         Afficher <Maximize2 className="w-4 h-4 text-brand-gold" />
@@ -1677,16 +1790,16 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                   {/* Secondary Visuals Stack */}
                   <div className="md:col-span-4 flex flex-col gap-8">
                     {[GALLERY_POSTS[1], GALLERY_POSTS[2]].map((post, i) => (
-                      <motion.div 
-                        key={post.id}
-                        initial={{ x: 20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.1 * (i + 1) }}
-                        whileHover={{ y: -10, scale: 1.02 }}
-                        className="flex-1 group relative rounded-[2.5rem] overflow-hidden shadow-xl bg-slate-900 cursor-pointer"
-                        onClick={() => setSelectedImage(post.image)}
-                      >
-                        <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Secondary" />
+                        <motion.div 
+                          key={post.id}
+                          initial={{ x: 20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.1 * (i + 1) }}
+                          whileHover={{ y: -10, scale: 1.02 }}
+                          className="flex-1 group relative rounded-[2.5rem] overflow-hidden shadow-xl bg-slate-900 cursor-pointer"
+                          onClick={() => setSelectedImage(post.image)}
+                        >
+                          <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Secondary" loading="lazy" decoding="async" />
                         <div className="absolute inset-0 bg-brand-green/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">
                           <Maximize2 className="w-8 h-8 text-white transition-transform duration-500 transform translate-y-4 group-hover:translate-y-0" />
                         </div>
@@ -1714,13 +1827,13 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                       }}
                     >
                       {[...GALLERY_POSTS, ...GALLERY_POSTS].map((post, idx) => (
-                        <motion.div 
-                          key={`${post.id}-${idx}`}
-                          whileHover={{ y: -10, scale: 1.02 }}
-                          className="w-72 aspect-square rounded-[2rem] overflow-hidden shadow-md cursor-pointer relative bg-white border border-black/5"
-                          onClick={() => setSelectedImage(post.image)}
-                        >
-                          <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Post" />
+                          <motion.div 
+                            key={`${post.id}-${idx}`}
+                            whileHover={{ y: -10, scale: 1.02 }}
+                            className="w-72 aspect-square rounded-[2rem] overflow-hidden shadow-md cursor-pointer relative bg-white border border-black/5"
+                            onClick={() => setSelectedImage(post.image)}
+                          >
+                            <img src={post.image} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" alt="Post" loading="lazy" decoding="async" />
                           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <Maximize2 className="w-5 h-5 text-white" />
                           </div>
@@ -1774,6 +1887,8 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                               src={photo} 
                               className="w-full h-full object-cover transition-all duration-1000 group-hover/img:scale-110" 
                               alt={`Event ${i}`} 
+                              loading="lazy"
+                              decoding="async"
                               referrerPolicy="no-referrer"
                             />
                             <div className="absolute inset-0 bg-brand-green/10 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
@@ -1992,29 +2107,31 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
               </button>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="absolute -top-10 -left-10 p-6 bg-white rounded-2xl shadow-2xl z-20 border border-black/5 hidden md:block">
-                <p className="text-[10px] font-black text-brand-red uppercase tracking-widest mb-2">{t.practical.exploreTogo}</p>
-                <div className="flex -space-x-3">
-                  {t.practical.placesToVisit.items.map((item: any, i: number) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-light">
-                      <img src={item.image} className="w-full h-full object-cover" alt={item.name} />
-                    </div>
-                  ))}
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="absolute -top-10 -left-10 p-6 bg-white rounded-2xl shadow-2xl z-20 border border-black/5 hidden md:block">
+                  <p className="text-[10px] font-black text-brand-red uppercase tracking-widest mb-2">{t.practical.exploreTogo}</p>
+                  <div className="flex -space-x-3">
+                    {t.practical.placesToVisit.items.map((item: any, i: number) => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-light">
+                        <img src={item.image} className="w-full h-full object-cover" alt={item.name} loading="lazy" decoding="async" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl relative border-4 border-white">
-                <img 
-                  src={Exploration} 
-                  className="w-full h-full object-cover" 
-                  alt="Togo" 
-                />
+                <div className="aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl relative border-4 border-white">
+                  <img 
+                    src={Exploration} 
+                    className="w-full h-full object-cover" 
+                    alt="Togo" 
+                    loading="lazy"
+                    decoding="async"
+                  />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">
                   <p className="text-white font-display font-bold text-2xl mb-4">{t.practical.exploreTogo}</p>
