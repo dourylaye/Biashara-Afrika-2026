@@ -55,3 +55,10 @@ export interface BlogPost {
   date: string;
   content: string;
 }
+
+export interface VideoItem {
+  id: number;
+  title: string;
+  youtubeId: string;
+  thumbnail: string;
+}

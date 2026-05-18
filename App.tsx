@@ -45,6 +45,8 @@ import {
   Share2,
   Copy,
   Check,
+  Play,
+  Video,
   Facebook,
   Linkedin,
   Twitter,
@@ -52,7 +54,7 @@ import {
   Briefcase,
   Store
 } from 'lucide-react';
-import { translations, PROGRAM_DATA, SPEAKERS_DATA } from './constants';
+import { translations, PROGRAM_DATA, SPEAKERS_DATA, VIDEO_DATA } from './constants';
 import { Counter } from './src/components/Counter';
 import { SpeakerCard } from './src/components/SpeakerCard';
 import { Navigation } from './src/components/Navigation';
@@ -145,7 +147,7 @@ import V11 from './Visuels/V11.jpeg';
 import V12 from './Visuels/V12.jpeg';
 import V13 from './Visuels/V13.jpeg';
 import ReactMarkdown from 'react-markdown';
-import { Language, Speaker, Exhibitor, BlogPost } from './types';
+import { Language, Speaker, Exhibitor, BlogPost, VideoItem } from './types';
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
@@ -153,8 +155,9 @@ const App: React.FC = () => {
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-  const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog'>('blog');
+  const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog' | 'videos'>('blog');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
@@ -1655,6 +1658,17 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 <Newspaper className="w-4 h-4" />
                 {t.gallery.newsTab}
               </button>
+              <button
+                onClick={() => setGalleryTab('videos')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'videos' 
+                    ? 'bg-brand-red text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <Video className="w-4 h-4" />
+                {t.gallery.videosTab}
+              </button>
             </div>
           </div>
 
@@ -1761,6 +1775,49 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            ) : galleryTab === 'videos' ? (
+              <motion.div
+                key="videos"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {VIDEO_DATA.map((video, i) => (
+                  <motion.div
+                    key={video.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1, duration: 0.7 }}
+                    whileHover={{ y: -10 }}
+                    className="group relative bg-black rounded-[2.5rem] overflow-hidden shadow-2xl aspect-video cursor-pointer border border-white/5"
+                    onClick={() => setSelectedVideo(video)}
+                  >
+                    <img 
+                      src={video.thumbnail} 
+                      alt={video.title} 
+                      className="w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <motion.div 
+                        whileHover={{ scale: 1.15 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="w-16 h-16 md:w-20 md:h-20 bg-brand-red rounded-full flex items-center justify-center text-white shadow-[0_0_50px_rgba(255,27,51,0.5)] group-hover:bg-white group-hover:text-brand-red transition-all duration-500"
+                      >
+                        <Play className="w-8 h-8 md:w-10 md:h-10 fill-current translate-x-1" />
+                      </motion.div>
+                      <h4 className="mt-6 text-white font-black text-center text-[10px] md:text-xs tracking-[0.3em] uppercase opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                        {video.title}
+                      </h4>
+                    </div>
+                    <div className="absolute top-6 right-6 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black text-white uppercase tracking-widest flex items-center gap-2">
+                       <div className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse" />
+                       MEDIA HUB
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             ) : galleryTab === 'news' ? (
               <motion.div
@@ -1911,6 +1968,51 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
           </AnimatePresence>
         </div>
       </section>
+
+      {/* VIDEO MODAL */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[300] flex items-center justify-center p-4 md:p-12 bg-black/98 backdrop-blur-3xl"
+            onClick={() => setSelectedVideo(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 50 }}
+              className="relative w-full max-w-6xl aspect-video bg-black rounded-[3rem] overflow-hidden shadow-[0_0_100px_rgba(255,27,51,0.2)] border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setSelectedVideo(null)}
+                className="absolute top-8 right-8 z-[110] w-14 h-14 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all group"
+              >
+                <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-500" />
+              </button>
+              
+              <iframe 
+                src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                title={selectedVideo.title}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              />
+              
+              <div className="absolute bottom-0 inset-x-0 p-12 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none">
+                <span className="inline-block px-5 py-2 bg-brand-red text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-full mb-6 shadow-xl">
+                  BIASHARA TV LIVE
+                </span>
+                <h3 className="text-white font-bold text-3xl md:text-5xl tracking-tight uppercase leading-none max-w-3xl drop-shadow-2xl">
+                  {selectedVideo.title}
+                </h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* LIGHTBOX */}
       <AnimatePresence>

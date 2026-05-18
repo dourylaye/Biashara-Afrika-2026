@@ -69,6 +69,7 @@ export const translations: Translation = {
       newsTab: "Bon à savoir",
       eventsTab: "Photos de l'Événement",
       blogTab: "Blog",
+      videosTab: "Vidéos",
     },
     programLabels: {
       speakers: "Intervenants",
@@ -205,6 +206,7 @@ export const translations: Translation = {
       newsTab: "Good to Know",
       eventsTab: "Event Photos",
       blogTab: "Blog",
+      videosTab: "Videos",
     },
     programLabels: {
       speakers: "Speakers",
@@ -966,5 +968,14 @@ export const VILLAGE_DATA = [
     country: "Morocco",
     logo: "https://api.placeholder.com/150",
     description: "Sustainable farming and distribution."
+  }
+];
+
+export const VIDEO_DATA = [
+  {
+    id: 1,
+    title: "BIASHARA AFRIKA 2026 - LOME",
+    youtubeId: "8m-Y4aIjZZE",
+    thumbnail: "https://img.youtube.com/vi/8m-Y4aIjZZE/maxresdefault.jpg"
   }
 ];
