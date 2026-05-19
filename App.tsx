@@ -134,6 +134,16 @@ import R12 from './Photos/R12.jpeg';
 import R13 from './Photos/R13.jpeg';
 import R14 from './Photos/R14.jpeg';
 import R15 from './Photos/R15.jpeg';
+import P1 from './Photos/P1.webp';
+import P2 from './Photos/P2.webp';
+import P3 from './Photos/P3.webp';
+import P4 from './Photos/P4.webp';
+import P5 from './Photos/P5.webp';
+import P6 from './Photos/P6.webp';
+import P7 from './Photos/P7.webp';
+import P8 from './Photos/P8.webp';
+import P9 from './Photos/P9.webp';
+import P10 from './Photos/P10.webp';
 import VIS1 from './Visuels/VIS1.jpg';
 import VIS2 from './Visuels/VIS2.jpg';
 import VIS3 from './Visuels/VIS3.jpeg';
@@ -213,6 +223,11 @@ const App: React.FC = () => {
   ];
 
   const EVENT_GALLERIES = [
+    {
+      id: 'opening-ceremony',
+      title: lang === 'fr' ? "Cérémonie d’ouverture" : "Opening Ceremony",
+      photos: [P1, P2, P3, P4, P5, P6, P7, P8, P9, P10]
+    },
     {
       id: 'organizing-comittee',
       title: lang === 'fr' ? "Rencontre des comités d’organisation" : "Organizing Committees Meeting",
