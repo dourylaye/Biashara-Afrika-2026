@@ -19,6 +19,7 @@ export const translations: Translation = {
       tickets: "Billetterie",
       gallery: "Galerie",
       practical: "Infos Pratiques",
+      catalogue: "Catalogue",
     },
     hero: {
       title: "Biashara Afrika 2026",
@@ -27,6 +28,7 @@ export const translations: Translation = {
       location: "Palais des Congrès de Lomé, Togo",
       ctaRegister: "S'inscrire",
       ctaProgram: "Voir le programme",
+      ctaCatalogue: "Télécharger le catalogue",
     },
     about: {
       title: "À Propos de Biashara Afrika",
@@ -156,6 +158,7 @@ export const translations: Translation = {
       tickets: "Tickets",
       gallery: "Gallery",
       practical: "Practical Info",
+      catalogue: "Catalogue",
     },
     hero: {
       title: "Biashara Afrika 2026",
@@ -164,6 +167,7 @@ export const translations: Translation = {
       location: "Palais des Congrès, Lomé, Togo",
       ctaRegister: "Register",
       ctaProgram: "View programme",
+      ctaCatalogue: "Download the catalogue",
     },
     about: {
       title: "About Biashara Afrika",

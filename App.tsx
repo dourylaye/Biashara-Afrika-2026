@@ -60,6 +60,8 @@ import { SpeakerCard } from './src/components/SpeakerCard';
 import { Navigation } from './src/components/Navigation';
 import { Footer } from './src/components/Footer';
 import { FloatingActions } from './src/components/FloatingActions';
+import { CatalogueViewer } from './src/components/CatalogueViewer';
+import cataloguePdf from './Catalogue/CATALOGUE.pdf';
 import qrCodeImage from './Images/QR code.jpg';
 import heroImage from './Images/FOND1.png';
 import Logo from './Images/Logo.png';
@@ -163,6 +165,7 @@ const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('fr');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
+  const [isCatalogueOpen, setIsCatalogueOpen] = useState(false);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
   const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog' | 'videos'>('blog');
@@ -574,6 +577,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
         toggleLang={toggleLang}
         scrollToSection={scrollToSection}
         translations={translations}
+        openCatalogue={() => setIsCatalogueOpen(true)}
       />
 
       {/* HERO SECTION */}
@@ -725,28 +729,31 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
 
             <div className="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-6">
               <motion.a 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-                href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-12 py-6 bg-brand-green text-white font-black rounded-sm shadow-[0_20px_50px_rgba(3,107,33,0.2)] hover:shadow-[0_25px_60px_rgba(3,107,33,0.3)] hover:-translate-y-1 transition-all flex items-center justify-center gap-3 uppercase tracking-widest text-[10px]"
-              >
-                {t.hero.ctaRegister}
-                <ArrowRight className="w-5 h-5" />
-              </motion.a>
-              <motion.a 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.5, duration: 0.8 }}
                 href="#program"
-                className="w-full sm:w-auto px-12 py-6 border-2 border-brand-green/30 text-brand-green font-black rounded-sm hover:bg-brand-green hover:text-white transition-all uppercase tracking-widest text-[10px] shadow-xl flex items-center justify-center gap-3 backdrop-blur-sm"
+                className="w-[280px] sm:w-[320px] px-12 py-6 bg-brand-green text-white font-black rounded-sm shadow-[0_20px_50px_rgba(3,107,33,0.2)] hover:shadow-[0_25px_60px_rgba(3,107,33,0.3)] hover:-translate-y-1 transition-all uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 backdrop-blur-sm cursor-pointer border-2 border-transparent"
               >
                 {t.hero.ctaProgram}
                 <ChevronRight className="w-5 h-5" />
               </motion.a>
             </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.7, duration: 0.8 }}
+              className="relative z-30 mt-8 flex justify-center"
+            >
+              <button 
+                onClick={() => setIsCatalogueOpen(true)}
+                className="w-full sm:w-auto px-12 py-5 bg-brand-red hover:bg-[#a02a1b] text-white font-black rounded-sm shadow-[0_20px_40px_rgba(183,49,32,0.15)] hover:shadow-[0_25px_50px_rgba(183,49,32,0.3)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 uppercase tracking-widest text-[10px] border border-brand-red/20 cursor-pointer"
+              >
+                <FileText className="w-5 h-5" />
+                {t.hero.ctaCatalogue}
+              </button>
+            </motion.div>
 
             {/* Extra Premium Decorative Accents */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none -z-20">
@@ -856,6 +863,238 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
               />
             </motion.div>
           </div>
+
+          {/* CATALOGUE BANNER - PREMIUM EDITORIAL SHOWCASE */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="mt-28 relative rounded-[2.5rem] bg-[#036B21] text-white overflow-hidden shadow-[0_30px_70px_rgba(3,107,33,0.25)] border border-white/10"
+          >
+            {/* Elegant Background Accents */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,_rgba(212,175,55,0.12),_transparent_60%)] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-red via-brand-gold to-brand-green" />
+            <div className="absolute -bottom-48 -left-48 w-96 h-96 bg-brand-gold/5 blur-[120px] rounded-full" />
+            
+            <div className="relative z-10 p-8 md:p-14 lg:p-16 grid lg:grid-cols-12 gap-12 items-center">
+              
+              {/* Left Column: Editorial Information & Features */}
+              <div className="lg:col-span-7 flex flex-col items-center text-center lg:items-start lg:text-left">
+                <div className="flex flex-wrap gap-2.5 items-center justify-center lg:justify-start mb-6">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] bg-brand-gold/20 text-brand-gold border border-brand-gold/30 px-4 py-1.5 rounded-full inline-flex items-center gap-1.5 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
+                    {lang === 'fr' ? 'Catalogue Officiel' : 'Official Catalogue'}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-white/45 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">
+                    2026
+                  </span>
+                </div>
+
+                <h3 className="text-3xl md:text-5xl font-bold font-display leading-[1.12] mb-6 text-white tracking-tight">
+                  {lang === 'fr' ? (
+                    <>
+                      Découvrez le <span className="text-brand-gold">Catalogue des Exposants</span>
+                    </>
+                  ) : (
+                    <>
+                      Explore the <span className="text-brand-gold">Exhibitors Catalogue</span>
+                    </>
+                  )}
+                </h3>
+
+                <p className="text-white/90 text-sm md:text-base leading-relaxed mb-8 max-w-2xl font-light">
+                  {lang === 'fr' 
+                    ? "Le guide de référence incontournable pour appréhender les opportunités uniques du marché unique africain, retrouver la liste des participants, et optimiser vos échanges avec les exposants du Forum à Lomé." 
+                    : "The essential reference guide to master exclusive opportunities in the single African market, find the list of participants, and optimize your networking with the exhibitors at the Lomé Forum."}
+                </p>
+
+                {/* Key Highlights Inside the catalog */}
+                <div className="grid sm:grid-cols-2 gap-4 w-full text-left mb-10 border-t border-b border-white/10 py-8">
+                  {lang === 'fr' ? (
+                    <>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Profils Pays :</strong> Fiches économiques exclusives</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Règles d'Origine :</strong> Synthèse technique ZLECAf</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Networking :</strong> Listes d'affaires & VIP Lomé 2026</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exposition :</strong> Plans & Stands du Business Village</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Country Sheets:</strong> Exclusive macroeconomic data</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Rules of Origin:</strong> Simplified AfCFTA analysis</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Networking:</strong> Strategic insights & local contacts</span>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
+                          <Check className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exhibition:</strong> Map & booth locator in the Village</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Call To Actions */}
+                <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+                  <motion.button
+                    onClick={() => setIsCatalogueOpen(true)}
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full sm:w-auto px-8 py-4 bg-brand-gold hover:bg-white text-brand-green font-black text-xs uppercase tracking-widest rounded-sm shadow-[0_15px_30px_rgba(212,175,55,0.25)] hover:shadow-[0_20px_45px_rgba(255,255,255,0.15)] transition-all duration-300 flex items-center justify-center gap-3 shrink-0 cursor-pointer"
+                  >
+                    <FileText className="w-4.5 h-4.5" />
+                    {lang === 'fr' ? 'Consulter en ligne' : 'Read Live Online'}
+                  </motion.button>
+                  
+                  <motion.a
+                    href={cataloguePdf}
+                    download="CATALOGUE_BIASHARA_AFRIKA_2026.pdf"
+                    whileHover={{ scale: 1.03, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full sm:w-auto px-8 py-4 bg-brand-red hover:bg-[#a02a1b] text-white font-black text-xs uppercase tracking-widest rounded-sm shadow-[0_15px_30px_rgba(183,49,32,0.2)] transition-all duration-300 flex items-center justify-center gap-3 shrink-0 cursor-pointer"
+                  >
+                    <Download className="w-4.5 h-4.5 text-white" />
+                    {lang === 'fr' ? 'Télécharger (.PDF)' : 'Download (.PDF)'}
+                  </motion.a>
+                </div>
+              </div>
+              
+              {/* Right Column: Premium 3D Magazine Mockup Interactive Preview */}
+              <div className="lg:col-span-5 flex justify-center items-center lg:pl-6">
+                <div 
+                  className="relative group cursor-pointer select-none"
+                  onClick={() => setIsCatalogueOpen(true)}
+                >
+                  {/* Subtle pulsing background aura */}
+                  <div className="absolute inset-0 bg-brand-gold/10 group-hover:bg-brand-gold/15 transition-colors duration-500 blur-[50px] rounded-[2rem] -z-10" />
+
+                  {/* 3D Perspective Wrap */}
+                  <div className="perspective-1200 py-6 px-4">
+                    <motion.div
+                      whileHover={{ 
+                        rotateY: -18, 
+                        rotateX: 12, 
+                        scale: 1.06,
+                        boxShadow: "25px 35px 60px rgba(0,0,0,0.6)"
+                      }}
+                      transition={{ type: "spring", stiffness: 90, damping: 14 }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                      className="w-[260px] h-[350px] md:w-[290px] md:h-[390px] rounded-r-2xl bg-gradient-to-br from-[#0A3D18] via-[#021808] to-[#011B07] relative shadow-[12px_24px_50px_rgba(0,0,0,0.55)] border-l-[8px] border-[#D4AF37] overflow-hidden"
+                    >
+                      {/* Paper Thickness/Edge Simulation in 3D */}
+                      <div className="absolute right-[-1px] top-0 bottom-0 w-[4px] bg-white/10 z-10" />
+                      
+                      {/* Spine Crease shading */}
+                      <div className="absolute left-0 top-0 bottom-0 w-[16px] bg-gradient-to-r from-black/50 via-white/10 to-transparent z-20" />
+                      
+                      {/* Decorative Gold Leaf Foil elements on cover */}
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,_rgba(212,175,55,0.15),_transparent_70%)] pointer-events-none" />
+                      
+                      {/* Design pattern overlay on cover */}
+                      <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(45deg,_#fff_25%,_transparent_25%,_transparent_75%,_#fff_75%,_#fff),_linear-gradient(45deg,_#fff_25%,_transparent_25%,_transparent_75%,_#fff_75%,_#fff)] [background-size:24px_24px] [background-position:0_0,_12px_12px] pointer-events-none" />
+
+                      {/* Cover Content layout */}
+                      <div className="absolute inset-0 p-8 flex flex-col justify-between z-10 text-white">
+                        
+                        {/* Top Cover Section */}
+                        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-gold bg-black/40 border border-brand-gold/30 px-2 py-0.5 rounded-sm">
+                            FORUM 2026
+                          </span>
+                          <span className="text-[9px] font-mono font-bold text-white/50 tracking-wider">
+                            LOMÉ - TOGO
+                          </span>
+                        </div>
+                        
+                        {/* Middle Title Cover Section */}
+                        <div className="my-auto py-2 flex flex-col gap-3">
+                          <div className="w-10 h-1 bg-brand-red rounded-full" />
+                          
+                          <h4 className="text-2xl md:text-3xl font-bold font-display uppercase tracking-wider leading-tight text-white drop-shadow-md">
+                            BIASHARA<br />
+                            <span className="text-brand-gold">AFRIKA</span>
+                          </h4>
+                          
+                          <p className="text-[9px] font-black text-brand-gold uppercase tracking-[0.15em] border-t border-brand-gold/15 pt-2 inline-block">
+                            EXPOSITION & CONFÉRENCES
+                          </p>
+                          
+                          <div className="text-[10px] text-white/80 leading-relaxed font-sans mt-2">
+                            {lang === 'fr' 
+                              ? 'Brochure & Catalogue des Exposants' 
+                              : 'Exhibitors Catalogue & Business Guide'}
+                          </div>
+                        </div>
+
+                        {/* Bottom Cover Section */}
+                        <div className="border-t border-white/10 pt-4 flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-[8px] font-black tracking-[0.2em] text-white/40 uppercase">OFFICIAL DOCUMENT</span>
+                            <span className="text-[9px] font-bold text-brand-gold">UNION AFRICAINE</span>
+                          </div>
+                          
+                          {/* Guinea Flag Ribbon color tabs */}
+                          <div className="flex gap-1 shadow-sm">
+                            <span className="w-2.5 h-3.5 bg-brand-red rounded-sm" />
+                            <span className="w-2.5 h-3.5 bg-brand-gold rounded-sm" />
+                            <span className="w-2.5 h-3.5 bg-brand-green rounded-sm" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Glossy sheen swipe animation effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.06] to-transparent pointer-events-none transform -skew-x-12 translate-x-[-120%] group-hover:translate-x-[150%] transition-transform duration-[1400ms] ease-out" />
+                    </motion.div>
+                  </div>
+
+                  {/* Clicking Invitation Ribbon badge */}
+                  <motion.div 
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: [0.9, 1, 0.9] }}
+                    transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                    className="absolute bottom-1 right-2 bg-gradient-to-r from-brand-red to-[#A51F0E] text-white text-[8px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg border border-white/10 flex items-center gap-1.5"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                    {lang === 'fr' ? 'Consulter le PDF' : 'Open PDF'}
+                  </motion.div>
+                </div>
+              </div>
+
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -1415,7 +1654,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                 {t.registration.text}
               </p>
               
-              <ul className="space-y-6 mb-12">
+              <ul className="space-y-6">
                 {[
                   lang === 'fr' ? 'Accès illimité aux plénières' : 'Unlimited plenary access',
                   lang === 'fr' ? 'Networking premium' : 'Premium networking',
@@ -1429,15 +1668,6 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                   </li>
                 ))}
               </ul>
-              
-              <a 
-                href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex px-12 py-5 bg-brand-red text-white font-black rounded-full shadow-2xl hover:bg-brand-red/90 transition-all uppercase tracking-[0.2em] text-xs hover:-translate-y-1"
-              >
-                Inscrivez-vous maintenant
-              </a>
             </motion.div>
 
             <motion.div
@@ -1448,16 +1678,11 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
             >
               <div className="relative z-10 bg-white p-12 rounded-[2rem] shadow-2xl text-center">
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-brand-red text-white font-black px-8 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg">
-                  Official Registration
+                  Official Access QR
                 </div>
                 
                 <div className="mb-8 pt-4">
-                    <a 
-                      href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden hover:scale-105 transition-transform"
-                    >
+                    <div className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden">
                       <img 
                         src={qrCodeImage} 
                         alt="Registration QR Code" 
@@ -1465,7 +1690,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                         loading="lazy"
                         decoding="async"
                       />
-                    </a>
+                    </div>
                 </div>
                 
                 <h3 className="text-2xl font-bold text-black mb-2">{t.registration.scan}</h3>
@@ -2361,6 +2586,14 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
       {/* Floating Actions */}
       <FloatingActions 
         lang={lang}
+      />
+
+      {/* Catalogue Viewer Modal */}
+      <CatalogueViewer 
+        isOpen={isCatalogueOpen}
+        onClose={() => setIsCatalogueOpen(false)}
+        lang={lang}
+        pdfUrl={cataloguePdf}
       />
     </div>
   );

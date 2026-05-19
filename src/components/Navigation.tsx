@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, FileText } from 'lucide-react';
 import { Language } from '../../types';
 
 interface NavigationProps {
@@ -11,6 +11,7 @@ interface NavigationProps {
   toggleLang: () => void;
   scrollToSection: (id: string) => void;
   translations: any;
+  openCatalogue: () => void;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
@@ -20,7 +21,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   lang,
   toggleLang,
   scrollToSection,
-  translations
+  translations,
+  openCatalogue
 }) => {
   const t = translations[lang];
 
@@ -49,19 +51,21 @@ export const Navigation: React.FC<NavigationProps> = ({
             <div className="flex items-center gap-4 ml-4">
               <button 
                 onClick={toggleLang}
-                className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${scrolled ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-black hover:bg-black/5'}`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full border transition-all ${scrolled ? 'border-white/20 text-white hover:bg-white/10 dark:border-white/30' : 'border-black/20 text-black hover:bg-black/5'}`}
               >
                 <Globe className="w-4 h-4" />
                 <span className="text-xs font-bold uppercase">{lang}</span>
               </button>
-              <a 
-                href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-brand-red text-white font-bold text-xs uppercase px-6 py-2.5 rounded-sm hover:brightness-110 transition-all shadow-md flex items-center justify-center"
+              
+              <button 
+                onClick={openCatalogue}
+                className={`font-semibold text-xs uppercase px-5 py-2.5 rounded-sm duration-200 transition-all shadow-md flex items-center justify-center gap-2 border cursor-pointer ${scrolled ? 'border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white' : 'border-brand-green text-brand-green hover:bg-brand-green hover:text-white'}`}
               >
-                {t.nav.register}
-              </a>
+                <FileText className="w-3.5 h-3.5" />
+                {t.nav.catalogue}
+              </button>
+
+
             </div>
           </div>
 
@@ -93,20 +97,23 @@ export const Navigation: React.FC<NavigationProps> = ({
                 {t.nav[item]}
               </button>
             ))}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openCatalogue();
+              }}
+              className="text-2xl font-display text-brand-gold hover:text-white transition-colors flex items-center gap-2 cursor-pointer"
+            >
+              <FileText className="w-6 h-6" />
+              {t.nav.catalogue}
+            </button>
             <button 
               onClick={toggleLang}
               className="text-white/60 font-bold uppercase p-2 border border-white/20 rounded-lg"
             >
               Change Language: {lang === 'fr' ? 'English' : 'Français'}
             </button>
-            <a 
-              href="https://events.au-afcfta.org/fr/register-event/bb1e3a23-aeb8-4edb-8705-18b75af9c315"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 bg-brand-red text-white font-bold px-10 py-4 uppercase tracking-widest"
-            >
-              {t.nav.register}
-            </a>
+
           </motion.div>
         )}
       </AnimatePresence>
