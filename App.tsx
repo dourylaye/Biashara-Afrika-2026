@@ -52,7 +52,8 @@ import {
   Twitter,
   MessageCircle,
   Briefcase,
-  Store
+  Store,
+  Handshake
 } from 'lucide-react';
 import { translations, PROGRAM_DATA, SPEAKERS_DATA, VIDEO_DATA } from './constants';
 import { Counter } from './src/components/Counter';
@@ -136,6 +137,14 @@ import R12 from './Photos/R12.jpeg';
 import R13 from './Photos/R13.jpeg';
 import R14 from './Photos/R14.jpeg';
 import R15 from './Photos/R15.jpeg';
+import A1 from './Photos/A1.webp';
+import A2 from './Photos/A2.webp';
+import A3 from './Photos/A3.webp';
+import A4 from './Photos/A4.webp';
+import A5 from './Photos/A5.webp';
+import A6 from './Photos/A6.webp';
+import A7 from './Photos/A7.webp';
+import A8 from './Photos/A8.webp';
 import P1 from './Photos/P1.webp';
 import P2 from './Photos/P2.webp';
 import P3 from './Photos/P3.webp';
@@ -146,6 +155,26 @@ import P7 from './Photos/P7.webp';
 import P8 from './Photos/P8.webp';
 import P9 from './Photos/P9.webp';
 import P10 from './Photos/P10.webp';
+import B1 from './Photos/B1.webp';
+import B2 from './Photos/B2.webp';
+import B3 from './Photos/B3.webp';
+import B4 from './Photos/B4.webp';
+import B5 from './Photos/B5.webp';
+import B6 from './Photos/B6.webp';
+import B7 from './Photos/B7.webp';
+import B8 from './Photos/B8.webp';
+import B9 from './Photos/B9.webp';
+import B10 from './Photos/B10.webp';
+import B11 from './Photos/B11.webp';
+import B12 from './Photos/B12.webp';
+import B13 from './Photos/B13.webp';
+import B14 from './Photos/B14.webp';
+import B15 from './Photos/B15.webp';
+import B16 from './Photos/B16.webp';
+import B17 from './Photos/B17.webp';
+import B18 from './Photos/B18.webp';
+import B19 from './Photos/B19.webp';
+import B20 from './Photos/B20.webp';
 import VIS1 from './Visuels/VIS1.jpg';
 import VIS2 from './Visuels/VIS2.jpg';
 import VIS3 from './Visuels/VIS3.jpeg';
@@ -166,9 +195,11 @@ const App: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isPracticalModalOpen, setIsPracticalModalOpen] = useState(false);
   const [isCatalogueOpen, setIsCatalogueOpen] = useState(false);
+  const [isProgramModalOpen, setIsProgramModalOpen] = useState(false);
+  const [modalActiveTab, setModalActiveTab] = useState(0);
   const [currentCityPhoto, setCurrentCityPhoto] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-  const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog' | 'videos'>('blog');
+  const [galleryTab, setGalleryTab] = useState<'news' | 'events' | 'blog' | 'videos'>('events');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const [selectedBlogPost, setSelectedBlogPost] = useState<BlogPost | null>(null);
@@ -227,9 +258,19 @@ const App: React.FC = () => {
 
   const EVENT_GALLERIES = [
     {
+      id: 'day-1',
+      title: lang === 'fr' ? "Jour 1" : "Day 1",
+      photos: [A1, A2, A3, A4, A5, A6, A7, A8]
+    },
+    {
       id: 'opening-ceremony',
       title: lang === 'fr' ? "Cérémonie d’ouverture" : "Opening Ceremony",
       photos: [P1, P2, P3, P4, P5, P6, P7, P8, P9, P10]
+    },
+    {
+      id: 'ministerial-dinner',
+      title: lang === 'fr' ? "DINER MINISTERIEL" : "MINISTERIAL DINNER",
+      photos: [B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15, B16, B17, B18, B19, B20]
     },
     {
       id: 'organizing-comittee',
@@ -727,18 +768,6 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
 
 
 
-            <div className="relative z-30 flex flex-col sm:flex-row items-center justify-center gap-6">
-              <motion.a 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.8 }}
-                href="#program"
-                className="w-[280px] sm:w-[320px] px-12 py-6 bg-brand-green text-white font-black rounded-sm shadow-[0_20px_50px_rgba(3,107,33,0.2)] hover:shadow-[0_25px_60px_rgba(3,107,33,0.3)] hover:-translate-y-1 transition-all uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 backdrop-blur-sm cursor-pointer border-2 border-transparent"
-              >
-                {t.hero.ctaProgram}
-                <ChevronRight className="w-5 h-5" />
-              </motion.a>
-            </div>
 
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -934,7 +963,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                         <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
                           <Check className="w-3.5 h-3.5" />
                         </div>
-                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exposition :</strong> Plans & Stands du Business Village</span>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exposition :</strong> Plans & Emplacement des Exposants</span>
                       </div>
                     </>
                   ) : (
@@ -961,7 +990,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
                         <div className="w-5 h-5 rounded-md bg-brand-gold/10 flex items-center justify-center shrink-0 border border-brand-gold/20 text-brand-gold mt-0.5">
                           <Check className="w-3.5 h-3.5" />
                         </div>
-                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exhibition:</strong> Map & booth locator in the Village</span>
+                        <span className="text-xs text-white/80"><strong className="text-white font-semibold">Exhibition:</strong> Map & Booth Locator for Exhibitors</span>
                       </div>
                     </>
                   )}
@@ -1098,199 +1127,7 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
         </div>
       </section>
 
-      {/* PROGRAM SECTION */}
-      <section id="program" className="section-padding bg-brand-light/50 backdrop-blur-sm relative overflow-hidden scroll-mt-20">
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-brand-light/0 to-white/10" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-24 max-w-4xl mx-auto">
-            <motion.span 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="font-bold text-sm uppercase tracking-[0.3em] block mb-6 px-6 py-2 bg-brand-red/5 text-brand-red rounded-full border border-brand-red/10 w-fit mx-auto"
-            >
-              Agenda 2026
-            </motion.span>
-            <h2 className="text-4xl md:text-7xl font-bold mb-10 text-black tracking-tight">{t.program.title}</h2>
-            <div className="w-24 h-1.5 bg-brand-green mx-auto rounded-full mb-4" />
-          </div>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-20 p-2 bg-white/40 backdrop-blur-xl rounded-[2.5rem] max-w-fit mx-auto border border-black/5 shadow-inner">
-            {PROGRAM_DATA[lang].map((day, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveTab(i)}
-                className={`relative px-10 py-5 rounded-[2rem] text-xs font-black uppercase tracking-[0.2em] transition-all duration-700 overflow-hidden group ${
-                  activeTab === i 
-                    ? 'text-white' 
-                    : 'text-black/50 hover:text-black hover:bg-white/50'
-                }`}
-              >
-                {activeTab === i && (
-                  <motion.div 
-                    layoutId="activeTabBg"
-                    className="absolute inset-0 bg-brand-red shadow-[0_10px_30px_rgba(183,49,32,0.3)]"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{day.day}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-12"
-              >
-                <div className="text-center mb-16">
-                  <motion.h3 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-3xl md:text-5xl font-display font-bold text-brand-green mb-4 leading-tight"
-                  >
-                    {PROGRAM_DATA[lang][activeTab].title}
-                  </motion.h3>
-                  <p className="text-black/50 font-light text-lg italic max-w-2xl mx-auto border-t border-black/5 pt-6">
-                    {PROGRAM_DATA[lang][activeTab].subtitle}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-8">
-                  {PROGRAM_DATA[lang][activeTab].items.map((item, j) => (
-                    <motion.div 
-                      key={j}
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: j * 0.05, duration: 0.7 }}
-                      whileHover={{ y: -5 }}
-                      className="group relative bg-white/70 backdrop-blur-md rounded-[2.5rem] p-8 md:p-12 border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.02)] hover:shadow-[0_45px_100px_rgba(0,0,0,0.08)] hover:bg-white transition-all duration-500"
-                    >
-                      {/* Premium Accent Line */}
-                      <div className="absolute top-0 left-12 w-16 h-1.5 bg-brand-green rounded-full group-hover:w-32 transition-all duration-700" />
-                      
-                      <div className="flex flex-col lg:flex-row gap-10">
-                        {/* Time Column */}
-                        <div className="lg:w-48 shrink-0">
-                          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-brand-red text-white font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-brand-red/20 mb-4">
-                            <Clock className="w-4 h-4" />
-                            {item.time}
-                          </div>
-                        </div>
-
-                        {/* Content Column */}
-                        <div className="flex-1">
-                          <h4 className="text-2xl md:text-3xl font-bold text-black mb-6 leading-tight group-hover:text-brand-green transition-colors duration-500">
-                            {item.title}
-                          </h4>
-                          
-                          {item.description && (
-                            <p className="text-black/60 text-lg font-light leading-relaxed mb-8 max-w-3xl">
-                              {item.description}
-                            </p>
-                          )}
-
-                          {/* Detail Grids */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                            {/* Keynotes & Speakers */}
-                            {(item.keynotes || item.speakers) && (
-                              <div className="space-y-4">
-                                {item.keynotes && (
-                                  <div className="space-y-3">
-                                    <h5 className="text-[10px] font-black text-brand-gold uppercase tracking-[0.3em]">{t.programLabels.keynotes}</h5>
-                                    <div className="flex flex-wrap gap-2">
-                                      {item.keynotes.map((name, k) => (
-                                        <span key={k} className="px-4 py-2 bg-brand-gold/5 text-brand-gold rounded-xl text-xs font-bold border border-brand-gold/10">
-                                          {name}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                                {item.speakers && (
-                                  <div className="space-y-3">
-                                    <h5 className="text-[10px] font-black text-brand-green uppercase tracking-[0.3em]">{t.programLabels.speakers}</h5>
-                                    <div className="flex flex-wrap gap-2">
-                                      {item.speakers.map((name, k) => (
-                                        <span key={k} className="px-4 py-2 bg-brand-green/5 text-brand-green rounded-xl text-xs font-bold border border-brand-green/10">
-                                          {name}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Panellists & Moderators */}
-                            {(item.panellists || item.moderators) && (
-                              <div className="space-y-4">
-                                {item.panellists && (
-                                  <div className="space-y-3">
-                                    <h5 className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">{t.programLabels.panellists}</h5>
-                                    <div className="flex flex-wrap gap-2">
-                                      {item.panellists.map((name, k) => (
-                                        <span key={k} className="px-4 py-2 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold border border-slate-200">
-                                          {name}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                                {item.moderators && (
-                                  <div className="space-y-3">
-                                    <h5 className="text-[10px] font-black text-brand-red uppercase tracking-[0.3em]">{t.programLabels.moderators}</h5>
-                                    <div className="flex flex-wrap gap-2">
-                                      {item.moderators.map((name, k) => (
-                                        <span key={k} className="px-4 py-2 bg-brand-red/5 text-brand-red rounded-xl text-xs font-bold border border-brand-red/10">
-                                          {name}
-                                        </span>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-
-                            {/* Tracks Handle */}
-                            {item.tracks && (
-                              <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                                {item.tracks.map((track, k) => (
-                                  <div key={k} className="p-6 bg-brand-light/50 rounded-2xl border border-black/5 group/track hover:bg-white transition-all">
-                                    <span className="text-[9px] font-black text-brand-gold uppercase tracking-widest block mb-2">{track.name}</span>
-                                    <p className="text-sm font-bold text-black group-hover/track:text-brand-green transition-colors">{track.title}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-    </section>
 
       {/* SPEAKERS SECTION */}
       <section id="speakers" className="section-padding bg-[#FCFBFA] relative overflow-hidden scroll-mt-20">
@@ -1576,144 +1413,351 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
         </div>
       </section>
 
-      {/* BUSINESS VILLAGE SECTION */}
-      <section id="village" className="section-padding bg-brand-green text-white overflow-hidden relative scroll-mt-20">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-red/5" />
+      {/* RETROSPECTIVE & BILAN SECTION */}
+      <section id="bilan" className="section-padding relative overflow-hidden scroll-mt-20 bg-[#1F9345] text-white">
+        {/* Premium Luminous Connections & Cultural African Backdrop */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Dynamic play of lights - gold sun-ray glows and soft red warm spotlights */}
+          <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.4),transparent_65%)] rounded-full blur-[100px] opacity-80" />
+          <div className="absolute bottom-[10%] right-[15%] w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(183,49,32,0.25),transparent_70%)] rounded-full blur-[120px] opacity-75" />
+          <div className="absolute top-[40%] left-[60%] w-[450px] h-[450px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_60%)] rounded-full blur-[90px]" />
+          
+          {/* Light Mesh Overlay Grid */}
+          <div className="absolute inset-0 opacity-[0.035]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 2px, transparent 0)', backgroundSize: '32px 32px' }} />
+
+          {/* Abstract fluid curves and trade flow connections (SVG) */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.16] stroke-white stroke-[1.2] fill-none" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            {/* Dynamic trade flow curves */}
+            <path d="M-50,300 C150,150 350,450 550,250 C750,50 900,350 1050,200" />
+            <path d="M-50,600 C200,450 400,750 650,550 C900,350 950,650 1050,450" strokeDasharray="6 6" />
+            <path d="M-50,850 C250,700 350,900 600,650 C850,400 900,800 1050,750" strokeOpacity="0.5" />
+
+            {/* Pulse connection points representing continental cities/hubs */}
+            <g className="fill-brand-gold stroke-brand-gold/40">
+              <circle cx="150" cy="225" r="5" className="animate-pulse" />
+              <circle cx="350" cy="385" r="7" />
+              <circle cx="550" cy="250" r="10" className="animate-ping" style={{ animationDuration: '3s' }} />
+              <circle cx="550" cy="250" r="5" />
+              <circle cx="650" cy="550" r="6" />
+              <circle cx="900" cy="425" r="8" className="animate-pulse" />
+            </g>
+          </svg>
+
+          {/* Exquisite African Geometric Watermark Motifs */}
+          <div 
+            className="absolute inset-0 opacity-[0.05] mix-blend-overlay" 
+            style={{ 
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 15 L45 30 L30 45 L15 30 Z M30 22 L38 30 L30 38 L22 30 Z' fill='%23ffffff' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }} 
+          />
+        </div>
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-20">
-            <span className="font-bold text-xs uppercase tracking-[0.4em] mb-6 px-5 py-2 bg-white/10 text-white rounded-full border border-white/20 inline-block">
-              Village Expo
-            </span>
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-              {lang === 'fr' ? "Chiffres clés du Village" : "Key Village Figures"}
-            </h2>
-            <div className="w-20 h-1.5 bg-brand-gold mx-auto rounded-full" />
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6 flex flex-col items-center"
+            >
+              <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] bg-white/20 text-brand-gold border border-brand-gold/30 px-6 py-2.5 rounded-full shadow-lg backdrop-blur-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-ping" />
+                {lang === 'fr' ? 'Rapports & Rétrospective' : 'Reports & Retrospective'}
+              </span>
+              
+              <h2 className="text-4xl md:text-6xl font-black font-display tracking-tight text-white leading-[1.12]">
+                {lang === 'fr' ? (
+                  <>
+                    Bilan du <br/>
+                    <span className="bg-gradient-to-r from-white via-brand-gold to-white bg-clip-text text-transparent italic font-serif">BIASHARA 2026</span>
+                  </>
+                ) : (
+                  <>
+                    Outcome of <br/>
+                    <span className="bg-gradient-to-r from-white via-brand-gold to-white bg-clip-text text-transparent italic font-serif">BIASHARA 2026</span>
+                  </>
+                )}
+              </h2>
+              
+              <div className="h-1 w-24 bg-gradient-to-r from-brand-red via-brand-gold to-white mx-auto rounded-full" />
+              
+              <p className="text-white/95 text-sm md:text-base font-medium leading-relaxed max-w-2xl">
+                {lang === 'fr' 
+                  ? "Découvrez l’impact économique, technologique et diplomatique d'un sommet panafricain d'envergure. Les chiffres officiels illustrent l'élan historique du forum d'affaires tenu à Lomé pour l'accélération d'un marché unique africain souverain."
+                  : "Discover the economic, technological and diplomatic impact of a far-reaching pan-African summit. These official figures illustrate the historic momentum generated in Lomé to accelerate a sovereign single African market."}
+              </p>
+
+              {/* RE-LIVE THE PROGRAM BUTTON */}
+              <motion.button
+                whileHover={{ 
+                  scale: 1.05, 
+                  boxShadow: "0 20px 40px rgba(183, 49, 32, 0.4)",
+                  borderColor: "rgba(255,255,255,1)"
+                }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setModalActiveTab(0);
+                  setIsProgramModalOpen(true);
+                }}
+                className="mt-6 px-10 py-5 bg-gradient-to-r from-brand-red via-[#CE3724] to-brand-gold text-white text-[11px] font-black uppercase tracking-[0.25em] rounded-full shadow-2xl border border-white/20 active:scale-95 transition-all duration-300 flex items-center gap-3 cursor-pointer select-none"
+              >
+                <Calendar className="w-4 h-4 text-white animate-bounce" />
+                <span>{lang === 'fr' ? 'Revivre le programme' : 'Revivre le programme'}</span>
+              </motion.button>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
+          {/* Grid of numbers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 relative mb-24">
             {[
-              { id: 1, value: 242, label: lang === 'fr' ? "Stands" : "Booths", icon: <Store className="w-8 h-8" />, color: "bg-brand-red" },
-              { id: 2, value: 20, label: lang === 'fr' ? "Pays" : "Countries", icon: <Globe2 className="w-8 h-8" />, color: "bg-brand-gold" },
-              { id: 3, value: 10, label: lang === 'fr' ? "Secteurs d’activité" : "Sectors of activity", icon: <Briefcase className="w-8 h-8" />, color: "bg-white/10" }
+              { 
+                value: 48, 
+                suffix: "", 
+                icon: <Globe2 className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Pays Représentés" : "Countries Represented", 
+                desc: lang === 'fr' ? "Une mobilisation mondiale avec des participants venant de 48 pays." : "A massive global gathering bringing together participants from 48 nations." 
+              },
+              { 
+                value: 700, 
+                suffix: "+", 
+                icon: <Store className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Exposants Actifs" : "Active Exhibitors", 
+                desc: lang === 'fr' ? "Plus de 700 exposants de secteurs stratégiques ont exposé leurs produits." : "More than 700 industry leaders exhibiting premium services and products." 
+              },
+              { 
+                value: 197, 
+                suffix: "", 
+                icon: <Building2 className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Stands Nationaux" : "National Booths", 
+                desc: lang === 'fr' ? "197 pavillons togolais mettant en relief l'entrepreneuriat national." : "197 Togolese booths highlighting the dynamism of domestic enterprises." 
+              },
+              { 
+                value: 97, 
+                suffix: "", 
+                icon: <Globe className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Stands Étrangers" : "Foreign Booths", 
+                desc: lang === 'fr' ? "97 stands internationaux incarnant l'intégration économique intra-africaine." : "97 international booths demonstrating direct regional trading collaboration." 
+              },
+              { 
+                value: 15, 
+                suffix: "", 
+                icon: <MessageCircle className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Panels Stratégiques" : "Strategic Panels", 
+                desc: lang === 'fr' ? "15 panels thématiques animés par des leaders d’opinion et ministres d'État." : "15 panels focused on structural policies, lead by ministers and business leaders." 
+              },
+              { 
+                value: 5, 
+                suffix: "", 
+                isPrefixZero: true,
+                icon: <Calendar className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Side Events Clés" : "Key Side Events", 
+                desc: lang === 'fr' ? "05 side events majeurs dédiés aux coopérations sectorielles." : "05 high-impact side events focusing on targeted continental investment portfolios." 
+              },
+              { 
+                valueText: lang === 'fr' ? "Plusieurs" : "Multiple", 
+                icon: <FileText className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Thématiques Abordées" : "Thematic Tracks", 
+                desc: lang === 'fr' ? "La logistique, la fiscalité douanière, le transport et le financement du commerce." : "Crucial tracks including logistics, customs taxes, transit and trade financing." 
+              },
+              { 
+                valueText: lang === 'fr' ? "Actives" : "Deployed", 
+                icon: <TrendingUp className="w-7 h-7 text-white" />, 
+                title: lang === 'fr' ? "Plateformes d'Actions" : "Action Platforms", 
+                desc: lang === 'fr' ? "Déploiement de plateformes d’actions stratégiques à fort impact économique." : "Unveiling robust cooperative action platforms to structure pan-African partnerships." 
+              }
             ].map((stat, i) => (
               <motion.div
-                key={stat.id}
-                initial={{ opacity: 0, y: 30 }}
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                whileHover={{ y: -10, scale: 1.05 }}
-                className="relative group p-10 bg-white/5 backdrop-blur-sm rounded-[3rem] border border-white/10 flex flex-col items-center text-center shadow-2xl overflow-hidden"
+                viewport={{ once: true, margin: "-10px" }}
+                transition={{ delay: i * 0.08, duration: 0.7 }}
+                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
+                className="group relative p-8 rounded-[2.25rem] bg-white text-slate-900 border-2 border-brand-gold/15 hover:border-brand-red shadow-[0_15px_45px_rgba(0,0,0,0.08)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)] transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
-                {/* Decorative background shape */}
-                <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:bg-brand-gold/10 transition-colors" />
+                {/* Decorative mesh water-mark style element inside card */}
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-brand-gold/[0.04] group-hover:bg-brand-red/[0.03] rounded-full blur-xl transition-colors" />
                 
-                <div className={`w-20 h-20 ${stat.color} rounded-3xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                  <div className="text-white group-hover:rotate-12 transition-transform">
-                    {stat.icon}
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-brand-green flex items-center justify-center border border-white/10 group-hover:bg-brand-red transition-all duration-500 shadow-md">
+                      {stat.icon}
+                    </div>
+                    <span className="font-mono text-[9px] font-black text-brand-gold uppercase tracking-widest">
+                      STAT_0{i + 1}
+                    </span>
                   </div>
-                </div>
 
-                <div className="text-6xl md:text-7xl font-black mb-4 tracking-tighter flex items-center justify-center gap-1">
-                  <Counter value={stat.value} />
-                </div>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tighter group-hover:text-brand-green transition-colors duration-500">
+                      {stat.valueText ? (
+                        stat.valueText
+                      ) : (
+                        <>
+                          {stat.isPrefixZero && "0"}
+                          <Counter value={stat.value ?? 0} duration={1.5} />
+                        </>
+                      )}
+                    </span>
+                    {stat.suffix && (
+                      <span className="text-2xl font-black text-brand-red font-display">
+                        {stat.suffix}
+                      </span>
+                    )}
+                  </div>
 
-                <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-white/60 mb-6">
-                  {stat.label}
-                </h3>
+                  <h3 className="text-md font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-green transition-colors duration-300">
+                    {stat.title}
+                  </h3>
+                  
+                  <p className="text-slate-500 text-xs font-medium leading-relaxed">
+                    {stat.desc}
+                  </p>
+                </div>
                 
-                <div className="w-12 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                <div className="w-full h-[1px] bg-slate-100 mt-6" />
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* REGISTRATION SECTION */}
-      <section id="register" className="section-padding relative scroll-mt-20">
-        <div className="absolute inset-0 bg-brand-green overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full opacity-10">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white rounded-full animate-pulse" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/50 rounded-full" />
-          </div>
-        </div>
+          {/* MOU SUB-SECTION */}
+          <div className="border-t border-white/20 pt-20 mt-10">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="space-y-4 font-display"
+              >
+                <div className="inline-flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.3em] bg-white/20 text-brand-gold border border-brand-gold/30 px-4 py-2 rounded-full backdrop-blur-md">
+                  <Handshake className="w-3.5 h-3.5" />
+                  {lang === 'fr' ? 'Accords & Coopération' : 'Bilateral Agreements'}
+                </div>
+                <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
+                  {lang === 'fr' ? "Partenariats & Memorandum of Understanding" : "Partnerships & Memorandum of Understanding"}
+                </h3>
+                <div className="h-0.5 w-16 bg-brand-gold mx-auto rounded-full" />
+                <p className="text-white/90 text-xs md:text-sm font-medium">
+                  {lang === 'fr' 
+                    ? "Les memorandums d'entente officiels scellés durant le BIASHARA 2026, posant des fondations solides pour faciliter le commerce continental et bilatéral."
+                    : "Official memorandums of understanding sealed during BIASHARA 2026, delivering concrete milestones to boost regional and continental trade."}
+                </p>
+              </motion.div>
+            </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="text-white"
-            >
-              <div className="w-20 h-1 bg-white mb-8" />
-              <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-                {t.registration.title}
-              </h2>
-              <p className="text-xl text-white/70 mb-10 leading-relaxed font-light">
-                {t.registration.text}
-              </p>
-              
-              <ul className="space-y-6">
-                {[
-                  lang === 'fr' ? 'Accès illimité aux plénières' : 'Unlimited plenary access',
-                  lang === 'fr' ? 'Networking premium' : 'Premium networking',
-                  lang === 'fr' ? 'Invitation au cocktail de bienvenue' : 'Welcome cocktail invitation'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-4 text-white font-bold">
-                    <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shadow-sm">
-                       <CheckCircle2 className="w-4 h-4 text-brand-gold" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+              {[
+                {
+                  partyA: "AfCFTA",
+                  partyB: "ITC",
+                  title: "AfCFTA – ITC",
+                  tag: lang === 'fr' ? "E-Commerce & Inclusion" : "E-Commerce & Youth Inclusion",
+                  desc: lang === 'fr' 
+                    ? "Soutien technique ciblé pour renforcer l'adoption du numérique, l'expansion du commerce transfrontalier en ligne et l'autonomisation économique des femmes et jeunes entrepreneurs africains."
+                    : "Dedicated technical support to enhance digital trade adoption, e-commerce networks, and boost economic integration for African women and youth entrepreneurs."
+                },
+                {
+                  partyA: "AfCFTA",
+                  partyB: "Rendeavour",
+                  title: "AfCFTA – Rendeavour",
+                  tag: lang === 'fr' ? "Zones Industrielles" : "Industrial Zones",
+                  desc: lang === 'fr' 
+                    ? "Accompagnement opérationnel pour le développement de zones économiques spéciales (ZES) de nouvelle génération et d'écosystèmes logistiques intégrés."
+                    : "Strategic cooperation aiming to fast-track modern Special Economic Zones (SEZ) and integrated structural industrial parks across regional territories."
+                },
+                {
+                  partyA: "AfCFTA",
+                  partyB: "Scanning Systems",
+                  title: "AfCFTA – Scanning Systems",
+                  tag: lang === 'fr' ? "Facilitation Douanière" : "Border Facilitation",
+                  desc: lang === 'fr' 
+                    ? "Coopération axée sur la modernisation et l'interconnexion technologique des postes de contrôle frontaliers pour minimiser les délais de transit des marchandises."
+                    : "Focused partnership enhancing technical interconnection and modern diagnostic scanners at border systems to minimize freight transit times."
+                },
+                {
+                  partyA: "CCI-Togo",
+                  partyB: "FEWACCI",
+                  title: "CCI-Togo – FEWACCI",
+                  tag: lang === 'fr' ? "Dialogue Régional" : "Chamber Network",
+                  desc: lang === 'fr' 
+                    ? "Mécanisme conjoint pour renforcer la synergie d'affaires entre chambres consulaires ouest-africaines et accélérer la réalisation des projets d'infrastructures communes de la CEDEAO."
+                    : "Joint roadmap to unite consul chambers across West Africa, boosting private-public initiatives and key infrastructure financing inside ECOWAS."
+                },
+                {
+                  partyA: "CCI-Togo",
+                  partyB: "CCI-Nigeria",
+                  title: "CCI-Togo – Chamber of Commerce of Nigeria",
+                  tag: lang === 'fr' ? "Corridor Bilatéral" : "Bilateral Trade",
+                  desc: lang === 'fr' 
+                    ? "Protocole visant à fluidifier le corridor commercial entre le Togo et le Nigeria et à encourager les joint-ventures et échanges commerciaux inter-entreprises directs."
+                    : "Bilateral agreement driving direct merchant channels, logistics cooperation, and co-investment projects between businesses in Togo and Nigeria."
+                }
+              ].map((mou, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.6 }}
+                  whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.25 } }}
+                  className="group relative p-6 rounded-[2rem] bg-white text-slate-800 border-2 border-brand-gold/15 hover:border-brand-red shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300"
+                >
+                  <div>
+                    {/* Visual Connected Treaty Line */}
+                    <div className="flex items-center justify-between gap-3 mb-6 bg-slate-50 px-4 py-3 rounded-xl border border-slate-100 group-hover:bg-brand-green/5 transition-colors">
+                      <div className="text-[10px] uppercase tracking-wider font-extrabold text-brand-green bg-brand-green/5 px-2.5 py-1 rounded border border-brand-green/10">
+                        {mou.partyA}
+                      </div>
+                      
+                      <div className="flex-1 flex items-center justify-center relative min-w-[30px]">
+                        <span className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-brand-gold/55 to-transparent" />
+                        <Handshake className="w-5 h-5 text-brand-gold relative z-10 bg-white px-1.5 rounded-full border border-brand-gold/10" />
+                      </div>
+                      
+                      <div className="text-[10px] uppercase tracking-wider font-extrabold text-brand-red bg-brand-red/5 px-2.5 py-1 rounded border border-brand-red/10">
+                        {mou.partyB}
+                      </div>
                     </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="relative z-10 bg-white p-12 rounded-[2rem] shadow-2xl text-center">
-                <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-brand-red text-white font-black px-8 py-2 rounded-full text-xs uppercase tracking-widest shadow-lg">
-                  Official Access QR
-                </div>
-                
-                <div className="mb-8 pt-4">
-                    <div className="inline-block p-4 bg-white rounded-3xl border-2 border-brand-green shadow-inner overflow-hidden">
-                      <img 
-                        src={qrCodeImage} 
-                        alt="Registration QR Code" 
-                        className="w-48 h-48 object-contain"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-md font-bold text-slate-950 group-hover:text-brand-green transition-colors">
+                        {mou.title}
+                      </h4>
+                      <span className="text-[8px] font-black uppercase tracking-wider text-brand-gold bg-brand-gold/10 px-2 py-0.5 rounded-full border border-brand-gold/5">
+                        {mou.tag}
+                      </span>
                     </div>
-                </div>
-                
-                <h3 className="text-2xl font-bold text-black mb-2">{t.registration.scan}</h3>
-                <p className="text-black/50 text-sm mb-8 italic">Veuillez utiliser votre smartphone pour scanner</p>
-                
-                <div className="flex items-center justify-center gap-4 py-4 border-t border-black/5">
-                  <div className="text-left">
-                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest">Venue</p>
-                    <p className="text-xs font-bold text-black">Palais des Congrès</p>
+
+                    <p className="text-slate-600 text-xs font-light leading-relaxed">
+                      {mou.desc}
+                    </p>
                   </div>
-                  <div className="w-px h-8 bg-black/10" />
-                  <div className="text-left">
-                    <p className="text-[10px] font-bold text-black/40 uppercase tracking-widest">Date</p>
-                    <p className="text-xs font-bold text-black">18 - 20 Mai 2026</p>
+
+                  <div className="mt-6 flex items-center justify-end text-[10px] font-bold text-brand-green opacity-80 group-hover:opacity-100 transition-opacity gap-1">
+                    <span>{lang === 'fr' ? "Accord Validé" : "Agreement Verified"}</span>
+                    <span className="w-1.5 h-1.5 bg-[#14b8a6] rounded-full inline-block animate-ping" />
                   </div>
-                </div>
-              </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -inset-4 border border-brand-gold/30 rounded-[2.5rem] -z-10 animate-pulse" />
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-brand-gold/20 rounded-full blur-3xl" />
-            </motion.div>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Immersive bottom row wrap up quote badge */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6 }}
+            className="mt-20 text-center"
+          >
+            <p className="inline-block relative text-xs md:text-sm italic font-medium px-8 py-4 bg-white/20 border border-white/30 rounded-2xl text-white/95 max-w-2xl mx-auto shadow-lg backdrop-blur-md">
+              {lang === 'fr'
+                ? "« Le bilan de Biashara Afrika 2026 s'impose comme le jalon capital pour concrétiser la feuille de route du commerce intra-africain et des accords diplomatiques. »"
+                : "“The BIASHARA 2026 outcomes stand as a key milestone in actualizing the intra-African trade blueprint and regional diplomatic alliances.”"}
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -1866,17 +1910,6 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
             
             <div className="flex flex-wrap justify-center p-1.5 bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] backdrop-blur-md rounded-2xl w-fit mx-auto border border-black/5 gap-2">
               <button
-                onClick={() => setGalleryTab('blog')}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                  galleryTab === 'blog' 
-                    ? 'bg-brand-gold text-white shadow-xl' 
-                    : 'text-black/40 hover:text-black'
-                }`}
-              >
-                <FileText className="w-4 h-4" />
-                {t.gallery.blogTab}
-              </button>
-              <button
                 onClick={() => setGalleryTab('events')}
                 className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                   galleryTab === 'events' 
@@ -1886,6 +1919,17 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
               >
                 <ImageIcon className="w-4 h-4" />
                 {t.gallery.eventsTab}
+              </button>
+              <button
+                onClick={() => setGalleryTab('blog')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
+                  galleryTab === 'blog' 
+                    ? 'bg-brand-gold text-white shadow-xl' 
+                    : 'text-black/40 hover:text-black'
+                }`}
+              >
+                <FileText className="w-4 h-4" />
+                {t.gallery.blogTab}
               </button>
               <button
                 onClick={() => setGalleryTab('news')}
@@ -2587,6 +2631,201 @@ Lomé remains a decisive step in realizing the potential of AfCFTA and contribut
       <FloatingActions 
         lang={lang}
       />
+
+      {/* IMMERSIVE PROGRAM MODAL */}
+      <AnimatePresence>
+        {isProgramModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 md:p-8"
+          >
+            <div 
+              className="absolute inset-0 bg-black/90 backdrop-blur-md" 
+              onClick={() => setIsProgramModalOpen(false)}
+            />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 30 }}
+              className="bg-slate-50 w-full max-w-6xl max-h-[92vh] md:max-h-[88vh] overflow-hidden rounded-[2.5rem] relative shadow-[0_50px_100px_rgba(0,0,0,0.5)] flex flex-col border border-white/25 z-10"
+            >
+              {/* Modal Header */}
+              <div className="p-6 md:p-10 border-b border-black/5 flex items-start justify-between bg-gradient-to-r from-brand-green to-[#032e0f] text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-32 opacity-15 rotate-12 pointer-events-none">
+                  <Calendar className="w-64 h-64 text-brand-gold font-light" />
+                </div>
+                
+                <div className="relative z-10">
+                  <span className="text-brand-gold font-black text-[10px] uppercase tracking-[0.4em] block mb-3">
+                    {lang === 'fr' ? "DOCUMENT OFFICIEL • RETROSPECTIVE" : "OFFICIAL DOCUMENT • RETROSPECTIVE"}
+                  </span>
+                  <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight mb-3">
+                    {lang === 'fr' ? "Programme Officiel" : "Official Program"}
+                  </h2>
+                  <p className="text-white/80 max-w-2xl text-xs md:text-sm font-light leading-relaxed">
+                    {lang === 'fr' 
+                      ? "Retrouvez l'intégralité des sessions stratégiques, tables rondes ministérielles et panels d'experts qui ont structuré le Forum BIASHARA 2026."
+                      : "Find all the strategic sessions, ministerial roundtables and expert panels that structured the BIASHARA 2026 Forum."}
+                  </p>
+                </div>
+                
+                <button 
+                  onClick={() => setIsProgramModalOpen(false)}
+                  className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition-all cursor-pointer relative z-10 self-start"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Day Selector Tabs inside Modal */}
+              <div className="bg-white px-6 md:px-10 py-5 border-b border-black/5 flex items-center justify-between flex-wrap gap-4 relative z-10">
+                <div className="flex flex-wrap gap-3">
+                  {PROGRAM_DATA[lang].map((day, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setModalActiveTab(i)}
+                      className={`relative px-6 py-3.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] transition-all duration-300 overflow-hidden ${
+                        modalActiveTab === i 
+                          ? 'text-white bg-brand-red' 
+                          : 'text-black/60 bg-slate-100 hover:text-black hover:bg-slate-200'
+                      }`}
+                    >
+                      <span className="relative z-10">{day.day}</span>
+                    </button>
+                  ))}
+                </div>
+                
+                <span className="text-[10px] font-bold text-black/40 uppercase tracking-widest font-mono">
+                  {PROGRAM_DATA[lang][modalActiveTab].day} • Lomé, Togo
+                </span>
+              </div>
+              
+              {/* Modal Content Scroll Area */}
+              <div className="overflow-y-auto flex-1 p-6 md:p-10 bg-slate-50">
+                <div className="max-w-4xl mx-auto space-y-12">
+                  <div className="text-center mb-10">
+                    <motion.h3 
+                      key={modalActiveTab}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-2xl md:text-4xl font-display font-bold text-brand-green mb-3"
+                    >
+                      {PROGRAM_DATA[lang][modalActiveTab].title}
+                    </motion.h3>
+                    <p className="text-slate-500 font-light text-sm italic max-w-xl mx-auto border-t border-black/5 pt-4">
+                      {PROGRAM_DATA[lang][modalActiveTab].subtitle}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-8">
+                    {PROGRAM_DATA[lang][modalActiveTab].items.map((item, j) => (
+                      <motion.div 
+                        key={j}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: j * 0.05, duration: 0.5 }}
+                        className="group relative bg-white rounded-[2rem] p-6 md:p-10 border border-black/5 shadow-[0_15px_40px_rgba(0,0,0,0.02)] hover:shadow-[0_25px_60px_rgba(0,0,0,0.05)] transition-all duration-300"
+                      >
+                        {/* Premium Accent Line */}
+                        <div className="absolute top-0 left-10 w-12 h-1 bg-brand-green rounded-full group-hover:w-24 transition-all duration-500" />
+                        
+                        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+                          {/* Time Column */}
+                          <div className="md:w-40 shrink-0">
+                            <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-red text-white font-black text-[10px] uppercase tracking-[0.15em] shadow-md shadow-brand-red/10">
+                              <Clock className="w-3.5 h-3.5" />
+                              {item.time}
+                            </div>
+                          </div>
+
+                          {/* Content Column */}
+                          <div className="flex-1">
+                            <h4 className="text-xl md:text-2xl font-bold text-black mb-4 leading-snug group-hover:text-brand-green transition-colors duration-300">
+                              {item.title}
+                            </h4>
+                            
+                            {item.description && (
+                              <p className="text-slate-600 text-sm md:text-base font-light leading-relaxed mb-6">
+                                {item.description}
+                              </p>
+                            )}
+
+                            {/* Detail Grids inside Modal */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                              {/* Keynotes & Speakers */}
+                              {(item.keynotes || item.speakers) && (
+                                <div className="space-y-3">
+                                  {item.keynotes && (
+                                    <div className="space-y-2">
+                                      <h5 className="text-[9px] font-black text-brand-gold uppercase tracking-[0.25em]">{t.programLabels.keynotes}</h5>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {item.keynotes.map((name, k) => (
+                                          <span key={k} className="px-3 py-1.5 bg-brand-gold/5 text-brand-gold rounded-lg text-[11px] font-bold border border-brand-gold/10">
+                                            {name}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {item.speakers && (
+                                    <div className="space-y-2">
+                                      <h5 className="text-[9px] font-black text-brand-green uppercase tracking-[0.25em]">{t.programLabels.speakers}</h5>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {item.speakers.map((name, k) => (
+                                          <span key={k} className="px-3 py-1.5 bg-brand-green/5 text-brand-green rounded-lg text-[11px] font-bold border border-brand-green/10">
+                                            {name}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+
+                              {/* Panellists & Moderators */}
+                              {(item.panellists || item.moderators) && (
+                                <div className="space-y-3">
+                                  {item.panellists && (
+                                    <div className="space-y-2">
+                                      <h5 className="text-[9px] font-black text-slate-400 uppercase tracking-[0.25em]">{t.programLabels.panellists}</h5>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {item.panellists.map((name, k) => (
+                                          <span key={k} className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg text-[11px] font-bold border border-slate-200">
+                                            {name}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                  {item.moderators && (
+                                    <div className="space-y-2">
+                                      <h5 className="text-[9px] font-black text-brand-red uppercase tracking-[0.25em]">{t.programLabels.moderators}</h5>
+                                      <div className="flex flex-wrap gap-1.5">
+                                        {item.moderators.map((name, k) => (
+                                          <span key={k} className="px-3 py-1.5 bg-brand-red/5 text-brand-red rounded-lg text-[11px] font-bold border border-brand-red/10">
+                                            {name}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Catalogue Viewer Modal */}
       <CatalogueViewer 

@@ -38,7 +38,7 @@ export const Navigation: React.FC<NavigationProps> = ({
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
+            {['about', 'speakers', 'gallery', 'practical'].map((item) => (
               <button 
                 key={item} 
                 onClick={() => scrollToSection(item)}
@@ -88,7 +88,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             exit={{ opacity: 0, x: '100%' }}
             className="fixed inset-0 z-40 bg-brand-green flex flex-col items-center justify-center gap-8"
           >
-            {['about', 'program', 'speakers', 'village', 'gallery', 'practical'].map((item) => (
+            {['about', 'speakers', 'gallery', 'practical'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
