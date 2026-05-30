@@ -145,6 +145,31 @@ import A5 from './Photos/A5.webp';
 import A6 from './Photos/A6.webp';
 import A7 from './Photos/A7.webp';
 import A8 from './Photos/A8.webp';
+import D1 from './Photos/D1.webp';
+import D2 from './Photos/D2.webp';
+import D3 from './Photos/D3.webp';
+import D4 from './Photos/D4.webp';
+import D5 from './Photos/D5.webp';
+import D6 from './Photos/D6.webp';
+import D7 from './Photos/D7.webp';
+import D8 from './Photos/D8.webp';
+import D9 from './Photos/D9.webp';
+import D10 from './Photos/D10.webp';
+import D11 from './Photos/D11.webp';
+import D12 from './Photos/D12.webp';
+import D13 from './Photos/D13.webp';
+import D14 from './Photos/D14.webp';
+import D15 from './Photos/D15.webp';
+import D16 from './Photos/D16.webp';
+import D17 from './Photos/D17.webp';
+import D18 from './Photos/D18.webp';
+import D19 from './Photos/D19.webp';
+import D20 from './Photos/D20.webp';
+import D21 from './Photos/D21.webp';
+import D22 from './Photos/D22.webp';
+import D23 from './Photos/D23.webp';
+import D24 from './Photos/D24.webp';
+import D25 from './Photos/D25.webp';
 import P1 from './Photos/P1.webp';
 import P2 from './Photos/P2.webp';
 import P3 from './Photos/P3.webp';
@@ -261,6 +286,11 @@ const App: React.FC = () => {
       id: 'day-1',
       title: lang === 'fr' ? "Jour 1" : "Day 1",
       photos: [A1, A2, A3, A4, A5, A6, A7, A8]
+    },
+    {
+      id: 'village-biashara',
+      title: lang === 'fr' ? "Village Biashara" : "Biashara Village",
+      photos: [D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25]
     },
     {
       id: 'opening-ceremony',
